@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>宣晓明的个人博客</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://xuanxiaoming.info/"/>
+  <updated>2020-01-16T18:32:56.492Z</updated>
+  <id>http://xuanxiaoming.info/</id>
+  
+  <author>
+    <name>宣晓明</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo博客搭建填坑记录</title>
+    <link href="http://xuanxiaoming.info/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xuanxiaoming.info/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-01-12T16:59:19.000Z</published>
+    <updated>2020-01-16T18:32:56.492Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>写文章前我决定先copy一份markdown的语法来，实在是忘了 = =！</p></blockquote><p>折腾了两天，总算是把博客弄好了，对于我这个懒人来说真是不容易，希望以后能抽空写写博客，毕竟生活中还是有不少事是值得记录的。</p><p>之前使用的博客是基于Jekyll+Gitment搭建的，用的主题是一个前端老哥写的H2O theme，可能有些人也知道吧，真的是很好看的主题，尤其是随着时间变换主题色这个功能我是太喜欢了，晚上看博文不刺眼了（明明没有人看）。但是奔着人活着就是为了折腾，这次我决定用Hexo+Valine来搭建新的博客（其实我就是看上了新主题）</p><p><strong>先附上之前博客的主题样式:</strong><br>白天：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeDay.png" alt="H2OThemeDay"><br>晚上：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/hexoH2OthemeNight.png" alt="H2OThemeNight"> </p><p><strong>新的博客的样式：</strong><br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/JournalTheme.png" alt="JournalTheme">  </p><hr><p>还有一点也是推动我换框架的原因，之前用的Gitment在登录GitHub账号的时候总是会出问题，会弹出<code>[object XMLHttpRequestProgressEvent]</code>这样的错误，具体原因不是很明白。其次是咱国内的网络登录github的速度实在是一言难尽，我希望我的博客并不只服务于我们这些技术人，还有我一些生活上的朋友，让他们为了能给我留言评论还得大费周章的去注册个GitHub账号，实在是有些不妥。  </p><p>于是在朋友的推荐下，我决定使用一个特别好用的匿名评论插件Valine，Valine用的是一个叫LeanCloud的云数据库存储博客评论内容，因为我国法律的原因，所以我注册的是LeanCloud的国际版。</p><p>有了Hexo+Valine，博客基本的东西都OK了，于是我启动GitHub Pages服务，尝试访问。</p><p>正如我之前所说，国内的网络环境访问GitHub还是很慢的。这时候强迫症就上来了，我既然折腾到现在了，不如继续折腾下去吧，于是我打开阿里云准备开个全站加速，这东西我是第一次弄，之前完全没用到过，弄了半天才明白我还得买个域名。行嘛！我买还不行吗！于是买了个便宜的 <a href="http://xuanxiaoming.info/">xuanxiaoming.info</a>，看起来还不错，哈哈。</p><blockquote><p>这里有个小插曲。因为是个人博客嘛，我本来是很想注册xuanxiaoming.me这个域名的，这个域名我当时只查到了在GoDaddy这个网站上购买，而这个网站的注册简直让我崩溃，它并不是及时注册成功的，差不多十几个小时后我才收到邮件说注册成功了，那个时候我所有的后续配置都已经做完还睡了一觉。。。</p></blockquote><p>后来我发现了一个网站<a href="https://www.domcomp.com/" target="_blank" rel="noopener">简化域名注册</a>，收罗了很多域名销售商，可以直接查出最便宜的购买点（包括了后续续费的价格），如果我再想买xuanxiaoming.me这个域名的话，我一定会去porkbun.com上购买。</p><p>扯得远了，域名买过后开始折腾起全站加速。懒得写大段文字了，直接看图吧，按红笔标的做就OK。</p><p><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/AllSiteAccelerate.jpeg" alt="全站加速配置"></p><p>全站加速配置完后列表页会给你一个CNAME值，将其填入域名解析的记录值中，保存，等一个TTL时间就好了。</p><p>开了全站加速后，我自己测试大概1~2秒就访问完成，确实快了很多。</p><p>最后我想再聊一聊感悟，这次博客搭建比我想象中要轻松一点，可能是因为踩过了Jekyll的坑，虽然有些不同，但简单看看就明白了，主要的时间都花费在博客功能配置和站点访问优化上了，所以现在赶紧记录下来既帮助自己又帮助别人。</p><blockquote><p>目前博客正在积极装修中，还有些旧的博文，我会慢慢搬运过来，期待一下以后的样子。<br>感谢你阅读到这！<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/heihei.jpg" alt="嘿嘿"></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      趁博客搭好之际，赶紧记录下过程
+    
+    </summary>
+    
+    
+    
+      <category term="博客搭建" scheme="http://xuanxiaoming.info/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown语法</title>
+    <link href="http://xuanxiaoming.info/2020/01/12/markdown-%E8%AF%AD%E6%B3%95/"/>
+    <id>http://xuanxiaoming.info/2020/01/12/markdown-%E8%AF%AD%E6%B3%95/</id>
+    <published>2020-01-12T08:17:20.000Z</published>
+    <updated>2020-01-12T19:51:19.610Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-标题"><a href="#1-标题" class="headerlink" title="1 标题"></a>1 标题</h1><p>两种形式：  </p><p>1）使用<code>=</code>和<code>-</code>标记一级和二级标题。</p><blockquote><p>一级标题<br><code>=========</code><br>二级标题<br><code>---------</code></p></blockquote><p>效果：</p><blockquote><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题   "></a>一级标题   </h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2></blockquote><p>2）使用<code>#</code>，可表示1-6级标题。</p><blockquote><p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题    </p></blockquote><p>效果：</p><blockquote><h1 id="一级标题-1"><a href="#一级标题-1" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题-1"><a href="#二级标题-1" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote><hr><h1 id="2-段落"><a href="#2-段落" class="headerlink" title="2 段落"></a>2 段落</h1><p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用<strong>两个以上</strong>空格加上回车（引用中换行省略回车）。</p><hr><h1 id="3-区块引用"><a href="#3-区块引用" class="headerlink" title="3 区块引用"></a>3 区块引用</h1><p>在段落的每行或者只在第一行使用符号<code>&gt;</code>,还可使用多个嵌套引用，如：</p><blockquote><p>&gt; 区块引用<br>&gt;&gt; 嵌套引用  </p></blockquote><p>效果：</p><blockquote><p>区块引用  </p><blockquote><p>嵌套引用</p></blockquote></blockquote><hr><h1 id="4-代码区块"><a href="#4-代码区块" class="headerlink" title="4 代码区块"></a>4 代码区块</h1><p>代码区块的建立是在每行加上4个空格或者一个制表符（如同写代码一样）。如<br>普通段落：</p><p>void main()<br>{<br>    printf(“Hello, Markdown.”);<br>}    </p><p>代码区块：</p><pre><code>void main(){    printf(&quot;Hello, Markdown.&quot;);}</code></pre><p><strong>注意</strong>:需要和普通段落之间存在空行。</p><hr><h1 id="5-强调"><a href="#5-强调" class="headerlink" title="5 强调"></a>5 强调</h1><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>，如：</p><blockquote><p>*斜体*，_斜体_<br>**粗体**，__粗体__</p></blockquote><p>效果：</p><blockquote><p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p></blockquote><hr><h1 id="6-列表"><a href="#6-列表" class="headerlink" title="6 列表"></a>6 列表</h1><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，如：</p><blockquote><p>-（+*） 第一项<br>-（+*） 第二项<br>- （+*）第三项</p></blockquote><p><strong>注意</strong>：标记后面最少有一个_空格<em>或</em>制表符_。若不在引用区块中，必须和前方段落之间存在空行。</p><p>效果：</p><blockquote><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul></blockquote><p>有序列表的标记方式是将上述的符号换成数字,并辅以<code>.</code>，如：</p><blockquote><p>1 . 第一项<br>2 . 第二项<br>3 . 第三项    </p></blockquote><p>效果：</p><blockquote><ol><li>第一项</li><li>第二项</li><li>第三项</li></ol></blockquote><hr><h1 id="7-分割线"><a href="#7-分割线" class="headerlink" title="7 分割线"></a>7 分割线</h1><p>分割线最常使用就是三个或以上<code>*</code>，还可以使用<code>-</code>和<code>_</code>。</p><hr><h1 id="8-链接"><a href="#8-链接" class="headerlink" title="8 链接"></a>8 链接</h1><p>链接可以由两种形式生成：<strong>行内式</strong>和<strong>参考式</strong>。<br><strong>行内式</strong>：</p><blockquote><p>[younghz的Markdown库](https:://github.com/younghz/Markdown “Markdown”)。</p></blockquote><p>效果：</p><blockquote><p><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库</a>。</p></blockquote><p><strong>参考式</strong>：</p><blockquote><p>[younghz的Markdown库1][1]<br>[younghz的Markdown库2][2]<br>[1]:https:://github.com/younghz/Markdown “Markdown”<br>[2]:https:://github.com/younghz/Markdown “Markdown”    </p></blockquote><p>效果：</p><blockquote><p><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库1</a><br><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库2</a></p></blockquote><p><strong>注意</strong>：上述的<code>[1]:https:://github.com/younghz/Markdown &quot;Markdown&quot;</code>不出现在区块中。</p><hr><h1 id="9-图片"><a href="#9-图片" class="headerlink" title="9 图片"></a>9 图片</h1><p>添加图片的形式和链接相似，只需在链接的基础上前方加一个<code>！</code>。  </p><hr><h1 id="10-反斜杠"><a href="#10-反斜杠" class="headerlink" title="10 反斜杠\"></a>10 反斜杠<code>\</code></h1><p>相当于<strong>反转义</strong>作用。使符号成为普通符号。  </p><hr><h1 id="11-符号’-’"><a href="#11-符号’-’" class="headerlink" title="11 符号’`’"></a>11 符号’`’</h1><p>起到标记作用。如：</p><blockquote><p>`ctrl+a`</p></blockquote><p>效果：</p><blockquote><p><code>ctrl+a</code></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      copy来的语法知识，忘了就看看
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
