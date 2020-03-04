@@ -111,6 +111,34 @@
   </entry>
   
   <entry>
+    <title>如何让Outlook (office365)不再弹出“没有默认的邮件客户端”对话框？</title>
+    <link href="http://xuanxiaoming.info/2018/07/17/%E5%BC%B9%E5%87%BA%E9%BB%98%E8%AE%A4%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AF%B9%E8%AF%9D%E6%A1%86/"/>
+    <id>http://xuanxiaoming.info/2018/07/17/%E5%BC%B9%E5%87%BA%E9%BB%98%E8%AE%A4%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AF%B9%E8%AF%9D%E6%A1%86/</id>
+    <published>2018-07-17T08:12:33.000Z</published>
+    <updated>2020-03-04T17:30:06.460Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这是一篇2018年我发布在知乎上的回答，这篇回答一直以来访问人数都很多且评论的人都给与一致的好评，所以我决定搬运到博客中来。</p></blockquote><p>我正好遇到这个问题，并且成功解决了，记下来帮助一下以后遇到问题的人。 </p><p>分析结果：</p><ul><li><p>触发这个弹窗的不是outlook程序，因为可能你和我一样已经把office 2016卸载了。 </p></li><li><p>也不是默认应用程序触发的弹窗。我把默认程序设置为邮件依旧弹窗。  </p></li><li><p>我在启动项里找到了office的lync，我不知道它从哪来的，但是也不是它，因为它没有运行。  </p></li><li><p>天知道我经历了什么…… 强迫症有时候真的会逼死人。  </p></li><li><p>最后当我看到service里的OneSyncSvc_sessionID服务项，答案就出来了。  </p></li></ul><div style="text-align: center"><img src="/2018/07/17/%E5%BC%B9%E5%87%BA%E9%BB%98%E8%AE%A4%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AF%B9%E8%AF%9D%E6%A1%86/userSession.jpg"></div><br>    <p>解决办法（服务里没法直接关闭）：</p><ol><li><p>定位注册表到“HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services”下。</p></li><li><p>找到4项 “OneSyncSvc”“OneSyncSvc_sessionID”“UserDataSvc”“UserDataSvc_sessionID”</p></li><li><p>把每项里“Start”的值设为4，重启就能看到效果了。（0 引导，1 系统，2 自动-默认，3 手动，4 禁用）</p></li></ol><br>  <blockquote><p>如果这篇文章有帮助你解决问题，治好强迫症，你可以来知乎里给我点赞。<br><a href="https://www.zhihu.com/question/40217178/answer/407644015" target="_blank" rel="noopener">如何让Outlook (office365)不再弹出“没有默认的邮件客户端”对话框？ - 拉格朗日的回答 - 知乎</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;这是一篇2018年我发布在知乎上的回答，这篇回答一直以来访问人数都很多且评论的人都给与一致的好评，所以我决定搬运到博客中来。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我正好遇到这个问题，并且成功解决了，记下来帮助一下以后遇到问题的人。 &lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="windows" scheme="http://xuanxiaoming.info/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
     <title>为什么我墙裂建议大家使用枚举来实现单例</title>
     <link href="http://xuanxiaoming.info/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/"/>
     <id>http://xuanxiaoming.info/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/</id>
@@ -132,6 +160,63 @@
     
     
       <category term="转载" scheme="http://xuanxiaoming.info/tags/%E8%BD%AC%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于canvas全屏的问题</title>
+    <link href="http://xuanxiaoming.info/2016/12/11/%E5%85%B3%E4%BA%8Ecanvas%E5%85%A8%E5%B1%8F%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://xuanxiaoming.info/2016/12/11/%E5%85%B3%E4%BA%8Ecanvas%E5%85%A8%E5%B1%8F%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2016-12-11T09:42:58.000Z</published>
+    <updated>2020-03-04T17:09:35.809Z</updated>
+    
+    <content type="html"><![CDATA[<p>刚上手canvas，被它的全屏问题，搞到蛋疼，最后解决了，非常激动。</p><p>关于canvas全屏，实际上要知道两样东西。</p><ul><li>canvas等比缩放</li><li>canvas拉伸  </li></ul><br>  <h3 id="1-等比缩放"><a href="#1-等比缩放" class="headerlink" title="1 等比缩放"></a>1 等比缩放</h3><p>方法一：<code>&lt;canvas width=&quot;500&quot; height=&quot;500&quot;&gt;&lt;/canvas&gt;</code></p><p>方法二：使用HTML5 Canvas API操作 </p><pre><code>var canvas = document.getElementById(&apos;canvas的id&apos;);canvas.width = 500;canvas.height= 500;</code></pre><p>以上方法设置宽高会以300*150的比例缩小扩大。<br><br></p><h3 id="2-拉伸"><a href="#2-拉伸" class="headerlink" title="2 拉伸"></a>2 拉伸</h3><p>若通过如下方法设置宽高，Canvas元素将由原来大小被拉伸到所设置的宽高。  </p><p>方法一：使用CSS 会被拉伸  </p><pre><code>#canvas的id｛    width:1000px;    height:1000px;｝</code></pre><p>方法二：使用HTML5 样式操作 会被拉伸  </p><pre><code>var canvas = document.getElementById(&apos;canvas的id&apos;);canvas.style.width = window.innerWidth + &quot;px&quot;;canvas.style.height = window.innerHeight + &quot;px&quot;;</code></pre><p>方法三 ：用jquery的<code>$(&quot;#id&quot;).width(500)</code>会被拉伸  </p><p>其它：canvas的width和height也不能用百分比表示。canvas会将百分值当成数值显示。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;刚上手canvas，被它的全屏问题，搞到蛋疼，最后解决了，非常激动。&lt;/p&gt;
+&lt;p&gt;关于canvas全屏，实际上要知道两样东西。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;canvas等比缩放&lt;/li&gt;
+&lt;li&gt;canvas拉伸  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;  
+
+&lt;h3 id=&quot;1
+      
+    
+    </summary>
+    
+    
+    
+      <category term="前端" scheme="http://xuanxiaoming.info/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Eclipse启动错误：A Java Runtime Environment(JRE) or Java Development Kit(JDK) must be available……</title>
+    <link href="http://xuanxiaoming.info/2016/10/30/eclipse%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF/"/>
+    <id>http://xuanxiaoming.info/2016/10/30/eclipse%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF/</id>
+    <published>2016-10-30T08:10:11.000Z</published>
+    <updated>2020-03-04T16:56:22.185Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这是一篇来自2016年我发布在CSDN博客上的博文，CSDN博客已经被我抛弃已久，本以为再无瓜葛，直到我前几天收到一份邮件说有新评论的内容，我才又去登录看了一下，发现这篇博文已被访问了近2万次，所以我决定将其搬运到我的新博客中。<br>已经很久没用Eclipse了，如果有人突然问我问题，我可能一时没法解决。</p></blockquote><pre><code>---------------------------Eclipse---------------------------A Java Runtime Environment (JRE) or Java Development Kit(JDK)must be available in order to run Eclipse. No Java virtualmachinewas found after searching the following locations:D:\eclipse\jre\bin\javaw.exejavaw.exe in your current PATH---------------------------确定   ---------------------------  </code></pre><p>解决这个问题前，先要明确自己的JAVA安装和环境变量配置没错。</p><p>我用的第一种解决办法是按照报错信息，手动填补出了一个D:\eclipse\jre\bin\javaw.exe（javaw.exe文件可以从jdk的bin目录下找到），Eclipse可以正常打开。</p><p>以上办法不是正规的解决办法，所以为了防止未知问题，我最后是拿第二种解决办法解决的。<br>打开Eclipse根目录eclipse.ini文件，在最前面加上两行：<br>-vm<br>C:\ProgramFiles\Java\jdk1.8.0_45\bin\javaw.exe（这个是你安装的javaw.exe的绝对路径）</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;这是一篇来自2016年我发布在CSDN博客上的博文，CSDN博客已经被我抛弃已久，本以为再无瓜葛，直到我前几天收到一份邮件说有新评论的内容，我才又去登录看了一下，发现这篇博文已被访问了近2万次，所以我决定将其搬运到我的新博客中。&lt;br&gt;已经很久没用
+      
+    
+    </summary>
+    
+    
+    
+      <category term="IDE" scheme="http://xuanxiaoming.info/tags/ide/"/>
     
   </entry>
   
