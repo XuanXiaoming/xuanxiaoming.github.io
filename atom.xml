@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xuanxiaoming.info/"/>
-  <updated>2020-01-16T18:32:56.492Z</updated>
+  <updated>2020-03-04T06:21:02.085Z</updated>
   <id>http://xuanxiaoming.info/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://xuanxiaoming.info/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
     <id>http://xuanxiaoming.info/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
     <published>2020-01-12T16:59:19.000Z</published>
-    <updated>2020-01-16T18:32:56.492Z</updated>
+    <updated>2020-03-04T06:21:02.085Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>写文章前我决定先copy一份markdown的语法来，实在是忘了 = =！</p></blockquote><p>折腾了两天，总算是把博客弄好了，对于我这个懒人来说真是不容易，希望以后能抽空写写博客，毕竟生活中还是有不少事是值得记录的。</p><p>之前使用的博客是基于Jekyll+Gitment搭建的，用的主题是一个前端老哥写的H2O theme，可能有些人也知道吧，真的是很好看的主题，尤其是随着时间变换主题色这个功能我是太喜欢了，晚上看博文不刺眼了（明明没有人看）。但是奔着人活着就是为了折腾，这次我决定用Hexo+Valine来搭建新的博客（其实我就是看上了新主题）</p><p><strong>先附上之前博客的主题样式:</strong><br>白天：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeDay.png" alt="H2OThemeDay"><br>晚上：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/hexoH2OthemeNight.png" alt="H2OThemeNight"> </p><p><strong>新的博客的样式：</strong><br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/JournalTheme.png" alt="JournalTheme">  </p><hr><p>还有一点也是推动我换框架的原因，之前用的Gitment在登录GitHub账号的时候总是会出问题，会弹出<code>[object XMLHttpRequestProgressEvent]</code>这样的错误，具体原因不是很明白。其次是咱国内的网络登录github的速度实在是一言难尽，我希望我的博客并不只服务于我们这些技术人，还有我一些生活上的朋友，让他们为了能给我留言评论还得大费周章的去注册个GitHub账号，实在是有些不妥。  </p><p>于是在朋友的推荐下，我决定使用一个特别好用的匿名评论插件Valine，Valine用的是一个叫LeanCloud的云数据库存储博客评论内容，因为我国法律的原因，所以我注册的是LeanCloud的国际版。</p><p>有了Hexo+Valine，博客基本的东西都OK了，于是我启动GitHub Pages服务，尝试访问。</p><p>正如我之前所说，国内的网络环境访问GitHub还是很慢的。这时候强迫症就上来了，我既然折腾到现在了，不如继续折腾下去吧，于是我打开阿里云准备开个全站加速，这东西我是第一次弄，之前完全没用到过，弄了半天才明白我还得买个域名。行嘛！我买还不行吗！于是买了个便宜的 <a href="http://xuanxiaoming.info/">xuanxiaoming.info</a>，看起来还不错，哈哈。</p><blockquote><p>这里有个小插曲。因为是个人博客嘛，我本来是很想注册xuanxiaoming.me这个域名的，这个域名我当时只查到了在GoDaddy这个网站上购买，而这个网站的注册简直让我崩溃，它并不是及时注册成功的，差不多十几个小时后我才收到邮件说注册成功了，那个时候我所有的后续配置都已经做完还睡了一觉。。。</p></blockquote><p>后来我发现了一个网站<a href="https://www.domcomp.com/" target="_blank" rel="noopener">简化域名注册</a>，收罗了很多域名销售商，可以直接查出最便宜的购买点（包括了后续续费的价格），如果我再想买xuanxiaoming.me这个域名的话，我一定会去porkbun.com上购买。</p><p>扯得远了，域名买过后开始折腾起全站加速。懒得写大段文字了，直接看图吧，按红笔标的做就OK。</p><p><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/AllSiteAccelerate.jpeg" alt="全站加速配置"></p><p>全站加速配置完后列表页会给你一个CNAME值，将其填入域名解析的记录值中，保存，等一个TTL时间就好了。</p><p>开了全站加速后，我自己测试大概1~2秒就访问完成，确实快了很多。</p><p>最后我想再聊一聊感悟，这次博客搭建比我想象中要轻松一点，可能是因为踩过了Jekyll的坑，虽然有些不同，但简单看看就明白了，主要的时间都花费在博客功能配置和站点访问优化上了，所以现在赶紧记录下来既帮助自己又帮助别人。</p><blockquote><p>目前博客正在积极装修中，还有些旧的博文，我会慢慢搬运过来，期待一下以后的样子。<br>感谢你阅读到这！<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/heihei.jpg" alt="嘿嘿"></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>写文章前我决定先copy一份markdown的语法来，实在是忘了 = =！</p></blockquote><p>折腾了两天，总算是把博客弄好了，对于我这个懒人来说真是不容易，希望以后能抽空写写博客，毕竟生活中还是有不少事是值得记录的。</p><p>之前使用的博客是基于Jekyll+Gitment搭建的，用的主题是一个前端老哥写的H2O theme，可能有些人也知道吧，真的是很好看的主题，尤其是随着时间变换主题色这个功能我是太喜欢了，晚上看博文不刺眼了（明明没有人看）。但是奔着人活着就是为了折腾，这次我决定用Hexo+Valine来搭建新的博客（其实我就是看上了新主题）</p><p><strong>先附上之前博客的主题样式:</strong><br>白天：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeDay.png" alt="H2OThemeDay"><br>晚上：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeNight.png" alt="H2OThemeNight"> </p><p><strong>新的博客的样式：</strong><br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/JournalTheme.png" alt="JournalTheme">  </p><hr><p>还有一点也是推动我换框架的原因，之前用的Gitment在登录GitHub账号的时候总是会出问题，会弹出<code>[object XMLHttpRequestProgressEvent]</code>这样的错误，具体原因不是很明白。其次是咱国内的网络登录github的速度实在是一言难尽，我希望我的博客并不只服务于我们这些技术人，还有我一些生活上的朋友，让他们为了能给我留言评论还得大费周章的去注册个GitHub账号，实在是有些不妥。  </p><p>于是在朋友的推荐下，我决定使用一个特别好用的匿名评论插件Valine，Valine用的是一个叫LeanCloud的云数据库存储博客评论内容，因为我国法律的原因，所以我注册的是LeanCloud的国际版。</p><p>有了Hexo+Valine，博客基本的东西都OK了，于是我启动GitHub Pages服务，尝试访问。</p><p>正如我之前所说，国内的网络环境访问GitHub还是很慢的。这时候强迫症就上来了，我既然折腾到现在了，不如继续折腾下去吧，于是我打开阿里云准备开个全站加速，这东西我是第一次弄，之前完全没用到过，弄了半天才明白我还得买个域名。行嘛！我买还不行吗！于是买了个便宜的 <a href="http://xuanxiaoming.info/">xuanxiaoming.info</a>，看起来还不错，哈哈。</p><blockquote><p>这里有个小插曲。因为是个人博客嘛，我本来是很想注册xuanxiaoming.me这个域名的，这个域名我当时只查到了在GoDaddy这个网站上购买，而这个网站的注册简直让我崩溃，它并不是及时注册成功的，差不多十几个小时后我才收到邮件说注册成功了，那个时候我所有的后续配置都已经做完还睡了一觉。。。</p></blockquote><p>后来我发现了一个网站<a href="https://www.domcomp.com/" target="_blank" rel="noopener">简化域名注册</a>，收罗了很多域名销售商，可以直接查出最便宜的购买点（包括了后续续费的价格），如果我再想买xuanxiaoming.me这个域名的话，我一定会去porkbun.com上购买。</p><p>扯得远了，域名买过后开始折腾起全站加速。懒得写大段文字了，直接看图吧，按红笔标的做就OK。</p><p><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/AllSiteAccelerate.jpeg" alt="全站加速配置"></p><p>全站加速配置完后列表页会给你一个CNAME值，将其填入域名解析的记录值中，保存，等一个TTL时间就好了。</p><p>开了全站加速后，我自己测试大概1~2秒就访问完成，确实快了很多。</p><p>最后我想再聊一聊感悟，这次博客搭建比我想象中要轻松一点，可能是因为踩过了Jekyll的坑，虽然有些不同，但简单看看就明白了，主要的时间都花费在博客功能配置和站点访问优化上了，所以现在赶紧记录下来既帮助自己又帮助别人。</p><blockquote><p>目前博客正在积极装修中，还有些旧的博文，我会慢慢搬运过来，期待一下以后的样子。<br>感谢你阅读到这！<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/heihei.jpg" alt="嘿嘿"></p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -53,6 +53,85 @@
     </summary>
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis Generator配置解析</title>
+    <link href="http://xuanxiaoming.info/2018/08/01/Mybatis%20Generator%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/"/>
+    <id>http://xuanxiaoming.info/2018/08/01/Mybatis%20Generator%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/</id>
+    <published>2018-07-31T18:03:37.000Z</published>
+    <updated>2020-03-04T06:51:17.118Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇文章我想简单说一说generatorConfig.xml这个配置文件    </p><p>本篇文章参考 <a href="https://www.jianshu.com/p/e09d2370b796" target="_blank" rel="noopener">简书——叩丁狼教育</a> 和 <a href="https://www.cnblogs.com/GaiDynasty/p/4088531.html" target="_blank" rel="noopener">博客——改着名儿玩</a></p><p>我们先对这个配置文件做一个拆分，看看具体包含哪些东西（可以参考上一篇博客结尾代码）</p><pre><code>classPathEntry 加载类(比如jdbc驱动物理位置)  generatorConfiguration 配置器    * context 生成一组对象环境           *  jdbcConnection           数据库连接配置          *  javaModelGenerator     model (domain)配置          *  sqlMapGenerator        mapper配置          *  javaClientGenerator    dao配置          *  table                  表结构  </code></pre><p>根据上面的内容，就可以搭出来一个generatorConfig.xml的基本骨架了  </p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;  &lt;generatorConfiguration&gt;        &lt;classPathEntry  location=&quot;jdbc驱动位置&quot;/&gt;        &lt;context id=&quot;MysqlContext&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;            &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;                            connectionURL=&quot;jdbc:mysql://localhost:3306/数据库名&quot;                            userId=&quot;root&quot;                            password=&quot;root&quot;&gt;            &lt;/jdbcConnection&gt;            &lt;javaModelGenerator targetPackage=&quot;test.model&quot;                             targetProject=&quot;model生成的位置&quot;&gt;            &lt;/javaModelGenerator&gt;            &lt;sqlMapGenerator targetPackage=&quot;test.xml&quot;                             targetProject=&quot;mapper生成的位置&quot;&gt;            &lt;/sqlMapGenerator&gt;            &lt;javaClientGenerator type=&quot;ANNOTATEDMAPPER&quot;                             targetPackage=&quot;test.dao&quot;                             targetProject=&quot;dao层接口生成的位置&quot; /&gt;            &lt;table tableName=&quot;person&quot; &gt;                &lt;property name=&quot;id&quot; value=&quot;false&quot;/&gt;                &lt;!-- 其他字段 --&gt;            &lt;/table&gt;        &lt;/context&gt;&lt;/generatorConfiguration&gt;</code></pre><p>然后根据自己的需要再往里面添肉，一个适合你的generatorConfig.xml就完成了。  </p><p>比如我不想看它生成的注释，那我就加上  </p><pre><code>&lt;commentGenerator&gt;    &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;    &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;&lt;/commentGenerator&gt;</code></pre><p>要添肉的部分，叩丁狼教育的那篇简书里已经说的很详细了，这里就不再赘述。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这篇文章我想简单说一说generatorConfig.xml这个配置文件    &lt;/p&gt;
+&lt;p&gt;本篇文章参考 &lt;a href=&quot;https://www.jianshu.com/p/e09d2370b796&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;简书
+      
+    
+    </summary>
+    
+    
+    
+      <category term="MyBatis" scheme="http://xuanxiaoming.info/tags/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gradle不支持MyBatis Generator怎么办</title>
+    <link href="http://xuanxiaoming.info/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/"/>
+    <id>http://xuanxiaoming.info/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/</id>
+    <published>2018-07-31T17:21:45.000Z</published>
+    <updated>2020-03-04T06:41:30.568Z</updated>
+    
+    <content type="html"><![CDATA[<p>第一次用Gradle做Mybatis的项目，一上手就发现了一个问题 —— <em>哎？MyBatis Generator的插件怎么下不下来</em>  </p><p>然后就上官网查了一下，官网是这么说的： </p><blockquote><p>MyBatis Generator (MBG) can be run in the following ways:  </p><ul><li>From the command prompt with an XML configuration  </li><li>As an Ant task with an XML configuration  </li><li>As a Maven Plugin  </li><li>From another Java program with an XML configuration  </li><li>From another Java program with a Java based configuration  </li><li>As an Eclipse Feature  </li></ul></blockquote><p>这么看来MyBatis Generator是不支持Gradle的，而官网提供的解决方案除了第一条，我觉得都很麻烦，那么就用第一种方案解决问题吧！  </p><p>根据官网上的描述，我们总共需要准备三样东西：  </p><ul><li>mybatis-generator-core.jar</li><li>mysql-connector-java.jar</li><li>generatorConfig.xml</li></ul><p>有关generatorConfig.xml的描述，我放在了后面。  </p><p>准备工作做完后，将这三个文件放在同一文件夹下，执行 <code>java -jar mybatis-generator-core-x.x.x.jar -configfile generatorConfig.xml</code>，就OK了，类似下图。<br><img src="/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/20180801100602.png" alt="图片">  </p><p>我这里给generatorConfig.xml起名叫test.xml，生成在test文件夹里了，起名字随意。<br><img src="/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/20180801100600.png" alt="图片">  </p><p><img src="/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/20180801100601.png" alt="图片">  </p><p>为了防止我说的不够详细，有遗漏的地方，官网描述也放<a href="http://www.mybatis.org/generator/running/runningFromCmdLine.html" target="_blank" rel="noopener">这里</a>  </p><p>最后，看一下generatorConfig.xml，这里为了让看博客的人看到这里能有个参考，我就直接把我自己写的test.xml贴出来了。想看更多的描述，稍后我会写一篇更详细的，不然东西都堆在这很乱。  </p><p>使用时请根据实际情况修改！</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;&lt;generatorConfiguration&gt;    &lt;classPathEntry  location=&quot;mysql-connector-java-5.1.46.jar&quot;/&gt;      &lt;context id=&quot;MysqlContext&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;        &lt;property name=&quot;javaFormatter&quot; value=&quot;org.mybatis.generator.api.dom.DefaultJavaFormatter&quot;/&gt;        &lt;property name=&quot;xmlFormatter&quot; value=&quot;org.mybatis.generator.api.dom.DefaultXmlFormatter&quot;/&gt;        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot; /&gt;        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot; /&gt;        &lt;commentGenerator&gt;            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;        &lt;/commentGenerator&gt;        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;                                    connectionURL=&quot;jdbc:mysql://localhost:3306/test2?useSSL=false&quot;                                    userId=&quot;root&quot;                                    password=&quot;root&quot;&gt;        &lt;/jdbcConnection&gt;        &lt;javaModelGenerator targetPackage=&quot;test.model&quot; targetProject=&quot;C:\Users\MYPC\Desktop\123&quot;&gt;            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;        &lt;/javaModelGenerator&gt;        &lt;sqlMapGenerator targetPackage=&quot;test.xml&quot; targetProject=&quot;C:\Users\MYPC\Desktop\123&quot;&gt;            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;        &lt;/sqlMapGenerator&gt;        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;test.dao&quot; targetProject=&quot;C:\Users\MYPC\Desktop\123&quot; /&gt;        &lt;table tableName=&quot;person&quot; &gt;            &lt;property name=&quot;id&quot; value=&quot;false&quot;/&gt;            &lt;property name=&quot;name&quot; value=&quot;false&quot;/&gt;            &lt;property name=&quot;sex&quot; value=&quot;false&quot;/&gt;            &lt;property name=&quot;age&quot; value=&quot;false&quot;/&gt;            &lt;property name=&quot;birthday&quot; value=&quot;false&quot;/&gt;            &lt;property name=&quot;address&quot; value=&quot;false&quot;/&gt;        &lt;/table&gt;    &lt;/context&gt;&lt;/generatorConfiguration&gt;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;第一次用Gradle做Mybatis的项目，一上手就发现了一个问题 —— &lt;em&gt;哎？MyBatis Generator的插件怎么下不下来&lt;/em&gt;  &lt;/p&gt;
+&lt;p&gt;然后就上官网查了一下，官网是这么说的： &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;MyBatis Gene
+      
+    
+    </summary>
+    
+    
+    
+      <category term="MyBatis" scheme="http://xuanxiaoming.info/tags/mybatis/"/>
+    
+      <category term="Gradle" scheme="http://xuanxiaoming.info/tags/gradle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么我墙裂建议大家使用枚举来实现单例</title>
+    <link href="http://xuanxiaoming.info/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/"/>
+    <id>http://xuanxiaoming.info/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/</id>
+    <published>2018-06-15T07:27:14.000Z</published>
+    <updated>2020-03-04T06:41:00.597Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们知道，单例模式，一般有七种写法，那么这七种写法中，最好的是哪一种呢？为什么呢？本文就来抽丝剥茧一下。  </p><h3 id="哪种写单例的方式最好"><a href="#哪种写单例的方式最好" class="headerlink" title="哪种写单例的方式最好"></a>哪种写单例的方式最好</h3><p>在StakcOverflow中，有一个关于<a href="https://stackoverflow.com/questions/70689/what-is-an-efficient-way-to-implement-a-singleton-pattern-in-java" target="_blank" rel="noopener">What is an efficient way to implement a singleton pattern in Java?</a>的讨论：<br><img src="/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/201806170342.png" alt="201806170342"><br>如上图，得票率最高的回答是：使用枚举。<br>回答者引用了Joshua Bloch大神在《Effective Java》中明确表达过的观点：</p><blockquote><p>使用枚举实现单例的方法虽然还没有广泛采用，但是单元素的枚举类型已经成为实现Singleton的最佳方法。  </p></blockquote><p>如果你真的深入理解了单例的用法以及一些可能存在的坑的话，那么你也许也能得到相同的结论，那就是：使用枚举实现单例是一种很好的方法。  </p><h3 id="枚举单例写法简单"><a href="#枚举单例写法简单" class="headerlink" title="枚举单例写法简单"></a>枚举单例写法简单</h3><p>如果你看过<a href="http://www.hollischuang.com/archives/205" target="_blank" rel="noopener">《单例模式的七种写法》</a>中的实现单例的所有方式的代码，那就会发现，各种方式实现单例的代码都比较复杂。主要原因是在考虑线程安全问题。  </p><p>我们简单对比下“双重校验锁”方式和枚举方式实现单例的代码。  </p><p>“双重校验锁”实现单例：  </p><pre><code>public class Singleton {      private volatile static Singleton singleton;      private Singleton (){}      public static Singleton getSingleton() {      if (singleton == null) {          synchronized (Singleton.class) {          if (singleton == null) {              singleton = new Singleton();          }          }      }      return singleton;      }  }  </code></pre><p>枚举实现单例：  </p><pre><code>public enum Singleton {      INSTANCE;      public void whateverMethod() {      }  }  </code></pre><p>相比之下，你就会发现，枚举实现单例的代码会精简很多。  </p><p>上面的双重锁校验的代码之所以很臃肿，是因为大部分代码都是在保证线程安全。为了在保证线程安全和锁粒度之间做权衡，代码难免会写的复杂些。但是，这段代码还是有问题的，因为他无法解决反序列化会破坏单例的问题。  </p><h3 id="枚举可解决线程安全问题"><a href="#枚举可解决线程安全问题" class="headerlink" title="枚举可解决线程安全问题"></a>枚举可解决线程安全问题</h3><p>上面提到过。使用非枚举的方式实现单例，都要自己来保证线程安全，所以，这就导致其他方法必然是比较臃肿的。那么，为什么使用枚举就不需要解决线程安全问题呢？  </p><p>其实，并不是使用枚举就不需要保证线程安全，只不过线程安全的保证不需要我们关心而已。也就是说，其实在“底层”还是做了线程安全方面的保证的。  </p><p>那么，“底层”到底指的是什么？  </p><p>这就要说到关于枚举的实现了。这部分内容可以参考我的另外一篇博文<a href="http://www.hollischuang.com/archives/197" target="_blank" rel="noopener">深度分析Java的枚举类型—-枚举的线程安全性及序列化问题</a>，这里我简单说明一下：  </p><p>定义枚举时使用<code>enum</code>和class一样，是Java中的一个关键字。就像class对应用一个Class类一样，<code>enum</code>也对应有一个<code>Enum</code>类。  </p><p>通过将定义好的枚举<a href="http://www.hollischuang.com/archives/58" target="_blank" rel="noopener">反编译</a>，我们就能发现，其实枚举在经过<code>javac</code>的编译之后，会被转换成形如<code>public final class T extends Enum</code>的定义。  </p><p>而且，枚举中的各个枚举项同事通过<code>static</code>来定义的。如：   </p><pre><code>public enum T {    SPRING,SUMMER,AUTUMN,WINTER;}    </code></pre><p>反编译后代码为：  </p><pre><code>public final class T extends Enum {    //省略部分内容    public static final T SPRING;    public static final T SUMMER;    public static final T AUTUMN;    public static final T WINTER;    private static final T ENUM$VALUES[];    static    {        SPRING = new T(&quot;SPRING&quot;, 0);        SUMMER = new T(&quot;SUMMER&quot;, 1);        AUTUMN = new T(&quot;AUTUMN&quot;, 2);        WINTER = new T(&quot;WINTER&quot;, 3);        ENUM$VALUES = (new T[] {            SPRING, SUMMER, AUTUMN, WINTER        });    }}  </code></pre><p>了解JVM的类加载机制的朋友应该对这部分比较清楚。<code>static</code>类型的属性会在类被加载之后被初始化，我们在<a href="http://www.hollischuang.com/archives/199" target="_blank" rel="noopener">深度分析Java的ClassLoader机制（源码级别）</a>和<a href="http://www.hollischuang.com/archives/201" target="_blank" rel="noopener">Java类的加载、链接和初始化</a>两个文章中分别介绍过，当一个Java类第一次被真正使用到的时候静态资源被初始化、Java类的加载和初始化过程都是线程安全的（因为虚拟机在加载枚举的类的时候，会使用<code>ClassLoader</code>的<code>loadClass</code>方法，而这个方法使用同步代码块保证了线程安全）。所以，创建一个<code>enum</code>类型是线程安全的。  </p><p>也就是说，我们定义的一个枚举，在第一次被真正用到的时候，会被虚拟机加载并初始化，而这个初始化过程是线程安全的。而我们知道，解决单例的并发问题，主要解决的就是初始化过程中的线程安全问题。  </p><p>所以，由于枚举的以上特性，枚举实现的单例是天生线程安全的。  </p><h3 id="枚举可解决反序列化会破坏单例的问题"><a href="#枚举可解决反序列化会破坏单例的问题" class="headerlink" title="枚举可解决反序列化会破坏单例的问题"></a>枚举可解决反序列化会破坏单例的问题</h3><p>前面我们提到过，就是使用双重校验锁实现的单例其实是存在一定问题的，就是这种单例有可能被序列化锁破坏，关于这种破坏及解决办法，参看<a href="http://www.hollischuang.com/archives/1144" target="_blank" rel="noopener">单例与序列化的那些事儿</a>，这里不做更加详细的说明了。</p><p>那么，对于序列化这件事情，为什么枚举又有先天的优势了呢？答案可以在<a href="https://docs.oracle.com/javase/7/docs/platform/serialization/spec/serial-arch.html#6469" target="_blank" rel="noopener">Java Object Serialization Specification</a>中找到答案。其中专门对枚举的序列化做了如下规定：<br><img src="/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/201806170400.png" alt="201806170400">   </p><p>大概意思就是：在序列化的时候Java仅仅是将枚举对象的name属性输出到结果中，反序列化的时候则是通过<code>java.lang.Enum</code>的<code>valueOf</code>方法来根据名字查找枚举对象。同时，编译器是不允许任何对这种序列化机制的定制的，因此禁用了<code>writeObject</code>、<code>readObject</code>、<code>readObjectNoData</code>、<code>writeReplace</code>和<code>readResolve</code>等方法。</p><p>普通的Java类的反序列化过程中，会通过反射调用类的默认构造函数来初始化对象。所以，即使单例中构造函数是私有的，也会被反射给破坏掉。由于反序列化后的对象是重新new出来的，所以这就破坏了单例。</p><p>但是，枚举的反序列化并不是通过反射实现的。所以，也就不会发生由于反序列化导致的单例破坏问题。这部分内容在<a href="http://www.hollischuang.com/archives/197" target="_blank" rel="noopener">深度分析Java的枚举类型—-枚举的线程安全性及序列化问题</a>中也有更加详细的介绍，还展示了部分代码，感兴趣的朋友可以前往阅读。   </p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在所有的单例实现方式中，枚举是一种在代码写法上最简单的方式，之所以代码十分简洁，是因为Java给我们提供了<code>enum</code>关键字，我们便可以很方便的声明一个枚举类型，而不需要关心其初始化过程中的线程安全问题，因为枚举类在被虚拟机加载的时候会保证线程安全的被初始化。</p><p>除此之外，在序列化方面，Java中有明确规定，枚举的序列化和反序列化是有特殊定制的。这就可以避免反序列化过程中由于反射而导致的单例被破坏问题。  </p><p>(全文完)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我们知道，单例模式，一般有七种写法，那么这七种写法中，最好的是哪一种呢？为什么呢？本文就来抽丝剥茧一下。  &lt;/p&gt;
+&lt;h3 id=&quot;哪种写单例的方式最好&quot;&gt;&lt;a href=&quot;#哪种写单例的方式最好&quot; class=&quot;headerlink&quot; title=&quot;哪种写单例的方式最好
+      
+    
+    </summary>
+    
+    
+    
+      <category term="转载" scheme="http://xuanxiaoming.info/tags/%E8%BD%AC%E8%BD%BD/"/>
     
   </entry>
   
