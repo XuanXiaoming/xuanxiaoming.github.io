@@ -4,12 +4,13 @@
 <html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Hexo博客搭建填坑记录 - 迷途</title>
+    <title>Hexo博客搭建填坑记录 二 - 迷途</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="baidu-site-verification" content="aRPR2l8QnW" />
 <meta name="author" content="宣晓明">
-<meta name="description" content="趁博客搭好之际，赶紧记录下过程">
+<meta name="description" content="
+在博客的维护和更新过程中我遇到了很多琐碎的小问题，我决定新建立一篇文章，用于记录这些小问题和解决办法。由于内容过...">
 <meta name="keywords" content="技术、开箱体验、生活，交友">
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -22,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?31671584">
+<link rel="stylesheet" href="/css/journal.css?7444780">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -222,13 +223,13 @@
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
-            <div class="post-head-wrapper"
-                 style="background-image: url('/2020/01/13/hexo博客搭建填坑记录/title.jpg')">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
                 <div class="post-title">
-                    Hexo博客搭建填坑记录
+                    Hexo博客搭建填坑记录 二
                     <div class="post-meta">
-                        <time datetime="2020-01-12T16:59:19.000Z" itemprop="datePublished">
-                            2020-01-13 00:59
+                        <time datetime="2020-03-04T11:26:52.000Z" itemprop="datePublished">
+                            2020-03-04 19:26
                         </time>&nbsp;
                         
     
@@ -246,43 +247,106 @@
             <div class="post-body-wrapper">
                 <div class="post-body">
                     <blockquote>
-<p>写文章前我决定先copy一份markdown的语法来，实在是忘了 = =！</p>
+<p>在博客的维护和更新过程中我遇到了很多琐碎的小问题，我决定新建立一篇文章，用于记录这些小问题和解决办法。<br>由于内容过于琐碎，所以我就直接列表记录了，他们之间并无逻辑关联。 </p>
 </blockquote>
-<p>折腾了两天，总算是把博客弄好了，对于我这个懒人来说真是不容易，希望以后能抽空写写博客，毕竟生活中还是有不少事是值得记录的。</p>
-<p>之前使用的博客是基于Jekyll+Gitment搭建的，用的主题是一个前端老哥写的H2O theme，可能有些人也知道吧，真的是很好看的主题，尤其是随着时间变换主题色这个功能我是太喜欢了，晚上看博文不刺眼了（明明没有人看）。但是奔着人活着就是为了折腾，这次我决定用Hexo+Valine来搭建新的博客（其实我就是看上了新主题）</p>
-<p><strong>先附上之前博客的主题样式:</strong><br>白天：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeDay.png" alt="H2OThemeDay"><br>晚上：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeNight.png" alt="H2OThemeNight"> </p>
-<p><strong>新的博客的样式：</strong><br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/JournalTheme.png" alt="JournalTheme">  </p>
-<hr>
-<p>还有一点也是推动我换框架的原因，之前用的Gitment在登录GitHub账号的时候总是会出问题，会弹出<code>[object XMLHttpRequestProgressEvent]</code>这样的错误，具体原因不是很明白。其次是咱国内的网络登录github的速度实在是一言难尽，我希望我的博客并不只服务于我们这些技术人，还有我一些生活上的朋友，让他们为了能给我留言评论还得大费周章的去注册个GitHub账号，实在是有些不妥。  </p>
-<p>于是在朋友的推荐下，我决定使用一个特别好用的匿名评论插件Valine，Valine用的是一个叫LeanCloud的云数据库存储博客评论内容，因为我国法律的原因，所以我注册的是LeanCloud的国际版。</p>
-<p>有了Hexo+Valine，博客基本的东西都OK了，于是我启动GitHub Pages服务，尝试访问。</p>
-<p>正如我之前所说，国内的网络环境访问GitHub还是很慢的。这时候强迫症就上来了，我既然折腾到现在了，不如继续折腾下去吧，于是我打开阿里云准备开个全站加速，这东西我是第一次弄，之前完全没用到过，弄了半天才明白我还得买个域名。行嘛！我买还不行吗！于是买了个便宜的 <a href="https://xuanxiaoming.info/">xuanxiaoming.info</a>，看起来还不错，哈哈。</p>
+<br> 
+
 <blockquote>
-<p>这里有个小插曲。因为是个人博客嘛，我本来是很想注册xuanxiaoming.me这个域名的，这个域名我当时只查到了在GoDaddy这个网站上购买，而这个网站的注册简直让我崩溃，它并不是及时注册成功的，差不多十几个小时后我才收到邮件说注册成功了，那个时候我所有的后续配置都已经做完还睡了一觉。。。</p>
+<p><font style="font-size:140%"> <strong>修改首页左侧导航栏列表循序</strong>  </font></p>
 </blockquote>
-<p>后来我发现了一个网站<a href="https://www.domcomp.com/" target="_blank" rel="noopener">简化域名注册</a>，收罗了很多域名销售商，可以直接查出最便宜的购买点（包括了后续续费的价格），如果我再想买xuanxiaoming.me这个域名的话，我一定会去porkbun.com上购买。</p>
-<p>扯得远了，域名买过后开始折腾起全站加速。懒得写大段文字了，直接看图吧，按红笔标的做就OK。</p>
-<p><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/AllSiteAccelerate.jpeg" alt="全站加速配置"></p>
-<p>全站加速配置完后列表页会给你一个CNAME值，将其填入域名解析的记录值中，保存，等一个TTL时间就好了。</p>
-<p>开了全站加速后，我自己测试大概1~2秒就访问完成，确实快了很多。</p>
-<p>最后我想再聊一聊感悟，这次博客搭建比我想象中要轻松一点，可能是因为踩过了Jekyll的坑，虽然有些不同，但简单看看就明白了，主要的时间都花费在博客功能配置和站点访问优化上了，所以现在赶紧记录下来既帮助自己又帮助别人。</p>
+<p>我发现主题的创建者只将归档(archive)这个页面单独做了处理，而我新加入的页面直接是对<code>site.pages</code>这个变量做了一个遍历，这导致我无法控制列表的排布，显得很乱，所以我最终的解决方案是直接将中间这段代码注释掉，将<code>&lt;a&gt;</code>标签内容写了进去，很简单粗暴的解决办法。  </p>
+<pre><code>&lt;% if (theme.archives) { %&gt;
+&lt;a class=&quot;a-block no-tint nav-link-item &lt;%= is_current(&apos;archives&apos;) &amp;&amp; &apos;active&apos; %&gt;&quot; href=&quot;&lt;%= config.root + &quot;archives&quot; %&gt;&quot;&gt;
+    &lt;%= __(&apos;Archive&apos;) %&gt;
+&lt;/a&gt;
+&lt;% } %&gt;
+
+&lt;% if(site.pages){ %&gt;
+&lt;% site.pages.each(function (page){ %&gt;
+&lt;a class=&quot;a-block nav-link-item &lt;%= is_current(page.path) &amp;&amp; &apos;active&apos; %&gt;&quot; href=&quot;&lt;%= config.root + page.path %&gt;&quot;&gt;
+    &lt;%= page.title %&gt;
+&lt;/a&gt;
+&lt;% });} %&gt;
+
+&lt;% if (theme.rss) { %&gt;
+&lt;a class=&quot;a-block no-tint nav-link-item&quot; href=&quot;&lt;%= config.root + theme.rss %&gt;&quot;&gt;
+    &lt;%= __(&apos;RSS&apos;) %&gt;
+&lt;/a&gt;
+&lt;% } %&gt;  </code></pre><p>之后我又发现PC网页上的导航顺序没问题了，但是移动端的页面列表循序还是乱的，在仔细核查了主题作者的代码后，我终于在另一个文件中找到了，为了方便以后修改，我在此记录一下。 </p>
+<pre><code>side_nav.ejs —— PC端的导航模块
+single_column_head.ejs —— 移动端的导航模块  </code></pre><br>
+
 <blockquote>
-<p>目前博客正在积极装修中，还有些旧的博文，我会慢慢搬运过来，期待一下以后的样子。<br>感谢你阅读到这！<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/heihei.jpg" alt="嘿嘿"></p>
+<p><font style="font-size:140%"> <strong>SSL证书申请，配置强制跳转https</strong> </font>  </p>
 </blockquote>
+<p>这块是这样的， 我上次在阿里云注册https的时候， 阿里云那边出了bug， 就是SSL证书那块我一直申请不下来（阿里云的免费SSL）， 点不动那个按钮， 所以就一直用http访问到现在， 这次我上阿里云的控制面板试探性的点了一下，发现这个可以申请了， 然后我就把https给配置好了。 为什么我一直要配置https呢，因为现在的浏览器，比如Safari、Chrome，他们都会把非https的连接标记为非安全连接，实际上你作为建站人你自己是知道的，就是一个博客而已什么也没干，但是这块就是让人很憋屈。  </p>
+<p>配置完这个https之后，我平时访问的时候，我发现还是会有http的访问，起初我以为是浏览器缓存的问题，但是并不是这样，后来我改了很多东西，甚至怀疑到了CNAME这个文件上，现在想想真是可笑至极。最后这个问题我在阿里云的全站加速的配置里找到了。如图所示，修改下强制跳转就行。  </p>
+<p><img src="https.png" alt="强制跳转">  </p>
+<br>
+
+<blockquote>
+<p><font style="font-size:140%"> <strong>CNAME文件与hexo忽略文件</strong> </font>  </p>
+</blockquote>
+<p>这个文件是做什么的，我就不说了，直接网上查一下就有。它在github中的作用是告诉gitHub page服务你的自定义域名是什么，顾名思义，这个文件里面填的就是你的域名，没别的了。</p>
+<p>在和hexo连用的时候我发现一个问题，当我执行<code>hexo clean</code>命令后，会将public文件夹下的文件全部删除，包括CNAME。这时候有两种解决办法，一是将CNAME文件放到source文件夹下，这样在<code>hexo g</code>后会将该文件原封不动copy到public文件夹下，避免了clean的删除。二是在hexo的全局配置文件里加入忽略文件（hexo会默认忽略“.”开头的和隐藏的文件）</p>
+<p><img src="/2020/03/04/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E4%BA%8C/hexoConfig.png" alt="hexoConfig">  </p>
+<p>举例：  </p>
+<pre><code># Include/Exclude Files/Folders
+include:
+    - &quot;.nojekyll&quot;
+    # 包括 &apos;source/css/_typing.css&apos;
+    - &quot;css/_typing.css&quot;
+    # 包括 &apos;source/_css/&apos; 中的任何文件，但不包括子目录及其其中的文件。
+    - &quot;_css/*&quot;
+    # 包含 &apos;source/_css/&apos; 中的任何文件和子目录下的任何文件
+    - &quot;_css/**/*&quot;
+
+exclude:
+    # 不包括 &apos;source/js/test.js&apos;
+    - &quot;js/test.js&quot;
+    # 不包括 &apos;source/js/&apos; 中的文件、但包括子目录下的所有目录和文件
+    - &quot;js/*&quot;
+    # 不包括 &apos;source/js/&apos; 中的文件和子目录下的任何文件
+    - &quot;js/**/*&quot;
+    # 不包括 &apos;source/js/&apos; 目录下的所有文件名以 &apos;test&apos; 开头的文件，但包括其它文件和子目录下的单文件
+    - &quot;js/test*&quot;
+    # 不包括 &apos;source/js/&apos; 及其子目录中任何以 &apos;test&apos; 开头的文件
+    - &quot;js/**/test*&quot;
+    # 不要用 exclude 来忽略 &apos;source/_posts/&apos; 中的文件。你应该使用 &apos;skip_render&apos;，或者在要忽略的文件的文件名之前加一个下划线 &apos;_&apos;
+    # 在这里配置一个 - &quot;_posts/hello-world.md&quot; 是没有用的。
+
+ignore:
+    # Ignore any folder named &apos;foo&apos;.
+    - &quot;**/foo&quot;
+    # Ignore &apos;foo&apos; folder in &apos;themes/&apos; only.
+    - &quot;**/themes/*/foo&quot;
+    # Same as above, but applies to every subfolders of &apos;themes/&apos;.
+    - &quot;**/themes/**/foo&quot;</code></pre><p> 我用的是第一种方法解决的，第二种方法我没试，不过官方文档里都写了，所以也是一种合格的解决办法。</p>
+<br>
+
+<blockquote>
+<p><font style="font-size:140%"> <strong>创建标签页</strong> </font>  </p>
+</blockquote>
+<p>主题作者只写了按时间归档的页面，标签页并没有写，甚至在使用文档里也没有说明（这个说明文档非常的简陋，issue里面一片哀嚎），但是hexo是自己支持标签分类的，我们只需要稍加配置一下即可。</p>
+<p><a href="https://github.com/SumiMakito/hexo-theme-Journal/issues/20#issuecomment-551090136" target="_blank" rel="noopener">参考这篇issue里面AmazingRise的回答</a>：  </p>
+<p><img src="/2020/03/04/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E4%BA%8C/tagsConfig.png" alt="标签页配置">  </p>
+<br>
+
+<blockquote>
+<p><font style="font-size:140%"> <strong>SEO优化</strong> </font>  </p>
+</blockquote>
+<p>参考这篇博文 –&gt; <a href="https://hoxis.github.io/Hexo+Next%20SEO%E4%BC%98%E5%8C%96.html" target="_blank" rel="noopener">Hexo博客Next主题SEO优化方法</a>  </p>
+<p>说的很详细，我就不赘述了。</p>
 
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/2020/03/04/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E4%BA%8C/">
-        上一篇<br>Hexo博客搭建填坑记录 二
-    </a>
-    
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/2020/01/12/markdown-%E8%AF%AD%E6%B3%95/">
-        下一篇<br>markdown语法
+    <a class="older-posts" href="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">
+        下一篇<br>Hexo博客搭建填坑记录
     </a>
     
 </nav>
@@ -359,7 +423,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?80137532"></script>
+<script src="/js/journal.js?66294883"></script>
 
 
     <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
