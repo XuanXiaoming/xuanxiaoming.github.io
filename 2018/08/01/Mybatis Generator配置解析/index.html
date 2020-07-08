@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Mybatis Generator配置解析 - 宣晓明的个人博客</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="宣晓明">
+<meta name="description" content="这篇文章我想简单分析一下generatorConfig.xml这个配置文件的结构    
+本篇文章参考 简书——叩...">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?66307539">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    // (function (d) {
+    //     var config = {
+    //             kitId: 'dwg1tuc',
+    //             scriptTimeout: 3000,
+    //             async: true
+    //         },
+    //         h = d.documentElement, t = setTimeout(function () {
+    //             h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+    //         }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+    //         s = d.getElementsByTagName("script")[0], a;
+    //     h.className += " wf-loading";
+    //     tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+    //     tk.async = true;
+    //     tk.onload = tk.onreadystatechange = function () {
+    //         a = this.readyState;\
+    //         if (f || a && a != "complete" && a != "loaded") return;
+    //         f = true;
+    //         clearTimeout(t);
+    //         try {
+    //             Typekit.load(config)
+    //         } catch (e) {
+    //         }
+    //     };
+    //     s.parentNode.insertBefore(tk, s)
+    // })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://xuanxiaoming.info">
+                首頁
+            </a>
+
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                標籤
+            </a>
+
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item false" href="/message/index.html">
+                閒言
+            </a>
+            <a class="a-block drawer-menu-item false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                關於
+            </a>
+
+            <!-- 
+            
+            <a class="a-block drawer-menu-item false" href="/friends/index.html">
+                友人
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                關於
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/message/index.html">
+                閒言
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                標籤
+            </a>
+             -->
+
+            
+            <a class="a-block drawer-menu-item" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            宣晓明的个人博客
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">宣晓明的个人博客</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            迷<br>途
+        </div>
+        <div class="nav-subtitle">
+            xiaoming's notebook
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            標籤
+        </a>
+
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            歸檔
+        </a>
+        
+
+        <a class="a-block nav-link-item false" href="/message/index.html">
+            閒言
+        </a>
+        <a class="a-block nav-link-item false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            關於
+        </a>
+
+        <!-- 
+        
+        <a class="a-block nav-link-item false" href="/friends/index.html">
+            友人
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/message/index.html">
+            閒言
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            標籤
+        </a>
+         -->
+
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2020 <a href="http://xuanxiaoming.info">宣晓明的个人博客</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2018/08/01/Mybatis Generator配置解析/20180801135801.jpg')">
+                <div class="post-title">
+                    Mybatis Generator配置解析
+                    <div class="post-meta">
+                        <time datetime="2018-07-31T18:03:37.000Z" itemprop="datePublished">
+                            2018-08-01 02:03
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/mybatis/'>MyBatis</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <p>这篇文章我想简单分析一下generatorConfig.xml这个配置文件的结构    </p>
+<p>本篇文章参考 <a href="https://www.jianshu.com/p/e09d2370b796" target="_blank" rel="noopener">简书——叩丁狼教育</a> 和 <a href="https://www.cnblogs.com/GaiDynasty/p/4088531.html" target="_blank" rel="noopener">博客——改着名儿玩</a></p>
+<p>我们先对这个配置文件做一个拆分，看看具体包含哪些东西（可以参考上一篇博客结尾代码）</p>
+<pre><code>classPathEntry 加载类(比如jdbc驱动物理位置)  
+generatorConfiguration 配置器
+    - context 生成一组对象环境   
+        -  jdbcConnection         数据库连接配置  
+        -  javaModelGenerator     model (domain)配置  
+        -  sqlMapGenerator        mapper配置  
+        -  javaClientGenerator    dao配置  
+        -  table                  表结构  </code></pre><p>根据上面的内容，就可以搭出来一个generatorConfig.xml的基本骨架了  </p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;  
+
+&lt;generatorConfiguration&gt;
+        &lt;classPathEntry  location=&quot;jdbc驱动位置&quot;/&gt;
+        &lt;context id=&quot;MysqlContext&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;
+
+            &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;
+                            connectionURL=&quot;jdbc:mysql://localhost:3306/数据库名&quot;
+                            userId=&quot;root&quot;
+                            password=&quot;root&quot;&gt;
+            &lt;/jdbcConnection&gt;
+            &lt;javaModelGenerator targetPackage=&quot;test.model&quot; 
+                            targetProject=&quot;model生成的位置&quot;&gt;
+            &lt;/javaModelGenerator&gt;
+            &lt;sqlMapGenerator targetPackage=&quot;test.xml&quot; 
+                            targetProject=&quot;mapper生成的位置&quot;&gt;
+            &lt;/sqlMapGenerator&gt;
+            &lt;javaClientGenerator type=&quot;ANNOTATEDMAPPER&quot; 
+                            targetPackage=&quot;test.dao&quot; 
+                            targetProject=&quot;dao层接口生成的位置&quot; /&gt;
+            &lt;table tableName=&quot;person&quot; &gt;
+                &lt;property name=&quot;id&quot; value=&quot;false&quot;/&gt;
+                &lt;!-- 其他字段 --&gt;
+            &lt;/table&gt;
+        &lt;/context&gt;
+&lt;/generatorConfiguration&gt;</code></pre><p>然后根据自己的需要再往里面添肉，一个适合你的generatorConfig.xml就完成了。  </p>
+<p>比如我不想看它生成的注释，那我就加上  </p>
+<pre><code>&lt;commentGenerator&gt;
+    &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;
+&lt;/commentGenerator&gt;</code></pre><p>要添肉的部分，叩丁狼教育的那篇简书里已经说的很详细了，这里就不再赘述。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2020/01/12/markdown-%E8%AF%AD%E6%B3%95/">
+        上一篇<br>markdown语法
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/">
+        下一篇<br>Gradle不支持MyBatis Generator怎么办
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div class="post-comment-wrapper">
+        <div id="vcomments"></div>
+    </div>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!-- <script src='//unpkg.com/valine/dist/Valine.min.js'></script> -->
+    <script src='//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
+	<script>
+		var notify = 'true == true ? true : false';
+		var verify = 'true == true ? true : false';
+		var visitor = 'false == true ? true : false';
+        new Valine({
+            el: '#vcomments',
+            app_id: '4PkrfUIMziwxg8I4kJKuP3hX-MdYXbMMI',
+            app_key: '2fRV8XGIOF6NN196fKHosY2O',
+            notify: 'true == true ? true : false',
+            verify: 'true == true ? true : false',
+            lang: 'zh-cn',
+            placeholder: 'ヾﾉ≧∀≦)o 快来评论一下吧!',
+            avatar: 'mp',
+            pageSize: '10',
+            visitor: 'false == true ? true : false',
+            highlight: 'true == true ? true : false',
+            recordIP: 'true == true ? true : false',
+            meta: ['nick','mail']
+        });
+    </script>
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2020 <a href="http://xuanxiaoming.info">宣晓明的个人博客</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?46230940"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+
+                function createtime() {
+                        var create_time = new Date("2020-1-13 00:00:00");
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                        hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                        mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                        snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                setInterval("createtime()", 250);
+        </script>
+
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <!-- <script src='//unpkg.com/valine/dist/Valine.min.js'></script> -->
+    <script src='//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
+	<script>
+		var notify = 'true == true ? true : false';
+		var verify = 'true == true ? true : false';
+		var visitor = 'false == true ? true : false';
+        new Valine({
+            el: '#vcomments',
+            app_id: '4PkrfUIMziwxg8I4kJKuP3hX-MdYXbMMI',
+            app_key: '2fRV8XGIOF6NN196fKHosY2O',
+            notify: 'true == true ? true : false',
+            verify: 'true == true ? true : false',
+            lang: 'zh-cn',
+            placeholder: 'ヾﾉ≧∀≦)o 快来评论一下吧!',
+            avatar: 'mp',
+            pageSize: '10',
+            visitor: 'false == true ? true : false',
+            highlight: 'true == true ? true : false',
+            recordIP: 'true == true ? true : false',
+            meta: ['nick','mail']
+        });
+    </script>
+
+
+</body>
+</html>
