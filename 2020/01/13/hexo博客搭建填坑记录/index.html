@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?51257417">
+<link rel="stylesheet" href="/css/journal.css?50826172">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -65,7 +65,7 @@
      v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
     <div class="drawer-content">
         <div class="drawer-menu">
-            <a class="a-block drawer-menu-item false" href="http://xuanxiaoming.info">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.info">
                 首頁
             </a>
 
@@ -202,7 +202,7 @@
         
         Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
         
-        &copy; 2020 <a href="http://xuanxiaoming.info">宣晓明的个人博客</a>
+        &copy; 2020 <a href="https://xuanxiaoming.info">宣晓明的个人博客</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -223,7 +223,7 @@
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             <div class="post-head-wrapper"
-                 style="background-image: url('/2020/01/13/hexo博客搭建填坑记录/title.jpg')">
+                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204705.jpg')">
                 <div class="post-title">
                     Hexo博客搭建填坑记录
                     <div class="post-meta">
@@ -250,8 +250,8 @@
 </blockquote>
 <p>折腾了两天，总算是把博客弄好了，对于我这个懒人来说真是不容易，希望以后能抽空写写博客，毕竟生活中还是有不少事是值得记录的。</p>
 <p>之前使用的博客是基于Jekyll+Gitment搭建的，用的主题是一个前端老哥写的H2O theme，可能有些人也知道吧，真的是很好看的主题，尤其是随着时间变换主题色这个功能我是太喜欢了，晚上看博文不刺眼了（明明没有人看）。但是奔着人活着就是为了折腾，这次我决定用Hexo+Valine来搭建新的博客（其实我就是看上了新主题）</p>
-<p><strong>先附上之前博客的主题样式:</strong><br>白天：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeDay.png" alt="H2OThemeDay"><br>晚上：<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/H2OthemeNight.png" alt="H2OThemeNight"> </p>
-<p><strong>新的博客的样式：</strong><br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/JournalTheme.png" alt="JournalTheme">  </p>
+<p><strong>先附上之前博客的主题样式:</strong><br>白天：<br><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204311.png" alt="H2OThemeDay"><br>晚上：<br><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204326.png" alt="H2OThemeNight"> </p>
+<p><strong>新的博客的样式：</strong><br><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204350.png" alt="JournalTheme">  </p>
 <hr>
 <p>还有一点也是推动我换框架的原因，之前用的Gitment在登录GitHub账号的时候总是会出问题，会弹出<code>[object XMLHttpRequestProgressEvent]</code>这样的错误，具体原因不是很明白。其次是咱国内的网络登录github的速度实在是一言难尽，我希望我的博客并不只服务于我们这些技术人，还有我一些生活上的朋友，让他们为了能给我留言评论还得大费周章的去注册个GitHub账号，实在是有些不妥。  </p>
 <p>于是在朋友的推荐下，我决定使用一个特别好用的匿名评论插件Valine，Valine用的是一个叫LeanCloud的云数据库存储博客评论内容，因为我国法律的原因，所以我注册的是LeanCloud的国际版。</p>
@@ -262,12 +262,12 @@
 </blockquote>
 <p>后来我发现了一个网站<a href="https://www.domcomp.com/" target="_blank" rel="noopener">简化域名注册</a>，收罗了很多域名销售商，可以直接查出最便宜的购买点（包括了后续续费的价格），如果我再想买xuanxiaoming.me这个域名的话，我一定会去porkbun.com上购买。</p>
 <p>扯得远了，域名买过后开始折腾起全站加速。懒得写大段文字了，直接看图吧，按红笔标的做就OK。</p>
-<p><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/AllSiteAccelerate.jpeg" alt="全站加速配置"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204615.jpeg" alt="全站加速配置"></p>
 <p>全站加速配置完后列表页会给你一个CNAME值，将其填入域名解析的记录值中，保存，等一个TTL时间就好了。</p>
 <p>开了全站加速后，我自己测试大概1~2秒就访问完成，确实快了很多。</p>
 <p>最后我想再聊一聊感悟，这次博客搭建比我想象中要轻松一点，可能是因为踩过了Jekyll的坑，虽然有些不同，但简单看看就明白了，主要的时间都花费在博客功能配置和站点访问优化上了，所以现在赶紧记录下来既帮助自己又帮助别人。</p>
 <blockquote>
-<p>目前博客正在积极装修中，还有些旧的博文，我会慢慢搬运过来，期待一下以后的样子。<br>感谢你阅读到这！<br><img src="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/heihei.jpg" alt="嘿嘿"></p>
+<p>目前博客正在积极装修中，还有些旧的博文，我会慢慢搬运过来，期待一下以后的样子。<br>感谢你阅读到这！<br><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204631.jpg" alt="嘿嘿"></p>
 </blockquote>
 
                 </div>
@@ -328,7 +328,7 @@
     
     Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
     
-    &copy; 2020 <a href="http://xuanxiaoming.info">宣晓明的个人博客</a>
+    &copy; 2020 <a href="https://xuanxiaoming.info">宣晓明的个人博客</a>
 </div>
 </div>
 
@@ -343,7 +343,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?71956825"></script>
+<script src="/js/journal.js?19218900"></script>
 <!-- 添加网站运行时间 -->
 
         <script>
