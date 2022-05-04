@@ -1,12 +1,13 @@
 let app;
 
-app = new Vue({
-    el: '#app',
-    data: {
-        scrollY: 0,
-        navOpacity: 0,
-        isDrawerOpen: false,
-        mounted: false,
+Vue.createApp({
+    data() {
+        return {
+            scrollY: 0,
+            navOpacity: 0,
+            isDrawerOpen: false,
+            mounted: false,
+        }
     },
     methods: {
         sgn(t, x) {
@@ -33,7 +34,7 @@ app = new Vue({
         handleResize() {
             const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
             extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
-        },
+        }, 
         navBarHeight() {
             return this.$refs.navBar.offsetHeight;
         },
@@ -57,14 +58,16 @@ app = new Vue({
         };
     },
     mounted() {
-        this.handleScroll();
-        this.handleResize();
-        this.mounted = true;
+        this.$nextTick(function () {
+            this.handleScroll();
+            this.handleResize();
+            this.mounted = true;
+        })
     },
-    destroyed() {
+    unmounted() {
         window.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener('resize', this.handleResize);
-    }
-});
+    },
+}).mount('#app')
 
 new SmoothScroll('a#globalBackToTop');

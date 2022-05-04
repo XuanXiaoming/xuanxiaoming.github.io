@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Docker笔记 - Almost&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="Almost.">
+<meta name="description" content="docker相关知识点和排坑记录">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?26794200">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    // (function (d) {
+    //     var config = {
+    //             kitId: 'dwg1tuc',
+    //             scriptTimeout: 3000,
+    //             async: true
+    //         },
+    //         h = d.documentElement, t = setTimeout(function () {
+    //             h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+    //         }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+    //         s = d.getElementsByTagName("script")[0], a;
+    //     h.className += " wf-loading";
+    //     tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+    //     tk.async = true;
+    //     tk.onload = tk.onreadystatechange = function () {
+    //         a = this.readyState;\
+    //         if (f || a && a != "complete" && a != "loaded") return;
+    //         f = true;
+    //         clearTimeout(t);
+    //         try {
+    //             Typekit.load(config)
+    //         } catch (e) {
+    //         }
+    //     };
+    //     s.parentNode.insertBefore(tk, s)
+    // })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                標籤
+            </a>
+
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item false" href="/message/index.html">
+                閒言
+            </a>
+            <a class="a-block drawer-menu-item false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                關於
+            </a>
+
+            <!-- 
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                關於
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friends/index.html">
+                友人
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/message/index.html">
+                閒言
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                標籤
+            </a>
+             -->
+
+            
+            <a class="a-block drawer-menu-item" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Almost&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Almost&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            迷<br>途
+        </div>
+        <div class="nav-subtitle">
+            xiaoming's notebook
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            標籤
+        </a>
+
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            歸檔
+        </a>
+        
+
+        <a class="a-block nav-link-item false" href="/message/index.html">
+            閒言
+        </a>
+        <a class="a-block nav-link-item false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            關於
+        </a>
+
+        <!-- 
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friends/index.html">
+            友人
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/message/index.html">
+            閒言
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            標籤
+        </a>
+         -->
+
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2022 <a href="https://xuanxiaoming.github.io">Almost&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205032321761.jpeg')">
+                <div class="post-title">
+                    Docker笔记
+                    <div class="post-meta">
+                        <time datetime="2022-12-13T07:34:51.000Z" itemprop="datePublished">
+                            2022-12-13 15:34
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/docker/'>docker</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="Docker笔记"><a href="#Docker笔记" class="headerlink" title="Docker笔记"></a>Docker笔记</h1><h4 id="检索docker容器IP"><a href="#检索docker容器IP" class="headerlink" title="检索docker容器IP"></a>检索docker容器IP</h4><pre class="line-numbers language-shell"><code class="language-shell"># 为了回避前端vue页面渲染标记，请自行将 [[ 替换为 {{，反之同理
+docker inspect -f '[[range .NetworkSettings.Networks]][[.IPAddress]][[end]]' [CONTAINER ID]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="docker可视化管理容器"><a href="#docker可视化管理容器" class="headerlink" title="docker可视化管理容器"></a>docker可视化管理容器</h4><p>使用portainer-ce，ce通常是指官方维护的非商业版</p>
+<pre class="line-numbers language-shell"><code class="language-shell">docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Users/xuan/portainer_data:/data portainer/portainer-ce<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="docker挂载卷的总结和避坑"><a href="#docker挂载卷的总结和避坑" class="headerlink" title="docker挂载卷的总结和避坑"></a>docker挂载卷的总结和避坑</h4><p>docker 有几种方式都可以挂载卷，实现与宿主机共享文件。但是我在网上搜索了很久也没有遇到讲解关于在dockerfile中使用volume实现docker run -v那种自定义挂载文件夹的方式，找了很长时间才找到问题所在。</p>
+<p>正常使用挂载，假设我想将桌面的demo文件夹挂载到ubuntu中的share文件夹，我可以这么写<code>docker run -v /Desktop/demo:/share ubuntu</code>。但是这样在dockerfile中是不允许的，dockerfile文件的目的是为了编撰镜像属性，而不是交互属性。交互属性应该是在镜像构建为容器时定义的。所以如果有交互方面的需求可以使用docker compose去实现。</p>
+<p>实际上容器内部的文件夹有三种情况：</p>
+<ol>
+<li><p>没有指定VOLUME，也没有指定-v，这种是普通文件夹</p>
+</li>
+<li><p>指定了VOLUME，ENTRYPOINT没有指定-v，这种文件夹可以在不同容器之间共享，但是无法在本地修改</p>
+</li>
+<li><p>指定了-v的文件夹，这种文件夹可以在不同容器之间共享，且可以在本地修改</p>
+</li>
+</ol>
+<h4 id="dockerfile中-ENTRYPOINT-和-CMD-的区别"><a href="#dockerfile中-ENTRYPOINT-和-CMD-的区别" class="headerlink" title="dockerfile中 ENTRYPOINT 和 CMD 的区别"></a>dockerfile中 ENTRYPOINT 和 CMD 的区别</h4><pre class="line-numbers language-dockerfile"><code class="language-dockerfile"># dockerfile中写
+CMD echo "hello world"
+
+# 运行容器时
+docker run -it xxx /bin/bash
+
+# 会直接打开交互命令行，CMD内容被直接忽略<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-dockerfile"><code class="language-dockerfile"># dockerfile中写
+ENTRYPOINT echo "hello world"
+
+# 运行容器时
+docker run -it xxx /bin/bash
+
+# 会直接忽略/bin/bash，输出hello world
+# 只有在运行容器指令后加--entrypoint，才能覆盖dockerfile中的定义<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通常建议使用的方式是，CMD和ENTRYPOINT结合使用，并使用Exec格式编写，用CMD为ENTRYPOINT添加参数。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2021/12/10/linux%E4%B8%89%E5%89%91%E5%AE%A2/">
+        下一篇<br>linux三剑客
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2022 <a href="https://xuanxiaoming.github.io">Almost&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?97190976"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+
+                function createtime() {
+                        var create_time = new Date("2020-1-13 00:00:00");
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                        hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                        mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                        snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
