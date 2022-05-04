@@ -4,13 +4,13 @@
 <html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>如何让Outlook (office365)不再弹出“没有默认的邮件客户端”对话框？ - 宣晓明的个人博客</title>
+    <title>Mybatis Generator配置解析 - 宣晓明的个人博客</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="baidu-site-verification" content="aRPR2l8QnW" />
 <meta name="author" content="宣晓明">
-<meta name="description" content="
-这是一篇2018年我发布在知乎上的回答，这篇回答一直以来访问人数都很多且评论的人都给与一致的好评，所以我决定搬运...">
+<meta name="description" content="这篇文章我想简单分析一下generatorConfig.xml这个配置文件的结构    
+本篇文章参考 简书——叩...">
 <meta name="keywords" content="技术、开箱体验、生活，交友">
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?9300484">
+<link rel="stylesheet" href="/css/journal.css?37399615">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -58,7 +58,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -92,20 +92,20 @@
 
             <!-- 
             
-            <a class="a-block drawer-menu-item false" href="/tags/index.html">
-                標籤
+            <a class="a-block drawer-menu-item false" href="/friends/index.html">
+                友人
             </a>
             
             <a class="a-block drawer-menu-item false" href="/about/index.html">
                 關於
             </a>
             
-            <a class="a-block drawer-menu-item false" href="/friends/index.html">
-                友人
-            </a>
-            
             <a class="a-block drawer-menu-item false" href="/message/index.html">
                 閒言
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                標籤
             </a>
              -->
 
@@ -173,20 +173,20 @@
 
         <!-- 
         
-        <a class="a-block nav-link-item false" href="/tags/index.html">
-            標籤
+        <a class="a-block nav-link-item false" href="/friends/index.html">
+            友人
         </a>
         
         <a class="a-block nav-link-item false" href="/about/index.html">
             關於
         </a>
         
-        <a class="a-block nav-link-item false" href="/friends/index.html">
-            友人
-        </a>
-        
         <a class="a-block nav-link-item false" href="/message/index.html">
             閒言
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            標籤
         </a>
          -->
 
@@ -224,12 +224,12 @@
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             <div class="post-head-wrapper"
-                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728205614.png')">
+                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728205221.jpg')">
                 <div class="post-title">
-                    如何让Outlook (office365)不再弹出“没有默认的邮件客户端”对话框？
+                    Mybatis Generator配置解析
                     <div class="post-meta">
-                        <time datetime="2018-07-17T08:12:33.000Z" itemprop="datePublished">
-                            2018-07-17 16:12
+                        <time datetime="2018-07-31T18:03:37.000Z" itemprop="datePublished">
+                            2018-08-01 02:03
                         </time>&nbsp;
                         
     
@@ -237,7 +237,7 @@
                         
                         <i class="material-icons" style="">label</i>
                         
-                        <a href='/tags/windows/'>windows</a>
+                        <a href='/tags/mybatis/'>MyBatis</a>
                         
                         
                     </div>
@@ -246,48 +246,65 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <blockquote>
-<p>这是一篇2018年我发布在知乎上的回答，这篇回答一直以来访问人数都很多且评论的人都给与一致的好评，所以我决定搬运到博客中来。</p>
-</blockquote>
-<p>我正好遇到这个问题，并且成功解决了，记下来帮助一下以后遇到问题的人。 </p>
-<p>分析结果：</p>
-<ul>
-<li>触发这个弹窗的不是outlook程序，因为可能你和我一样已经把office 2016卸载了。 </li>
-<li>也不是默认应用程序触发的弹窗。我把默认程序设置为邮件依旧弹窗。  </li>
-<li>我在启动项里找到了office的lync，我不知道它从哪来的，但是也不是它，因为它没有运行。  </li>
-<li>天知道我经历了什么…… 强迫症有时候真的会逼死人。  </li>
-<li>最后当我看到service里的OneSyncSvc_sessionID服务项，答案就出来了。  </li>
-</ul>
-<div style="text-align: center"><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728205555.jpg"></div><br>    
+                    <p>这篇文章我想简单分析一下generatorConfig.xml这个配置文件的结构    </p>
+<p>本篇文章参考 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e09d2370b796">简书——叩丁狼教育</a> 和 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/GaiDynasty/p/4088531.html">博客——改着名儿玩</a></p>
+<p>我们先对这个配置文件做一个拆分，看看具体包含哪些东西（可以参考上一篇博客结尾代码）</p>
+<pre><code>classPathEntry 加载类(比如jdbc驱动物理位置)  
+generatorConfiguration 配置器
+    - context 生成一组对象环境   
+        -  jdbcConnection         数据库连接配置  
+        -  javaModelGenerator     model (domain)配置  
+        -  sqlMapGenerator        mapper配置  
+        -  javaClientGenerator    dao配置  
+        -  table                  表结构  </code></pre><p>根据上面的内容，就可以搭出来一个generatorConfig.xml的基本骨架了  </p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;  
 
-<p>解决办法（服务里没法直接关闭）：</p>
-<ol>
-<li><p>定位注册表到“HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services”下。</p>
-</li>
-<li><p>找到4项 “OneSyncSvc”“OneSyncSvc_sessionID”“UserDataSvc”“UserDataSvc_sessionID”</p>
-</li>
-<li><p>把每项里“Start”的值设为4，重启就能看到效果了。（0 引导，1 系统，2 自动-默认，3 手动，4 禁用）</p>
-</li>
-</ol>
-<br>  
+&lt;generatorConfiguration&gt;
+        &lt;classPathEntry  location=&quot;jdbc驱动位置&quot;/&gt;
+        &lt;context id=&quot;MysqlContext&quot; targetRuntime=&quot;MyBatis3Simple&quot; defaultModelType=&quot;flat&quot;&gt;
 
-<blockquote>
-<p>如果这篇文章有帮助你解决问题，治好强迫症，你可以来知乎里给我点赞。<br><a href="https://www.zhihu.com/question/40217178/answer/407644015" target="_blank" rel="noopener">如何让Outlook (office365)不再弹出“没有默认的邮件客户端”对话框？ - 拉格朗日的回答 - 知乎</a></p>
-</blockquote>
+            &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;
+                            connectionURL=&quot;jdbc:mysql://localhost:3306/数据库名&quot;
+                            userId=&quot;root&quot;
+                            password=&quot;root&quot;&gt;
+            &lt;/jdbcConnection&gt;
+            &lt;javaModelGenerator targetPackage=&quot;test.model&quot; 
+                            targetProject=&quot;model生成的位置&quot;&gt;
+            &lt;/javaModelGenerator&gt;
+            &lt;sqlMapGenerator targetPackage=&quot;test.xml&quot; 
+                            targetProject=&quot;mapper生成的位置&quot;&gt;
+            &lt;/sqlMapGenerator&gt;
+            &lt;javaClientGenerator type=&quot;ANNOTATEDMAPPER&quot; 
+                            targetPackage=&quot;test.dao&quot; 
+                            targetProject=&quot;dao层接口生成的位置&quot; /&gt;
+            &lt;table tableName=&quot;person&quot; &gt;
+                &lt;property name=&quot;id&quot; value=&quot;false&quot;/&gt;
+                &lt;!-- 其他字段 --&gt;
+            &lt;/table&gt;
+        &lt;/context&gt;
+&lt;/generatorConfiguration&gt;</code></pre><p>然后根据自己的需要再往里面添肉，一个适合你的generatorConfig.xml就完成了。  </p>
+<p>比如我不想看它生成的注释，那我就加上  </p>
+<pre><code>&lt;commentGenerator&gt;
+    &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;
+&lt;/commentGenerator&gt;</code></pre><p>要添肉的部分，叩丁狼教育的那篇简书里已经说的很详细了，这里就不再赘述。</p>
 
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E/">
-        上一篇<br>Gradle不支持MyBatis Generator怎么办
+    <a class="newer-posts" href="/2020/01/12/markdown-%E8%AF%AD%E6%B3%95">
+        上一篇<br>markdown语法
     </a>
     
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/2018/06/15/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%A2%99%E8%A3%82%E5%BB%BA%E8%AE%AE%E5%A4%A7%E5%AE%B6%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B/">
-        下一篇<br>为什么我墙裂建议大家使用枚举来实现单例
+    <a class="older-posts" href="/2018/08/01/Gradle%E4%B8%8D%E6%94%AF%E6%8C%81MyBatis%20Generator%E6%80%8E%E4%B9%88%E5%8A%9E">
+        下一篇<br>Gradle不支持MyBatis Generator怎么办
     </a>
     
 </nav>
@@ -295,24 +312,34 @@
             <!-- _include/comment_templates 加载评论插件元素 -->
             
 
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <div class="post-comment-wrapper">
+        <div id="vcomments"></div>
+    </div>
 
 
             <!-- _include/comment_includes 加载评论插件脚本 -->
             
-
-    <script type="text/javascript">
-        (function (d, s) {
-            var j, e = d.getElementsByTagName(s)[0];
-            if (typeof LivereTower === 'function') { return; }
-            j = d.createElement(s);
-            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-            j.async = true;
-            e.parentNode.insertBefore(j, e);
-        })(document, 'script');
+	<script>
+		var notify = 'true == true ? true : false';
+		var verify = 'true == true ? true : false';
+		var visitor = 'false == true ? true : false';
+        new Valine({
+            el: '#vcomments',
+            app_id: '4PkrfUIMziwxg8I4kJKuP3hX-MdYXbMMI',
+            app_key: '2fRV8XGIOF6NN196fKHosY2O',
+            notify: 'true == true ? true : false',
+            verify: 'true == true ? true : false',
+            lang: 'zh-cn',
+            placeholder: 'ヾﾉ≧∀≦)o 快来评论一下吧!',
+            avatar: 'mp',
+            pageSize: '10',
+            visitor: 'false == true ? true : false',
+            highlight: 'true == true ? true : false',
+            recordIP: 'true == true ? true : false',
+            meta: ['nick','mail'],
+            serverURLs: 'https://4PkrfUIM.api.lncldglobal.com',
+        });
     </script>
-    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-
 
         </div>
     </div>
@@ -336,7 +363,8 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?36674664"></script>
+<script src="/js/journal.js?13017794"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 <!-- 添加网站运行时间 -->
 
         <script>
@@ -369,6 +397,31 @@
                 }
                 setInterval("createtime()", 250);
         </script>
+
+
+
+	<script>
+		var notify = 'true == true ? true : false';
+		var verify = 'true == true ? true : false';
+		var visitor = 'false == true ? true : false';
+        new Valine({
+            el: '#vcomments',
+            app_id: '4PkrfUIMziwxg8I4kJKuP3hX-MdYXbMMI',
+            app_key: '2fRV8XGIOF6NN196fKHosY2O',
+            notify: 'true == true ? true : false',
+            verify: 'true == true ? true : false',
+            lang: 'zh-cn',
+            placeholder: 'ヾﾉ≧∀≦)o 快来评论一下吧!',
+            avatar: 'mp',
+            pageSize: '10',
+            visitor: 'false == true ? true : false',
+            highlight: 'true == true ? true : false',
+            recordIP: 'true == true ? true : false',
+            meta: ['nick','mail'],
+            serverURLs: 'https://4PkrfUIM.api.lncldglobal.com',
+        });
+    </script>
+
 
 </body>
 </html>

@@ -4,12 +4,13 @@
 <html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>markdown语法 - 宣晓明的个人博客</title>
+    <title>使用picgo+jsDelivr提升博客图片载入速度 - 宣晓明的个人博客</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="baidu-site-verification" content="aRPR2l8QnW" />
 <meta name="author" content="宣晓明">
-<meta name="description" content="copy来的语法知识，忘了就看看">
+<meta name="description" content="
+很长时间没有来写博客了，最近一直在忙找工作和考研的事，有空也会刷些leetcode，每天生活都过于充实，疏忽了写...">
 <meta name="keywords" content="技术、开箱体验、生活，交友">
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -22,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?21900350">
+<link rel="stylesheet" href="/css/journal.css?83758883">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -57,7 +58,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -91,20 +92,20 @@
 
             <!-- 
             
-            <a class="a-block drawer-menu-item false" href="/tags/index.html">
-                標籤
+            <a class="a-block drawer-menu-item false" href="/friends/index.html">
+                友人
             </a>
             
             <a class="a-block drawer-menu-item false" href="/about/index.html">
                 關於
             </a>
             
-            <a class="a-block drawer-menu-item false" href="/friends/index.html">
-                友人
-            </a>
-            
             <a class="a-block drawer-menu-item false" href="/message/index.html">
                 閒言
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                標籤
             </a>
              -->
 
@@ -172,20 +173,20 @@
 
         <!-- 
         
-        <a class="a-block nav-link-item false" href="/tags/index.html">
-            標籤
+        <a class="a-block nav-link-item false" href="/friends/index.html">
+            友人
         </a>
         
         <a class="a-block nav-link-item false" href="/about/index.html">
             關於
         </a>
         
-        <a class="a-block nav-link-item false" href="/friends/index.html">
-            友人
-        </a>
-        
         <a class="a-block nav-link-item false" href="/message/index.html">
             閒言
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            標籤
         </a>
          -->
 
@@ -223,15 +224,21 @@
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             <div class="post-head-wrapper"
-                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728204749.png')">
+                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200805160330.jpg')">
                 <div class="post-title">
-                    markdown语法
+                    使用picgo+jsDelivr提升博客图片载入速度
                     <div class="post-meta">
-                        <time datetime="2020-01-12T08:17:20.000Z" itemprop="datePublished">
-                            2020-01-12 16:17
+                        <time datetime="2020-07-29T15:20:41.000Z" itemprop="datePublished">
+                            2020-07-29 23:20
                         </time>&nbsp;
                         
     
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/博客搭建/'>-博客搭建</a>
+                        
                         
                     </div>
                 </div>
@@ -239,110 +246,25 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="1-标题"><a href="#1-标题" class="headerlink" title="1 标题"></a>1 标题</h1><p>两种形式：  </p>
-<p>1）使用<code>=</code>和<code>-</code>标记一级和二级标题。</p>
-<blockquote>
-<p>一级标题<br><code>=========</code><br>二级标题<br><code>---------</code></p>
+                    <blockquote>
+<p>很长时间没有来写博客了，最近一直在忙找工作和考研的事，有空也会刷些leetcode，每天生活都过于充实，疏忽了写博客。哎,慢慢补吧。</p>
 </blockquote>
-<p>效果：</p>
+<p>我这个博客自建立以来就一直有个诟病，加载太慢，起初我以为是挂在github的原因，所以我开了全站加速，其实效果并不是那么好（当然我并不是说毫无影响，事实证明如果我把博客挂在码云上所有的问题都解决了）。排查了一些问题后，发现对加载速度影响最大的是图片的加载，所以我就一直在找解决办法，直到我无意中在知乎上看到了jsDelivr这个CDN。</p>
+<p>我要做的事很简单，在写markdown的软件typora上配置picgo的使用，然后让图片上传到仓库中，获得到URL再改为jsDelivr的加载链接，最后直接替换原博客图片链接就可以了，接下来配上图再详细说一遍。</p>
+<p>首先打开GitHub创建一个公共仓库存储图片，然后到个人设置的开发者设置那里生成一个token，这里的token只会出现一次，所以先复制保存下来。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200805152422.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200805152451.png" alt></p>
+<p>然后到typora中配置picgo，当然也可以使用picgo-core，配置都比较简单这里就不赘述了，网上一搜一大堆。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200805153019.png" alt></p>
+<p>把typora设置好后在到picgo里修改下图床设置，token项就是刚才复制保存的那个。存储路径就是将图片保存到仓库的指定路径下。</p>
+<p>自定义域名这里需要注意一下，因为一会要修改成使用jsdelivr代理，所以填入<code>https://cdn.jsdelivr.net/gh/你的仓库名@master</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200805153252.png" alt></p>
+<p>为了方便使用和避免文件名重复，我还在picgo中开启了如下选项</p>
+<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200805154042.png" alt></p>
+<p>在typora中上传完图片后，一般会直接替换掉图片的URL，如果是文章的头图之类的非markdown语法的图片链接，直接粘贴刚才自动复制的URL替换即可。</p>
+<p>接下来就可以愉快的写博客了！！！</p>
 <blockquote>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题   "></a>一级标题   </h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2></blockquote>
-<p>2）使用<code>#</code>，可表示1-6级标题。</p>
-<blockquote>
-<p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题    </p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<h1 id="一级标题-1"><a href="#一级标题-1" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题-1"><a href="#二级标题-1" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
-<hr>
-<h1 id="2-段落"><a href="#2-段落" class="headerlink" title="2 段落"></a>2 段落</h1><p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用<strong>两个以上</strong>空格加上回车（引用中换行省略回车）。</p>
-<hr>
-<h1 id="3-区块引用"><a href="#3-区块引用" class="headerlink" title="3 区块引用"></a>3 区块引用</h1><p>在段落的每行或者只在第一行使用符号<code>&gt;</code>,还可使用多个嵌套引用，如：</p>
-<blockquote>
-<p>&gt; 区块引用<br>&gt;&gt; 嵌套引用  </p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p>区块引用  </p>
-<blockquote>
-<p>嵌套引用</p>
-</blockquote>
-</blockquote>
-<hr>
-<h1 id="4-代码区块"><a href="#4-代码区块" class="headerlink" title="4 代码区块"></a>4 代码区块</h1><p>代码区块的建立是在每行加上4个空格或者一个制表符（如同写代码一样）。如<br>普通段落：</p>
-<p>void main()<br>{<br>    printf(“Hello, Markdown.”);<br>}    </p>
-<p>代码区块：</p>
-<pre><code>void main()
-{
-    printf(&quot;Hello, Markdown.&quot;);
-}</code></pre><p><strong>注意</strong>:需要和普通段落之间存在空行。</p>
-<hr>
-<h1 id="5-强调"><a href="#5-强调" class="headerlink" title="5 强调"></a>5 强调</h1><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>，如：</p>
-<blockquote>
-<p>*斜体*，_斜体_<br>**粗体**，__粗体__</p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p>
-</blockquote>
-<hr>
-<h1 id="6-列表"><a href="#6-列表" class="headerlink" title="6 列表"></a>6 列表</h1><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，如：</p>
-<blockquote>
-<p>-（+*） 第一项<br>-（+*） 第二项<br>- （+*）第三项</p>
-</blockquote>
-<p><strong>注意</strong>：标记后面最少有一个_空格<em>或</em>制表符_。若不在引用区块中，必须和前方段落之间存在空行。</p>
-<p>效果：</p>
-<blockquote>
-<ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ul>
-</blockquote>
-<p>有序列表的标记方式是将上述的符号换成数字,并辅以<code>.</code>，如：</p>
-<blockquote>
-<p>1 . 第一项<br>2 . 第二项<br>3 . 第三项    </p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<ol>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ol>
-</blockquote>
-<hr>
-<h1 id="7-分割线"><a href="#7-分割线" class="headerlink" title="7 分割线"></a>7 分割线</h1><p>分割线最常使用就是三个或以上<code>*</code>，还可以使用<code>-</code>和<code>_</code>。</p>
-<hr>
-<h1 id="8-链接"><a href="#8-链接" class="headerlink" title="8 链接"></a>8 链接</h1><p>链接可以由两种形式生成：<strong>行内式</strong>和<strong>参考式</strong>。<br><strong>行内式</strong>：</p>
-<blockquote>
-<p>[younghz的Markdown库](https:://github.com/younghz/Markdown “Markdown”)。</p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库</a>。</p>
-</blockquote>
-<p><strong>参考式</strong>：</p>
-<blockquote>
-<p>[younghz的Markdown库1][1]<br>[younghz的Markdown库2][2]<br>[1]:https:://github.com/younghz/Markdown “Markdown”<br>[2]:https:://github.com/younghz/Markdown “Markdown”    </p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库1</a><br><a href="https://github.com/younghz/Markdown" target="_blank" rel="noopener">younghz的Markdown库2</a></p>
-</blockquote>
-<p><strong>注意</strong>：上述的<code>[1]:https:://github.com/younghz/Markdown &quot;Markdown&quot;</code>不出现在区块中。</p>
-<hr>
-<h1 id="9-图片"><a href="#9-图片" class="headerlink" title="9 图片"></a>9 图片</h1><p>添加图片的形式和链接相似，只需在链接的基础上前方加一个<code>！</code>。  </p>
-<hr>
-<h1 id="10-反斜杠"><a href="#10-反斜杠" class="headerlink" title="10 反斜杠\"></a>10 反斜杠<code>\</code></h1><p>相当于<strong>反转义</strong>作用。使符号成为普通符号。  </p>
-<hr>
-<h1 id="11-符号’-’"><a href="#11-符号’-’" class="headerlink" title="11 符号’`’"></a>11 符号’`’</h1><p>起到标记作用。如：</p>
-<blockquote>
-<p>`ctrl+a`</p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><code>ctrl+a</code></p>
+<p>经过我的实际测试使用jsDelivr代理后的图片的加载速度得到了飞速的提升，我这篇博客就加了很多图片，你们可以试试加载速度。</p>
 </blockquote>
 
                 </div>
@@ -350,14 +272,10 @@
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/2020/01/13/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">
-        上一篇<br>Hexo博客搭建填坑记录
-    </a>
-    
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/2018/08/01/Mybatis%20Generator%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/">
-        下一篇<br>Mybatis Generator配置解析
+    <a class="older-posts" href="/2020/03/04/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E4%BA%8C">
+        下一篇<br>Hexo博客搭建填坑记录 二
     </a>
     
 </nav>
@@ -365,24 +283,34 @@
             <!-- _include/comment_templates 加载评论插件元素 -->
             
 
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <div class="post-comment-wrapper">
+        <div id="vcomments"></div>
+    </div>
 
 
             <!-- _include/comment_includes 加载评论插件脚本 -->
             
-
-    <script type="text/javascript">
-        (function (d, s) {
-            var j, e = d.getElementsByTagName(s)[0];
-            if (typeof LivereTower === 'function') { return; }
-            j = d.createElement(s);
-            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-            j.async = true;
-            e.parentNode.insertBefore(j, e);
-        })(document, 'script');
+	<script>
+		var notify = 'true == true ? true : false';
+		var verify = 'true == true ? true : false';
+		var visitor = 'false == true ? true : false';
+        new Valine({
+            el: '#vcomments',
+            app_id: '4PkrfUIMziwxg8I4kJKuP3hX-MdYXbMMI',
+            app_key: '2fRV8XGIOF6NN196fKHosY2O',
+            notify: 'true == true ? true : false',
+            verify: 'true == true ? true : false',
+            lang: 'zh-cn',
+            placeholder: 'ヾﾉ≧∀≦)o 快来评论一下吧!',
+            avatar: 'mp',
+            pageSize: '10',
+            visitor: 'false == true ? true : false',
+            highlight: 'true == true ? true : false',
+            recordIP: 'true == true ? true : false',
+            meta: ['nick','mail'],
+            serverURLs: 'https://4PkrfUIM.api.lncldglobal.com',
+        });
     </script>
-    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-
 
         </div>
     </div>
@@ -406,7 +334,8 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?58728614"></script>
+<script src="/js/journal.js?44441879"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 <!-- 添加网站运行时间 -->
 
         <script>
@@ -439,6 +368,31 @@
                 }
                 setInterval("createtime()", 250);
         </script>
+
+
+
+	<script>
+		var notify = 'true == true ? true : false';
+		var verify = 'true == true ? true : false';
+		var visitor = 'false == true ? true : false';
+        new Valine({
+            el: '#vcomments',
+            app_id: '4PkrfUIMziwxg8I4kJKuP3hX-MdYXbMMI',
+            app_key: '2fRV8XGIOF6NN196fKHosY2O',
+            notify: 'true == true ? true : false',
+            verify: 'true == true ? true : false',
+            lang: 'zh-cn',
+            placeholder: 'ヾﾉ≧∀≦)o 快来评论一下吧!',
+            avatar: 'mp',
+            pageSize: '10',
+            visitor: 'false == true ? true : false',
+            highlight: 'true == true ? true : false',
+            recordIP: 'true == true ? true : false',
+            meta: ['nick','mail'],
+            serverURLs: 'https://4PkrfUIM.api.lncldglobal.com',
+        });
+    </script>
+
 
 </body>
 </html>
