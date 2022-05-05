@@ -4,12 +4,12 @@
 <html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>歸檔: 2022/12 - Almost&#39;s blog</title>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Docker笔记 - Almost&#39;s blog</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="baidu-site-verification" content="aRPR2l8QnW" />
 <meta name="author" content="Almost.">
-<meta name="description" content="A Blog Powered By Hexo">
+<meta name="description" content="docker相关知识点和排坑记录">
 <meta name="keywords" content="技术、开箱体验、生活，交友">
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?24849595">
+<link rel="stylesheet" href="/css/journal.css?85836069">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -151,51 +151,110 @@
         </a>
 
         
-        
-
-        
-
-        
-        
     </div>
 </div>
 
+
+
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        
-        
-        <div class="post-item-wrapper post-item-wrapper-no-hover">
-            <div class="post-item post-item-no-gaps">
-                <div class="post-item-info-wrapper">
-                    <div class="post-item-title  post-item-title-small">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205032321761.jpeg')">
+                <div class="post-title">
+                    Docker笔记
+                    <div class="post-meta">
+                        <time datetime="2021-12-13T07:34:51.000Z" itemprop="datePublished">
+                            2021-12-13 15:34
+                        </time>&nbsp;
                         
-                        <a href="/archives/2022">2022</a> / 12
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-
-        <a href="/2022/12/13/docker笔记/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            Docker笔记
-                        </div>
-                        <div class="post-item-meta">
-                            2022-12-13
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        
-    </div>
     
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/docker/'>docker</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="Docker笔记"><a href="#Docker笔记" class="headerlink" title="Docker笔记"></a>Docker笔记</h1><h4 id="检索docker容器IP"><a href="#检索docker容器IP" class="headerlink" title="检索docker容器IP"></a>检索docker容器IP</h4><pre class="line-numbers language-shell"><code class="language-shell"># 为了回避前端vue页面渲染标记，请自行将 [[ 替换为 {{，反之同理
+docker inspect -f '[[range .NetworkSettings.Networks]][[.IPAddress]][[end]]' [CONTAINER ID]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="docker可视化管理容器"><a href="#docker可视化管理容器" class="headerlink" title="docker可视化管理容器"></a>docker可视化管理容器</h4><p>使用portainer-ce，ce通常是指官方维护的非商业版</p>
+<pre class="line-numbers language-shell"><code class="language-shell">docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Users/xuan/portainer_data:/data portainer/portainer-ce<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="docker挂载卷的总结和避坑"><a href="#docker挂载卷的总结和避坑" class="headerlink" title="docker挂载卷的总结和避坑"></a>docker挂载卷的总结和避坑</h4><p>docker 有几种方式都可以挂载卷，实现与宿主机共享文件。但是我在网上搜索了很久也没有遇到讲解关于在dockerfile中使用volume实现docker run -v那种自定义挂载文件夹的方式，找了很长时间才找到问题所在。</p>
+<p>正常使用挂载，假设我想将桌面的demo文件夹挂载到ubuntu中的share文件夹，我可以这么写<code>docker run -v /Desktop/demo:/share ubuntu</code>。但是这样在dockerfile中是不允许的，dockerfile文件的目的是为了编撰镜像属性，而不是交互属性。交互属性应该是在镜像构建为容器时定义的。所以如果有交互方面的需求可以使用docker compose去实现。</p>
+<p>实际上容器内部的文件夹有三种情况：</p>
+<ol>
+<li><p>没有指定VOLUME，也没有指定-v，这种是普通文件夹</p>
+</li>
+<li><p>指定了VOLUME，ENTRYPOINT没有指定-v，这种文件夹可以在不同容器之间共享，但是无法在本地修改</p>
+</li>
+<li><p>指定了-v的文件夹，这种文件夹可以在不同容器之间共享，且可以在本地修改</p>
+</li>
+</ol>
+<h4 id="dockerfile中-ENTRYPOINT-和-CMD-的区别"><a href="#dockerfile中-ENTRYPOINT-和-CMD-的区别" class="headerlink" title="dockerfile中 ENTRYPOINT 和 CMD 的区别"></a>dockerfile中 ENTRYPOINT 和 CMD 的区别</h4><pre class="line-numbers language-dockerfile"><code class="language-dockerfile"># dockerfile中写
+CMD echo "hello world"
 
+# 运行容器时
+docker run -it xxx /bin/bash
+
+# 会直接打开交互命令行，CMD内容被直接忽略<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-dockerfile"><code class="language-dockerfile"># dockerfile中写
+ENTRYPOINT echo "hello world"
+
+# 运行容器时
+docker run -it xxx /bin/bash
+
+# 会直接忽略/bin/bash，输出hello world
+# 只有在运行容器指令后加--entrypoint，才能覆盖dockerfile中的定义<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通常建议使用的方式是，CMD和ENTRYPOINT结合使用，并使用Exec格式编写，用CMD为ENTRYPOINT添加参数。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2022/01/14/ansible%E7%AC%94%E8%AE%B0/">
+        上一篇<br>Ansible笔记
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2021/12/10/linux%E4%B8%89%E5%89%91%E5%AE%A2/">
+        下一篇<br>linux三剑客
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
     <div class="single-column-footer">
     Proudly published with Hexo<br>
     
@@ -212,7 +271,7 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?60146684"></script>
+<script src="/js/journal.js?31330737"></script>
 <!-- 添加网站运行时间 -->
 
         <script>
@@ -245,7 +304,6 @@
                 }
                 setInterval("createtime()", 250);
         </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
 
 </body>
 </html>
