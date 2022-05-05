@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?64814327">
+<link rel="stylesheet" href="/css/journal.css?98596705">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -376,38 +376,38 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?80558197"></script>
+<script src="/js/journal.js?87917998"></script>
 <!-- 添加网站运行时间 -->
 
         <script>
                 var now = new Date();
-
                 function createtime() {
-                        var create_time = new Date("2020-1-13 00:00:00");
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
                         now.setTime(now.getTime() + 250);
                         days = (now - create_time) / 1000 / 60 / 60 / 24;
                         dnum = Math.floor(days);
                         hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
                         hnum = Math.floor(hours);
                         if (String(hnum).length == 1) {
-                        hnum = "0" + hnum;
+                                hnum = "0" + hnum;
                         }
                         minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
                         mnum = Math.floor(minutes);
                         if (String(mnum).length == 1) {
-                        mnum = "0" + mnum;
+                                mnum = "0" + mnum;
                         }
                         seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
                         snum = Math.round(seconds);
                         if (String(snum).length == 1) {
-                        snum = "0" + snum;
+                                snum = "0" + snum;
                         }
                         if (document.getElementById("timeDate") && document.getElementById("times")) {
                                 document.getElementById("timeDate").innerHTML = dnum + " 天 ";
                                 document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
                         }
                 }
-                setInterval("createtime()", 250);
+                window.setInterval("createtime()", 250);
         </script>
 
 
