@@ -44,6 +44,14 @@ button {
   cursor: hand;
   cursor: pointer; }
 
+#taboola-livere {
+  display: none !important;
+}
+
+#taboola-livere .trc_rbox_container {
+  display: none !important;
+}
+
 code {
   color: #7a422c;
   background: rgba(159, 86, 58, 0.07) !important;
