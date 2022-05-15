@@ -120,6 +120,11 @@ a {
     #lv-container {
       padding: 0 15px; } }
 
+.taboola-livere {
+  width: 0px !important;
+  height: 0px !important;
+}
+
 .single-column-nav-container {
   display: none !important; }
   @media screen and (max-width: 1020px) {
