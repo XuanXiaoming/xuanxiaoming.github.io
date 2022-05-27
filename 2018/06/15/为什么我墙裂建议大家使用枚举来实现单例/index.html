@@ -24,7 +24,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?61662158">
+<link rel="stylesheet" href="/css/journal.css?98047424">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -161,7 +161,7 @@
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             <div class="post-head-wrapper"
-                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728205909.png')">
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280612583.png')">
                 <div class="post-title">
                     为什么我墙裂建议大家使用枚举来实现单例
                     <div class="post-meta">
@@ -184,7 +184,7 @@
             <div class="post-body-wrapper">
                 <div class="post-body">
                     <p>我们知道，单例模式，一般有七种写法，那么这七种写法中，最好的是哪一种呢？为什么呢？本文就来抽丝剥茧一下。  </p>
-<h3 id="哪种写单例的方式最好"><a href="#哪种写单例的方式最好" class="headerlink" title="哪种写单例的方式最好"></a>哪种写单例的方式最好</h3><p>在StakcOverflow中，有一个关于<a href="https://stackoverflow.com/questions/70689/what-is-an-efficient-way-to-implement-a-singleton-pattern-in-java" target="_blank" rel="noopener">What is an efficient way to implement a singleton pattern in Java?</a>的讨论：<br><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728205909.png" alt="201806170342"><br>如上图，得票率最高的回答是：使用枚举。<br>回答者引用了Joshua Bloch大神在《Effective Java》中明确表达过的观点：</p>
+<h3 id="哪种写单例的方式最好"><a href="#哪种写单例的方式最好" class="headerlink" title="哪种写单例的方式最好"></a>哪种写单例的方式最好</h3><p>在StakcOverflow中，有一个关于<a href="https://stackoverflow.com/questions/70689/what-is-an-efficient-way-to-implement-a-singleton-pattern-in-java" target="_blank" rel="noopener">What is an efficient way to implement a singleton pattern in Java?</a>的讨论：<br><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280615029.png" alt="201806170342"><br>如上图，得票率最高的回答是：使用枚举。<br>回答者引用了Joshua Bloch大神在《Effective Java》中明确表达过的观点：</p>
 <blockquote>
 <p>使用枚举实现单例的方法虽然还没有广泛采用，但是单元素的枚举类型已经成为实现Singleton的最佳方法。  </p>
 </blockquote>
@@ -243,7 +243,7 @@
 <p>也就是说，我们定义的一个枚举，在第一次被真正用到的时候，会被虚拟机加载并初始化，而这个初始化过程是线程安全的。而我们知道，解决单例的并发问题，主要解决的就是初始化过程中的线程安全问题。  </p>
 <p>所以，由于枚举的以上特性，枚举实现的单例是天生线程安全的。  </p>
 <h3 id="枚举可解决反序列化会破坏单例的问题"><a href="#枚举可解决反序列化会破坏单例的问题" class="headerlink" title="枚举可解决反序列化会破坏单例的问题"></a>枚举可解决反序列化会破坏单例的问题</h3><p>前面我们提到过，就是使用双重校验锁实现的单例其实是存在一定问题的，就是这种单例有可能被序列化锁破坏，关于这种破坏及解决办法，参看<a href="http://www.hollischuang.com/archives/1144" target="_blank" rel="noopener">单例与序列化的那些事儿</a>，这里不做更加详细的说明了。</p>
-<p>那么，对于序列化这件事情，为什么枚举又有先天的优势了呢？答案可以在<a href="https://docs.oracle.com/javase/7/docs/platform/serialization/spec/serial-arch.html#6469" target="_blank" rel="noopener">Java Object Serialization Specification</a>中找到答案。其中专门对枚举的序列化做了如下规定：<br><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728205847.png" alt="201806170400">   </p>
+<p>那么，对于序列化这件事情，为什么枚举又有先天的优势了呢？答案可以在<a href="https://docs.oracle.com/javase/7/docs/platform/serialization/spec/serial-arch.html#6469" target="_blank" rel="noopener">Java Object Serialization Specification</a>中找到答案。其中专门对枚举的序列化做了如下规定：<br><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280616471.png" alt="201806170400">   </p>
 <p>大概意思就是：在序列化的时候Java仅仅是将枚举对象的name属性输出到结果中，反序列化的时候则是通过<code>java.lang.Enum</code>的<code>valueOf</code>方法来根据名字查找枚举对象。同时，编译器是不允许任何对这种序列化机制的定制的，因此禁用了<code>writeObject</code>、<code>readObject</code>、<code>readObjectNoData</code>、<code>writeReplace</code>和<code>readResolve</code>等方法。</p>
 <p>普通的Java类的反序列化过程中，会通过反射调用类的默认构造函数来初始化对象。所以，即使单例中构造函数是私有的，也会被反射给破坏掉。由于反序列化后的对象是重新new出来的，所以这就破坏了单例。</p>
 <p>但是，枚举的反序列化并不是通过反射实现的。所以，也就不会发生由于反序列化导致的单例破坏问题。这部分内容在<a href="http://www.hollischuang.com/archives/197" target="_blank" rel="noopener">深度分析Java的枚举类型—-枚举的线程安全性及序列化问题</a>中也有更加详细的介绍，还展示了部分代码，感兴趣的朋友可以前往阅读。   </p>
@@ -311,7 +311,7 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?98457605"></script>
+<script src="/js/journal.js?45356988"></script>
 <!-- 添加网站运行时间 -->
 
         <script>

@@ -24,7 +24,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?13160462">
+<link rel="stylesheet" href="/css/journal.css?91450875">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -161,7 +161,7 @@
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             <div class="post-head-wrapper"
-                 style="background-image: url('https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728181958.jpg')">
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280530048.jpeg')">
                 <div class="post-title">
                     Hexo博客搭建填坑记录 二
                     <div class="post-meta">
@@ -218,7 +218,7 @@ single_column_head.ejs —— 移动端的导航模块  </code></pre><br>
 </blockquote>
 <p>这块是这样的， 我上次在阿里云注册https的时候， 阿里云那边出了bug， 就是SSL证书那块我一直申请不下来（阿里云的免费SSL）， 点不动那个按钮， 所以就一直用http访问到现在， 这次我上阿里云的控制面板试探性的点了一下，发现这个可以申请了， 然后我就把https给配置好了。 为什么我一直要配置https呢，因为现在的浏览器，比如Safari、Chrome，他们都会把非https的连接标记为非安全连接，实际上你作为建站人你自己是知道的，就是一个博客而已什么也没干，但是这块就是让人很憋屈。  </p>
 <p>配置完这个https之后，我平时访问的时候，我发现还是会有http的访问，起初我以为是浏览器缓存的问题，但是并不是这样，后来我改了很多东西，甚至怀疑到了CNAME这个文件上，现在想想真是可笑至极。最后这个问题我在阿里云的全站加速的配置里找到了。如图所示，修改下强制跳转就行。  </p>
-<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728181809.png" alt="强制跳转">  </p>
+<p><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280533856.png" alt="强制跳转">  </p>
 <br>
 
 <blockquote>
@@ -226,7 +226,7 @@ single_column_head.ejs —— 移动端的导航模块  </code></pre><br>
 </blockquote>
 <p>这个文件是做什么的，我就不说了，直接网上查一下就有。它在github中的作用是告诉gitHub page服务你的自定义域名是什么，顾名思义，这个文件里面填的就是你的域名，没别的了。</p>
 <p>在和hexo连用的时候我发现一个问题，当我执行<code>hexo clean</code>命令后，会将public文件夹下的文件全部删除，包括CNAME。这时候有两种解决办法，一是将CNAME文件放到source文件夹下，这样在<code>hexo g</code>后会将该文件原封不动copy到public文件夹下，避免了clean的删除。二是在hexo的全局配置文件里加入忽略文件（hexo会默认忽略“.”开头的和隐藏的文件）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728181741.png" alt="hexoConfig">  </p>
+<p><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280532219.png" alt="hexoConfig">  </p>
 <p>举例：  </p>
 <pre><code># Include/Exclude Files/Folders
 include:
@@ -266,7 +266,7 @@ ignore:
 </blockquote>
 <p>主题作者只写了按时间归档的页面，标签页并没有写，甚至在使用文档里也没有说明（这个说明文档非常的简陋，issue里面一片哀嚎），但是hexo是自己支持标签分类的，我们只需要稍加配置一下即可。</p>
 <p><a href="https://github.com/SumiMakito/hexo-theme-Journal/issues/20#issuecomment-551090136" target="_blank" rel="noopener">参考这篇issue里面AmazingRise的回答</a>：  </p>
-<p><img src="https://cdn.jsdelivr.net/gh/XuanXiaoming/picRepository@master/img/20200728203823.png" alt="标签页配置">  </p>
+<p><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205280533025.png" alt="标签页配置">  </p>
 <br>
 
 <blockquote>
@@ -335,7 +335,7 @@ ignore:
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?81204444"></script>
+<script src="/js/journal.js?55449520"></script>
 <!-- 添加网站运行时间 -->
 
         <script>
