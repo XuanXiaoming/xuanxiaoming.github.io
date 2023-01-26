@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Linux系统检查与故障诊断 - Almost&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="Almost.">
+<meta name="description" content="linux系统状态的检查方式，以及会涉及到的问题排查方法">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?93529267">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Almost&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Almost&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Almost's Blog
+        </div>
+        <div class="nav-subtitle">
+            年年歲歲花相似<br>歲歲年年人不同
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">Almost&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202301270414188.png')">
+                <div class="post-title">
+                    Linux系统检查与故障诊断
+                    <div class="post-meta">
+                        <time datetime="2022-11-06T17:07:34.000Z" itemprop="datePublished">
+                            2022-11-07 01:07
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/运维/'>运维</a>, 
+                        
+                        <a href='/tags/linux/'>linux</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="硬件信息检查"><a href="#硬件信息检查" class="headerlink" title="硬件信息检查"></a>硬件信息检查</h2><h3 id="dmesg"><a href="#dmesg" class="headerlink" title="dmesg"></a>dmesg</h3><p><strong>功能说明</strong>：显示开机信息。显示系统运行时硬件的检测或者断开连接信息。</p>
+<blockquote>
+<p>使用前注意权限问题，内核日志是限制非管理员权限阅读的。遇到 <code>dmesg: read kernel buffer failed: Permission denied</code>，先修改权限，使用命令<code>sudo sysctl -w kernel.dmesg_restrict=0</code>  <br><br>在ubuntu 20.1以上版本中，还可以更改 <code>/etc/sysctl.d/10-kernel-hardening.conf</code> 中的配置 <code>kernel.dmesg_restrict=0</code>，再执行 <code>sudo service procps restart</code> 使其生效。<br><br>另外如果是docker容器中，修改权限会遇到 <code>sysctl: setting key &quot;kernel.yama.ptrace_scope&quot;, ignoring: Read-only file system</code>，解决办法请参考 <a href="http://fleey.cn/archives/108.html" target="_blank" rel="noopener">http://fleey.cn/archives/108.html</a></p>
+</blockquote>
+<br>
+dmesg 命令显示 linux 内核的环形缓冲区信息，我们可以从中获得诸如系统架构、cpu、挂载的硬件，RAM等多个运行级别的大量的系统信 息。当计算机启动时，系统内核（操作系统的核心部分）将会被加载到内存中。在加载的过程中会显示很多的信息，在这些信息中我们可以看到内核检测硬件设备。    
+<br><br>
+dmesg 命令用于设备故障的诊断是非常重要的。进行硬件的连接或断开连接操作时，在 dmesg 命令的帮助下，我们可以看到硬件的检测或者断开连接的信息。dmesg 命令在多数基于Linux和Unix的操作系统中都可以使用。
+<br><br>  
+
+<p><strong>常用</strong>  </p>
+<ol>
+<li>查看网卡启动信息 <code>dmesg | grep eth</code></li>
+<li>列出所有被检测到的硬件 <code>dmesg | grep sda</code></li>
+<li>清空dmesg缓冲区日志 <code>dmesg -c</code>， 即使清除了缓冲区数据也可以查看日志文件，文件保存在 <code>/var/log/dmesg</code></li>
+<li>监控硬件变化 <code>dmesg | tail -20</code></li>
+</ol>
+<h3 id="lshw"><a href="#lshw" class="headerlink" title="lshw"></a>lshw</h3><p><strong>功能说明</strong>：检查全部硬件信息</p>
+<p>需要安装软件包  </p>
+<pre class="line-numbers language-shell"><code class="language-shell">apt install -y lshw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="lspci"><a href="#lspci" class="headerlink" title="lspci"></a>lspci</h3><p><strong>功能说明</strong>：检查PCI设备</p>
+<p>需要安装软件包  </p>
+<pre class="line-numbers language-shell"><code class="language-shell">apt install -y lshw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="lsusb"><a href="#lsusb" class="headerlink" title="lsusb"></a>lsusb</h3><p><strong>功能说明</strong>：检查USB设备</p>
+<br>   
+
+<h2 id="网络检查"><a href="#网络检查" class="headerlink" title="网络检查"></a>网络检查</h2><h3 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h3><p><strong>功能说明</strong>：查看进程打开的文件、目录，以及查看进程监听的端口等 socket 相关的信息  </p>
+<p>需要安装软件包</p>
+<pre class="line-numbers language-shell"><code class="language-shell">apt install -y lsof<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>检查结果解释：</p>
+<ol>
+<li>COMMAND：程序的名称</li>
+<li>PID：进程标识符</li>
+<li>USER：进程所有者</li>
+<li>FD：文件描述符，应用程序通过文件描述符识别该文件<br>FD 列中的常见内容有 cwd、rtd、txt、mem 和一些数字等等。<br>其中 cwd 表示当前的工作目录；rtd 表示根目录；txt 表示程序的可执行文件；mem 表示内存映射文件；标准输入输出文件通常以数字表示。</li>
+<li>TYPE：文件类型，如 DIR、REG 等<br>REG 和 DIR 分别表示普通文件和目录。</li>
+<li>DEVICE：以逗号分隔设备编号</li>
+<li>SIZE：文件的大小(bytes)</li>
+<li>NODE：索引节点(文件在磁盘上的标识)</li>
+<li>NAME：打开文件的确切名称  </li>
+</ol>
+<p><strong>常用</strong>：</p>
+<ol>
+<li>查看哪些进程打开了某个文件或设备<br>直接指定文件（设备）的名称作为 lsof 的参数就可以查看哪些进程打开了这个文件（设备），例：<code>lsof /bin/bash</code> 或 <code>lsof /dev/sda1</code></li>
+<li>查看哪些进程打开了某个目录及目录下的文件<pre class="line-numbers language-shell"><code class="language-shell"> lsof +d /var/log  #不递归查询
+ lsof +D /var/log  #递归查询<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>查看某个进程打开的所有文件<br>先用ps查询进程的PID，再用lsof查询，用bash举例<pre class="line-numbers language-shell"><code class="language-shell"> ps -C bash
+ lsof -p bash的PID<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>复杂查询条件<ul>
+<li>使用 <code>-a</code> 参数，使查询组合多个条件</li>
+<li><code>-c</code> 使多条件为或的关系</li>
+<li>对条件取反，则直接在条件前加 <code>^</code></li>
+<li>另外也可以使用正则表达式，使用 <code>/</code> 包裹表达式</li>
+</ul>
+</li>
+<li>只列出 IPv4 或 IPv6 打开的文件<pre class="line-numbers language-shell"><code class="language-shell"> lsof -i 4  #IPv4
+ lsof -i 6  #IPv6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>列出与某端口相关的文件，例：<code>lsof -i:22</code></li>
+<li>列出指定范围内被打开的 TCP 端口，例：<code>lsof -i TCP:1-1024</code></li>
+<li>查看某个用户打开的所有文件，例：<code>lsof -u root</code></li>
+</ol>
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><p><strong>功能说明</strong>：显示各种网络相关信息，如网络连接，路由表，接口状态 (Interface Statistics)，masquerade 连接，多播成员 (Multicast Memberships) 等等。</p>
+<p><strong>常用</strong>：</p>
+<ol>
+<li>列出所有端口 <code>netstat -a</code>，默认不显示监听状态栏</li>
+<li>列出所有 tcp 端口 <code>netstat -at</code></li>
+<li>列出所有 udp 端口 <code>netstat -au</code></li>
+<li>列出所有监听端口 <code>netstat -l</code></li>
+<li>列出特定进程的使用端口 <code>netstat -p [PID]</code></li>
+<li>持续输出 netstat 信息 <code>netstat -c</code></li>
+<li>显示核心路由信息 <code>netstat -r</code></li>
+<li>显示网络接口列表 <code>netstat -i</code></li>
+</ol>
+<blockquote>
+<p><strong>什么是监听端口</strong><br>首先了解一下TCP/IP协议中的端口指的是什么？如果把IP地址比作一间房子 ，端口就是出入这间房子的门。真正的房子只有一个或者几个门，但是一个IP地址下的端口可以有65536（即：256×256）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从0到65535（256×256-1）。<br><br>在互联网上主机与主机之间通过TCP/IP协议发送和接收数据包，各个数据包根据其目的主机IP地址来进行路由。当数据包顺利的被传送到目的主机后，它要如何进入主机呢？当然是要通过端口(现实中的门)进入了。我们知道大多数操作系统都支持多应用程序（多进程）同时运行，不同的应用具有不同的处理功能，那么目的主机应该把接收到的数据包传送给哪一个应用程序呢？这就要靠端口了，一个应用对应一个或多个端口，这样我们就可以把数据包传递给对应的程序了。这就是监听端口的由来。<br><br>同一个端口只能被一个应用程序使用。如果多个应用使用了相同端口，就会出现端口冲突问题。这种情况通常我们不需要担心，因为端口冲突会导致应用程序无法启动。</p>
+</blockquote>
+<h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><p><strong>功能说明</strong>：根据使用者的定义对网络上的数据包进行截获的包分析工具。支持与或非逻辑语句帮助筛选信息。  </p>
+<p>需要安装软件包</p>
+<pre class="line-numbers language-shell"><code class="language-shell">apt install -y tcpdump<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输出信息的描述:   </p>
+<ul>
+<li>时间精确到微秒</li>
+<li>localhost.42333 &gt; localhost.9501 表示通信的流向</li>
+<li>[S] 表示这是一个SYN请求</li>
+<li>[.] 表示这是一个ACK确认包，(client)SYN-&gt;(server)SYN-&gt;(client)ACK 就是3次握手过程</li>
+<li>[P] 表示这个是一个数据推送，可以是从服务器端向客户端推送，也可以从客户端向服务器端推</li>
+<li>[F] 表示这是一个FIN包，是关闭连接操作，client/server都有可能发起</li>
+<li>[R] 表示这是一个RST包，与F包作用相同，但RST表示连接关闭时，仍然有数据未被处理。可以理解为是强制切断连接</li>
+<li>win 342是指滑动窗口大小</li>
+<li>length 12指数据包的大小  </li>
+</ul>
+<p>查看数据包的详细信息，使用 <code>-XX -vvv -nn</code>：</p>
+<ul>
+<li><code>-v</code> 当分析和打印的时候，产生详细的输出。</li>
+<li><code>-vv</code> 产生比-v更详细的输出。</li>
+<li><code>-vvv</code> 产生比-vv更详细的输出。</li>
+<li><code>-XX</code> 输出包的头部数据，会以16进制和ASCII两种方式同时输出。</li>
+<li><code>-nn</code> 直接以IP以及PORT number显示，而非主机名与服务名称。</li>
+</ul>
+<p><strong>常用</strong>：  </p>
+<ol>
+<li>监视指定主机的数据包 <code>tcpdump host 主机IP</code></li>
+<li>截获主机210.27.48.1 和主机210.27.48.2 或210.27.48.3的通信 <code>tcpdump host 210.27.48.1 and \(210.27.48.2 or 210.27.48.3 \)</code></li>
+<li>获取主机210.27.48.1除了和主机210.27.48.2之外所有主机通信的ip包 <code>tcpdump ip host 210.27.48.1 and ! 210.27.48.2</code></li>
+<li>监视指定主机和端口的数据包 <code>tcpdump tcp port 23 and host 210.27.48.1</code></li>
+<li>对本机的UDP 222端口进行监视 <code>tcpdump udp port 222</code>  </li>
+<li>检查数据包的详细信息：</li>
+</ol>
+<br>
+
+<h2 id="系统模块检查"><a href="#系统模块检查" class="headerlink" title="系统模块检查"></a>系统模块检查</h2><h3 id="lsmod"><a href="#lsmod" class="headerlink" title="lsmod"></a>lsmod</h3><p><strong>功能说明</strong>：检查当前内核已经加载的模块和驱动</p>
+<p>需要安装软件包  </p>
+<pre class="line-numbers language-shell"><code class="language-shell">apt install -y kmod<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>检查结果通常有三列，分别是： </p>
+<ol>
+<li>模块名称（Module）</li>
+<li>模块的大小（Size）</li>
+<li>此模块是否被其他模块使用（Used by）</li>
+</ol>
+<br>
+
+<h2 id="系统状态检查"><a href="#系统状态检查" class="headerlink" title="系统状态检查"></a>系统状态检查</h2><h3 id="du"><a href="#du" class="headerlink" title="du"></a>du</h3><p><strong>功能说明</strong>：显示指定的目录或文件所占用的磁盘空间</p>
+<p><strong>常用</strong>:</p>
+<ol>
+<li><code>du -h</code> 将空间大小换算成更易读的k、m、g</li>
+<li><code>du -D</code> 显示链接文件的原文件大小</li>
+</ol>
+<h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p><strong>功能说明</strong>：显示目前在 Linux 系统上的文件系统磁盘使用情况统计</p>
+<p><strong>常用</strong>:</p>
+<ol>
+<li><code>df -h</code> 将空间大小换算成更易读的k、m、g</li>
+<li><code>du -a</code> 输出所有文件的磁盘用量，不仅仅是目录</li>
+<li><code>du -d</code> 仅当目录（或在 –all 选项启用时包括文件）层级不高于命令行参数指定的 N 层时输出对应目录或文件的对应大小</li>
+<li><code>du --time</code> 显示目录中或其子目录下所有文件的最后修改时间</li>
+</ol>
+<h3 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h3><p><strong>功能说明</strong>：以树状图形式列出目录的内容</p>
+<p><strong>常用</strong>：</p>
+<ol>
+<li><code>tree -a</code> 列出所有文件</li>
+<li><code>tree -d</code> 仅列出目录</li>
+<li><code>tree -f</code> 列出每个文件的完整路径</li>
+<li><code>tree -L 数字</code> 列出的目录深度</li>
+<li><code>tree --charset UTF8</code> 设置字符集，将来用于终端或HTML展示</li>
+<li><code>-u</code> 列出文件或目录的拥有者名称，没有对应的名称时，则显示用户识别码<br><code>-g</code> 列出文件或目录的所属群组名称，没有对应的名称时，则显示群组识别码</li>
+<li><code>tree -p</code> 列出文件权限</li>
+<li><code>tree -h</code> 将空间大小换算成更易读的k、m、g</li>
+<li><code>tree -D</code> 显示上次修改或状态更改的日期<br><code>--timefmt</code> 根据格式打印并格式化时间，例如：’%F %T’ 或 ‘%c’</li>
+<li><code>-v</code> 按字母排序<br><code>-t</code> 按最后修改的时间排序<br><code>-c</code> 按上次状态更改时间对文件排序<br><code>-r</code> 反转排序的顺序<br><code>--dirsfirst</code> 在文件之前列出目录</li>
+<li>输出：<br><code>-X</code> 打印出树的XML表示<br><code>-J</code> 打印出树的 JSON 表示<br><code>-H 根名</code> 输出为网页表示，参数为根名，会影响超链接，建议用 <code>.</code>；<code>-T 标题</code> 替换默认的 HTML 标题和 H1 标题，<code>--nolinks</code> 关闭 HTML 输出中的超链接</li>
+</ol>
+<h3 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a>iostat</h3><p><strong>功能说明</strong>：动态监视系统的磁盘操作活动</p>
+<h3 id="vmstat"><a href="#vmstat" class="headerlink" title="vmstat"></a>vmstat</h3><p><strong>功能说明</strong>：实时动态监视操作系统的虚拟内存、进程、CPU活动</p>
+<h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p><strong>功能说明</strong>：显示内存的使用情况，包括实体内存，虚拟的交换文件内存，共享内存区段，以及系统核心使用的缓冲区等</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/05/01/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%89/">
+        下一篇<br>Hexo博客搭建填坑记录三
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">Almost&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?15542099"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
