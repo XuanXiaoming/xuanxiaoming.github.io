@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?47041484">
+<link rel="stylesheet" href="/css/journal.css?47315543">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -103,7 +103,7 @@
             ming's Blog
         </div>
         <div class="nav-subtitle">
-            風月都好看<br>人間也浪漫
+            風月都好看，人間也浪漫
         </div>
     </a>
 
@@ -338,8 +338,66 @@ dmesg 命令用于设备故障的诊断是非常重要的。进行硬件的连�
 <li>输出：<br><code>-X</code> 打印出树的XML表示<br><code>-J</code> 打印出树的 JSON 表示<br><code>-H 根名</code> 输出为网页表示，参数为根名，会影响超链接，建议用 <code>.</code>；<code>-T 标题</code> 替换默认的 HTML 标题和 H1 标题，<code>--nolinks</code> 关闭 HTML 输出中的超链接</li>
 </ol>
 <h3 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a>iostat</h3><p><strong>功能说明</strong>：动态监视系统的磁盘操作活动</p>
+<p><strong>常用</strong>：</p>
+<ol>
+<li><code>-c</code> 显示CPU资源情况</li>
+<li><code>-d</code> 显示磁盘使用情况</li>
+<li><code>-h</code> 改变显示单位，使其更加易读</li>
+<li><code>iostat delay count</code> delay表示每隔几秒刷新一次，count表示总共输出几次</li>
+</ol>
+<blockquote>
+<p>cpu属性值说明：<br>%user：CPU处在用户模式下的时间百分比。<br>%nice：CPU处在带NICE值的用户模式下的时间百分比。<br>%system：CPU处在系统模式下的时间百分比。<br>%iowait：CPU等待输入输出完成时间的百分比。<br>%steal：管理程序维护另一个虚拟处理器时，虚拟CPU的无意识等待时间百分比。<br>%idle：CPU空闲时间百分比。</p>
+</blockquote>
+<blockquote>
+<p>disk属性值说明：<br>rrqm/s: 每秒进行 merge 的读操作数目。即 rmerge/s<br>wrqm/s: 每秒进行 merge 的写操作数目。即 wmerge/s<br>r/s: 每秒完成的读 I/O 设备次数。即 rio/s<br>w/s: 每秒完成的写 I/O 设备次数。即 wio/s<br>rsec/s: 每秒读扇区数。即 rsect/s<br>wsec/s: 每秒写扇区数。即 wsect/s<br>rkB/s: 每秒读K字节数。是 rsect/s 的一半，因为每扇区大小为512字节。<br>wkB/s: 每秒写K字节数。是 wsect/s 的一半。<br>avgrq-sz: 平均每次设备I/O操作的数据大小 (扇区)。<br>avgqu-sz: 平均I/O队列长度。<br>await: 平均每次设备I/O操作的等待时间 (毫秒)。<br>svctm: 平均每次设备I/O操作的服务时间 (毫秒)。<br>%util: 一秒中有百分之多少的时间用于 I/O 操作，即被io消耗的cpu百分比</p>
+</blockquote>
 <h3 id="vmstat"><a href="#vmstat" class="headerlink" title="vmstat"></a>vmstat</h3><p><strong>功能说明</strong>：实时动态监视操作系统的虚拟内存、进程、CPU活动</p>
+<p><strong>常用</strong>:</p>
+<ol>
+<li><code>-n</code> 表示在周期性循环输出时，输出的头部信息仅显示一次</li>
+<li><code>vmstat delay count</code> delay表示每隔几秒刷新一次，count表示总共输出几次</li>
+</ol>
+<p><strong>字段说明</strong>：  </p>
+<p>Procs（进程）:</p>
+<ul>
+<li>r: 运行队列中进程数量</li>
+<li>b: 等待IO的进程数量  </li>
+</ul>
+<p>Memory（内存）:</p>
+<ul>
+<li>swpd: 使用虚拟内存大小</li>
+<li>free: 可用内存大小</li>
+<li>buff: 用作缓冲的内存大小<br>-cache: 用作缓存的内存大小  </li>
+</ul>
+<p>Swap:</p>
+<ul>
+<li>si: 每秒从交换区写到内存的大小</li>
+<li>so: 每秒写入交换区的内存大小  </li>
+</ul>
+<p>IO：（现在的Linux版本块的大小为1024bytes）</p>
+<ul>
+<li>bi: 每秒读取的块数</li>
+<li>bo: 每秒写入的块数  </li>
+</ul>
+<p>system：</p>
+<ul>
+<li>in: 每秒中断数，包括时钟中断</li>
+<li>cs: 每秒上下文切换数  </li>
+</ul>
+<p>CPU（以百分比表示）</p>
+<ul>
+<li>us: 用户进程执行时间(user time)</li>
+<li>sy: 系统进程执行时间(system time)</li>
+<li>id: 空闲时间(包括IO等待时间)</li>
+<li>wa: 等待IO时间</li>
+</ul>
 <h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p><strong>功能说明</strong>：显示内存的使用情况，包括实体内存，虚拟的交换文件内存，共享内存区段，以及系统核心使用的缓冲区等</p>
+<p><strong>常用</strong>:</p>
+<ol>
+<li><code>-h</code> 改变显示单位，使其更加易读</li>
+<li><code>-t</code> 显示总和</li>
+<li><code>free -s delay -c count</code> -s后面delay表示每隔几秒刷新一次，-c后面count表示总共输出几次</li>
+</ol>
 
                 </div>
             </div>
@@ -397,7 +455,7 @@ dmesg 命令用于设备故障的诊断是非常重要的。进行硬件的连�
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?90880099"></script>
+<script src="/js/journal.js?56946856"></script>
 <!-- 添加网站运行时间 -->
 
         <script>
