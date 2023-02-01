@@ -272,7 +272,7 @@ a {
   position: fixed;
   top: 0;
   height: 100vh;
-  width: 28%;
+  width: 27%;
   text-align: right;
   /* font-family: "Montserrat", "Roboto", "Source Sans Pro", "Helvetica", "Arial", "Lora", "source-han-serif-tc", serif; */
   padding: 20px 0 50px 0;
@@ -334,7 +334,7 @@ a {
   top: 0;
   right: 0;
   height: 100vh;
-  width: 28%;
+  width: 27%;
   text-align: right;
   font-family: "Montserrat", "Roboto", "Source Sans Pro", "Helvetica", "Arial", "Lora", "source-han-serif-tc", serif;
   overflow-x: hidden;
@@ -396,8 +396,8 @@ a {
   flex-direction: column; }
 
 .stream-container {
-  padding-left: 28%;
-  padding-right: 28%;
+  padding-left: 27%;
+  padding-right: 27%;
   width: 100%;
   min-height: 100vh;
   /*max-width: 1480px;*/
