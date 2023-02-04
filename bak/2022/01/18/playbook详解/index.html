@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>playbook详解 - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="有关Ansible playbook的详细解释的精简版，有助于理清思路">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?23969081">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205051215177.jpeg')">
+                <div class="post-title">
+                    playbook详解
+                    <div class="post-meta">
+                        <time datetime="2022-01-18T04:51:18.000Z" itemprop="datePublished">
+                            2022-01-18 12:51
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/运维/'>运维</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="Playbook详解"><a href="#Playbook详解" class="headerlink" title="Playbook详解"></a>Playbook详解</h1><p>playbook由一个或多个“plays”组成。它的内容是一个以“plays”为元素的列表。</p>
+<p>在ansible中，play的内容被称为tasks（任务）。在基本层次的应用中，一个任务是一个对ansible模块的调用。</p>
+<p>通过playbook，可以编排步骤进行多机器的部署，比如在webservers组的所有机器上运行一定的步骤，然后在database server组运行一些步骤，最后回到webservers组，再运行一些步骤，诸如此类。</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 例如</span>
+<span class="token punctuation">-</span> <span class="token key atrule">hosts</span><span class="token punctuation">:</span> webservers
+  <span class="token key atrule">vars</span><span class="token punctuation">:</span>
+    <span class="token key atrule">http_port</span><span class="token punctuation">:</span> <span class="token number">80</span>
+    <span class="token key atrule">max_clients</span><span class="token punctuation">:</span> <span class="token number">200</span>
+  <span class="token key atrule">remote_user</span><span class="token punctuation">:</span> root
+  <span class="token key atrule">tasks</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> ensure apache is at the latest version
+    <span class="token key atrule">yum</span><span class="token punctuation">:</span> pkg=httpd state=latest
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> write the apache config file
+    <span class="token key atrule">template</span><span class="token punctuation">:</span> src=/srv/httpd.j2 dest=/etc/httpd.conf
+    <span class="token key atrule">notify</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> restart apache
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> ensure apache is running
+    <span class="token key atrule">service</span><span class="token punctuation">:</span> name=httpd state=started
+  <span class="token key atrule">handlers</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> restart apache
+      <span class="token key atrule">service</span><span class="token punctuation">:</span> name=httpd state=restarted<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="主机和用户"><a href="#主机和用户" class="headerlink" title="主机和用户"></a>主机和用户</h2><p>hosts行的内容是一个或多个组或主机的patterns，以逗号为分隔符；remote_user就是账户名（在Ansible 1.4以后才改为 remote_user。主要为了不跟user模块混淆，user 模块用于在远程系统上创建用户）</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 支持sudo执行命令</span>
+<span class="token punctuation">-</span> <span class="token key atrule">hosts</span><span class="token punctuation">:</span> webservers
+  <span class="token key atrule">remote_user</span><span class="token punctuation">:</span> yourname
+  <span class="token key atrule">sudo</span><span class="token punctuation">:</span> yes
+
+<span class="token comment" spellcheck="true"># 也可以仅在一个task中使用sudo执行命令，而不是在整个play中使用sudo</span>
+<span class="token punctuation">-</span> <span class="token key atrule">hosts</span><span class="token punctuation">:</span> webservers
+  <span class="token key atrule">remote_user</span><span class="token punctuation">:</span> yourname
+  <span class="token key atrule">tasks</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">service</span><span class="token punctuation">:</span> name=nginx state=started
+      <span class="token key atrule">sudo</span><span class="token punctuation">:</span> yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Tasks列表"><a href="#Tasks列表" class="headerlink" title="Tasks列表"></a>Tasks列表</h2><p>每一个play包含了一个task列表（任务列表）。一个task在其所对应的所有主机上执行完毕之后，下一个task才会执行。有一点需要明白的是，在一个play之中，所有hosts会获取相同的任务指令，这是play的一个目的所在，也就是会将所有选出的hosts映射上task。</p>
+<p>每个task的目标在于执行一个moudle，通常是带有特定的参数来执行。在参数中可以使用变量（variables）。</p>
+<p>modules具有“幂等”性，意思是如果你再一次地执行moudle，moudle只会执行必要的改动，只会改变需要改变的地方。所以重复多次执行playbook也很安全。</p>
+<blockquote>
+<p>为什么使用module而不是打包一套shell放在机器上运行？</p>
+<p>答：为了幂等性，将tasks交给ansible控制，不至于多次执行tasks进行重复操作，从而降低风险。当然使用shell也有办法解决幂等性，但远不如这样更加直观。</p>
+</blockquote>
+<p>每一个task必须有一个名称name，这样在运行playbook时，从其输出的任务执行信息中可以很好的辨别出是属于哪一个task的。如果没有定义name，“action”的值将会用作输出信息中标记特定的task。</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 基本的task的定义</span>
+<span class="token key atrule">tasks</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> make sure apache is running
+    <span class="token key atrule">service</span><span class="token punctuation">:</span> name=httpd state=running<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>比较特别的两个modudle是command和shell，它们不使用key=value格式的参数，而是这样：</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">tasks</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> disable selinux
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> /sbin/setenforce 0
+
+
+<span class="token key atrule">tasks</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> run this command and ignore the result
+    <span class="token key atrule">shell</span><span class="token punctuation">:</span> /usr/bin/somecommand
+    <span class="token key atrule">ignore_errors</span><span class="token punctuation">:</span> <span class="token boolean important">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Action-Shorthand"><a href="#Action-Shorthand" class="headerlink" title="Action Shorthand"></a>Action Shorthand</h2><p>新版ansible更喜欢使用如下的格式列出modules：</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">template</span><span class="token punctuation">:</span> src=templates/foo.j2 dest=/etc/foo.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Handlers-在发生改变时执行的操作"><a href="#Handlers-在发生改变时执行的操作" class="headerlink" title="Handlers: 在发生改变时执行的操作"></a>Handlers: 在发生改变时执行的操作</h2><p>module 具有”幂等”性,所以当远端系统被人改动时，可以重放playbooks达到恢复的目的。playbooks本身可以识别这种改动，并且有一个基本的event system（事件系统），可以响应这种改动。</p>
+<p>（当发生改动时）‘notify’ actions会在playbook的每一个task结束时被触发，而且即使有多个不同的task通知改动的发生，‘notify’ actions只会被触发一次。</p>
+<p>举例来说，比如多个resources指出因为一个配置文件被改动，所以apache需要重新启动，但是重新启动的操作只会被执行一次。</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># ‘notify’ 下列出的即是handlers</span>
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> template configuration file
+  <span class="token key atrule">template</span><span class="token punctuation">:</span> src=template.j2 dest=/etc/foo.conf
+  <span class="token key atrule">notify</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> restart memcached
+     <span class="token punctuation">-</span> restart apache<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Handlers也是一些task的列表，通过名字来引用，它们和一般的task并没有什么区别。Handlers是由通知者进行notify, 如果没有被notify，handlers不会执行。不管有多少个通知者进行了notify，等到play中的所有task执行完成之后，handlers也只会被执行一次。</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 这是一个handlers的示例:</span>
+<span class="token key atrule">handlers</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> restart memcached
+      <span class="token key atrule">service</span><span class="token punctuation">:</span>  name=memcached state=restarted
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> restart apache
+      <span class="token key atrule">service</span><span class="token punctuation">:</span> name=apache state=restarted<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>handlers 最佳的应用场景是用来重启服务，或者触发系统重启操作。除此以外很少用到了。</p>
+<p>handlers 会按照声明的顺序执行</p>
+</blockquote>
+<p>如果你想立即执行所有的handler命令，在1.2及以后的版本，你可以这样做:</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 任何在排队等候的handlers会在执行到‘meta’部分时，优先执行</span>
+<span class="token key atrule">tasks</span><span class="token punctuation">:</span>
+   <span class="token punctuation">-</span> <span class="token key atrule">shell</span><span class="token punctuation">:</span> some tasks go here
+   <span class="token punctuation">-</span> <span class="token key atrule">meta</span><span class="token punctuation">:</span> flush_handlers
+   <span class="token punctuation">-</span> <span class="token key atrule">shell</span><span class="token punctuation">:</span> some other tasks<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="执行Playbook"><a href="#执行Playbook" class="headerlink" title="执行Playbook"></a>执行Playbook</h2><pre class="line-numbers language-shell"><code class="language-shell"># 运行10个并发的playbook
+> ansible-playbook playbook.yml -f 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="Playbook基本结构"><a href="#Playbook基本结构" class="headerlink" title="Playbook基本结构"></a>Playbook基本结构</h2><pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># [···] 表示可选配置</span>
+
+<span class="token punctuation">-</span> <span class="token key atrule">host</span><span class="token punctuation">:</span>
+  <span class="token punctuation">[</span>vars<span class="token punctuation">]</span><span class="token punctuation">:</span>
+  <span class="token key atrule">remote_user</span><span class="token punctuation">:</span>
+  <span class="token key atrule">task</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span>
+    <span class="token punctuation">[</span>yum/template/service/<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    <span class="token punctuation">[</span>notify<span class="token punctuation">]</span><span class="token punctuation">:</span>
+  <span class="token punctuation">[</span>handlers<span class="token punctuation">]</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span>
+    service<span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2022/02/20/google%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/">
+        上一篇<br>google搜索语法
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/01/14/ansible%E7%AC%94%E8%AE%B0/">
+        下一篇<br>Ansible笔记
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?57754893"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

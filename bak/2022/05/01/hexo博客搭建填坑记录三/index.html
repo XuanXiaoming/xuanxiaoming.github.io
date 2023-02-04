@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Hexo博客搭建填坑记录三 - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="这次修复的问题也太多太杂了，博客终于恢复了可用状态。">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?41111676">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205060256989.jpeg')">
+                <div class="post-title">
+                    Hexo博客搭建填坑记录三
+                    <div class="post-meta">
+                        <time datetime="2022-04-30T16:23:31.000Z" itemprop="datePublished">
+                            2022-05-01 00:23
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/博客搭建/'>博客搭建</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <blockquote>
+<p>许久未更新博客主要是自己随便做做笔记比较快速，不需要考虑排版问题。最近突然想把之前整理的笔记都放进去，看起来比较美观也方便，就掏出来用了，结果发现一大堆问题，只好重新装修了一下。</p>
+</blockquote>
+<p>这次大概解决的问题如下，我会挑一些重点来细讲：</p>
+<ul>
+<li>修改博客评论插件，之前的因为中国网络审核的原因被屏蔽了</li>
+<li>修改图床为腾讯云存储桶，之前的图床CDN因为中国网络审核的原因被屏蔽了</li>
+<li>修改资源CDN调用，之前的CDN因为中国网络审核的原因被屏蔽了</li>
+<li>由于浏览器内核升级导致vue2中部分方法过时失效，故将vue2升级到了vue3</li>
+<li>检查出博文代码中的 <code>{</code> 与vue标记语言冲突导致的页面渲染bug</li>
+<li>将之前使用的代码插件从highlight.js更换为prismjs，换了新的样式</li>
+<li>修复左侧导航栏的一处链接BUG</li>
+<li>为首页文章列表增加显示标签，并修改样式</li>
+<li>修复博客之前错误的国际化(i18n)使用，并增加部分内容</li>
+<li>解决了在mac中使用nodejs引发的hexo渲染错误</li>
+<li>解决了safari上不支持的日期格式引发的显示错误</li>
+<li>增加了新的博文、更新了关于页面内容、微调部分样式</li>
+</ul>
+<h2 id="先说说最令我头疼的mac下使用nodejs的问题"><a href="#先说说最令我头疼的mac下使用nodejs的问题" class="headerlink" title="先说说最令我头疼的mac下使用nodejs的问题"></a>先说说最令我头疼的mac下使用nodejs的问题</h2><p>一开始我安装的nodejs最新的稳定版，使用hexo去生成静态文件，一会给我报一个权限不足的问题，一会又给我报一个无法解析ejs。那我就去改文件夹权限、重装package.json里的包嘛，但是问题仍然存在。这个问题一上来就摆在我面前，折磨了我好几天，我甚至一度准备放弃继续使用hexo。</p>
+<p>后来我在网上看到有人也遇到这个问题，他说是nodejs在mac上存在问题，需要将nodejs版本降到12。</p>
+<p>好了，我降到12后，上述两个问题确实不发生了，但是又出现了新的问题：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">FATAL {
+  err: [Error: EISDIR: illegal operation on a directory, open '/home/***'] {
+    errno: -21,
+    code: 'EISDIR',
+    syscall: 'open',
+    path: '/home/***'
+  }
+} Something's wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个问题并不是不能解决，只是解决办法和我的需求冲突，但最后我还是妥协了，没有其他办法了，甚至连hexo的官方issue里都没给出第二种解决办法。</p>
+<p><strong>解决办法是将 <code>_config.yaml</code> 文件里的 post_asset_folder 设置为 false，即可解决，但同时 hexo 也不再为文章生成资源文件夹。</strong></p>
+<p>本来我是挺想为博文的资源文件做一份备份的，但是现在不得不放弃这个想法了，以后博文的内容我尽量用文字的方式记录吧。</p>
+<p>在解决这个问题的同时，这个解决办法也为我解决了另外一个问题，所以也算是一石二鸟了，下面来说一说。</p>
+<h2 id="博客各种CDN故障、云评论仓库被封锁"><a href="#博客各种CDN故障、云评论仓库被封锁" class="headerlink" title="博客各种CDN故障、云评论仓库被封锁"></a>博客各种CDN故障、云评论仓库被封锁</h2><p>因为是在线静态博客，以轻量化为主，所以所有的包用的都是在线的CDN链接，包括之前使用的图床、评论插件、以及开发用的包都是。</p>
+<p>其中最常用的就是图床了，为了免费和访问速度，之前一直都是用GitHub仓库做云存储，然后用jsdelivr做免费的CDN加载（直接访问仓库文件会非常慢），但现在因为网络审核的缘故，匿名的jsdelivr已被中国封了，我只好更换图床了。</p>
+<p>我选择使用的是腾讯云的COS服务，需要付费，但价格比较便宜。我购买的10G 2年的使用权，总共不到20块钱，这就是上一节提到的“一石二鸟”，不仅解决了存储问题，也解决了CDN的问题。</p>
+<p>开发用的包这个太好解决了，遍地都有免费CDN提供，直接更换就好。而评论插件这边，又是一顿折腾，哎。</p>
+<h2 id="更改评论插件"><a href="#更改评论插件" class="headerlink" title="更改评论插件"></a>更改评论插件</h2><p>我这一次打开博客的第一反应就是，之前小伙伴们给我的评论都没有了，我起初还是挺蒙的，但这个问题并不是首先要解决的，所以稍微往后放了放。</p>
+<p>后来我在检查Valine这个评论插件的时候，发现其版本更新导致很多过时功能都无法使用了，于是我就改嘛，捣鼓了好长时间都改好了，但进页面看还是没有。</p>
+<p>偶然间我在issue中看到有其他人也遇到这个问题，这个问题是因为国内审核要求禁止评论使用国际服域名，这下就破案了，以前为了不花钱买域名，使用的国际服<a href="https://leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a>，这个是Valine的云数据库。看样子现在强制使用国内备案域名了，想继续使用国际服必须配置好Valine的serverURLs参数。</p>
+<p>看到这我立马就去配置了serverURLs，但是问题并没有解决。我确实看到请求的数据已经发来，但不知为什么就是绑定不到页面上去，折腾了很久，我决定弃坑了，想着要是Valine以后继续更新，每次更新都得这么大费周章的重新配置，甚至以后还可能强制要求备案域名，我为啥不使用更加成熟的方案呢。</p>
+<p>于是我更换了韩国的<a href="https://www.livere.com/" target="_blank" rel="noopener">来必力</a>，配置及其简单，只需注册账户然后将嵌入代码贴到你需要的地方就行，相当的省心。</p>
+<h2 id="hexo渲染错误"><a href="#hexo渲染错误" class="headerlink" title="hexo渲染错误"></a>hexo渲染错误</h2><p>上述问题都解决完后，博客就可以正常使用了，于是我加了几篇博文。在使用 <code>hexo g</code> 渲染后发现，渲染过程正常、文件也正常，但就是页面空白，什么也没有，当时问题处理到这已经头脑发热了，不知道又是哪出了问题。</p>
+<p>即使现在去回忆处理问题的过程，我也记不清了。当时一点点排查问题，最后发现是因为博文中引用的代码使用了 <code>{</code> 标记，而这个vue使用的也是这个标记，所以网页渲染就出现了问题，具体解决办法我现在也没有，毕竟我也不是专业的前端工程师，我现在已将博文中出现的 <code>{</code> 替换为 <code>[</code> ，反方向的括号同理，共计两处更改。</p>
+<h2 id="移动端浏览器上不显示博客运行时间，显示为NaN"><a href="#移动端浏览器上不显示博客运行时间，显示为NaN" class="headerlink" title="移动端浏览器上不显示博客运行时间，显示为NaN"></a>移动端浏览器上不显示博客运行时间，显示为NaN</h2><p>最后值得一提的就是这个问题，一开始我以为是手机浏览器屏蔽了js脚本，于是我把Safari高级设置里的选项都开了，结果还是这个问题。</p>
+<p>然后我在脚本中加 <code>console.info()</code> 慢慢调试，发现从 <code>new Date()</code> 那里拿来的值就已经是NaN了。</p>
+<p>上网一搜才知道，Safari和Chrome对于日期的格式支持不同，修改一下就好了。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// Safari不支持的格式</span>
+<span class="token keyword">const</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2021-08-09'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Safari支持的格式</span>
+<span class="token keyword">const</span> nDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2021, 07, 06'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// yyyy, mm, dd</span>
+<span class="token keyword">const</span> nDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token number">2021</span><span class="token punctuation">,</span> <span class="token number">07</span><span class="token punctuation">,</span> <span class="token number">06</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">05</span><span class="token punctuation">,</span> <span class="token number">00</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// yyyy, mm, dd, hh, mm, ss</span>
+<span class="token keyword">const</span> nDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token number">07</span><span class="token operator">/</span><span class="token number">06</span><span class="token operator">/</span><span class="token number">2021</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// mm/dd/yyyy</span>
+<span class="token keyword">const</span> nDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token number">07</span><span class="token operator">/</span><span class="token number">06</span><span class="token operator">/</span><span class="token number">2021</span> <span class="token number">10</span><span class="token punctuation">:</span><span class="token number">05</span><span class="token punctuation">:</span><span class="token number">00</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// mm/dd/yyyy hh:mm:ss</span>
+<span class="token keyword">const</span> nDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>Tue Jul <span class="token number">06</span> <span class="token number">2021</span> <span class="token number">10</span><span class="token punctuation">:</span><span class="token number">05</span><span class="token punctuation">:</span><span class="token number">00</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Day Mon dd yyyy hh:mm:ss</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2022/11/07/linux%E7%B3%BB%E7%BB%9F%E6%A3%80%E6%9F%A5%E4%B8%8E%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/">
+        上一篇<br>Linux系统检查与故障诊断
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/04/15/MySQL%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">
+        下一篇<br>MySQL安装记录
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?55695541"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

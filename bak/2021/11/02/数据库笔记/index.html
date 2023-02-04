@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>数据库笔记 - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="数据相关知识">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?95238552">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205032320824.jpeg')">
+                <div class="post-title">
+                    数据库笔记
+                    <div class="post-meta">
+                        <time datetime="2021-11-02T01:35:47.000Z" itemprop="datePublished">
+                            2021-11-02 09:35
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/数据库/'>数据库</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h1><ol>
+<li><p><strong>第一范式(确保每列保持原子性)</strong></p>
+<p> 第一范式是最基本的范式。如果数据库表中的所有字段值都是不可分解的原子值，就说明该数据库表满足了第一范式。</p>
+</li>
+<li><p><strong>第二范式(确保表中的每列都和主键相关)</strong></p>
+<p> 第二范式在第一范式的基础之上更进一层。第二范式需要确保数据库表中的每一列都和主键相关，而不能只与主键的某一部分相关（主要针对联合主键而言）。也就是说在一个数据库表中，一个表中只能保存一种数据，不可以把多种数据保存在同一张数据库表中。</p>
+<p> 比如要设计一个订单信息表，因为订单中可能会有多种商品，所以要将订单编号和商品编号作为数据库表的联合主键。这样就产生一个问题：这个表中是以订单编号和商品编号作为联合主键。这样在该表中商品名称、单位、商品价格等信息不与该表的主键相关，而仅仅是与商品编号相关。</p>
+<p> 所以在这里违反了第二范式的设计原则。而如果把这个订单信息表进行拆分，把商品信息分离到另一个表中，把订单项目表也分离到另一个表中，就非常完美了。</p>
+</li>
+<li><p><strong>第三范式(确保每列都和主键列直接相关,而不是间接相关)</strong></p>
+<p> 第三范式需要确保数据表中的每一列数据都和主键直接相关，而不能间接相关。</p>
+<p> 比如在设计一个订单数据表的时候，可以将客户编号作为一个外键和订单表建立相应的关系。而不可以在订单表中添加关于客户其它信息（比如姓名、所属公司等）的字段。</p>
+</li>
+</ol>
+<br>
+
+<h1 id="数据库事务的四个特性"><a href="#数据库事务的四个特性" class="headerlink" title="数据库事务的四个特性"></a>数据库事务的四个特性</h1><p>事务具有四个特性:原子性(Atomicity)、一致性(Consistency)、隔离性(Isolation)、持久性(Durability)。这四个特性简称为ACID原则。</p>
+<ol>
+<li><p><strong>原子性</strong></p>
+<p> 事务必须是原子工作单元,事务中的操作要么全部执行,要么全都不执行,不能只完成部分操作。原子性在数据库系统中由恢复机制来实现。</p>
+</li>
+<li><p><strong>一致性</strong></p>
+<p> 事务开始之前,数据库处于一致性的状态;事务结束后,数据库必须仍处于一致性状态。数据库一致性的定义是由用户负责的。例如,在银行转账中,用户可以定义转账前后两个账户金额之和保持不变。</p>
+</li>
+<li><p><strong>隔离性</strong></p>
+<p> 系统必须保证事务不受其他并发执行事务的影响,即当多个事务同时运行时,各事务之间相互隔离,不可互相干扰。事务查看数据时数据所处的状态,要么是另一个并发事务修改它之前的状态,要么是另一个并发事务修改它之后的状态,事务不会查看中间状态的数据。隔离性通过系统的并发控制机制实现。</p>
+</li>
+<li><p><strong>持久性</strong></p>
+<p> 一个已完成的事务对数据所做的任何变动在系统中是永久有效的,即使该事务产生的修改不正确,错误也将一直保持。持久性通过恢复机制实现,发生故障时,可以通过日志等手段恢复数据库信息。</p>
+</li>
+</ol>
+<br>
+
+<h1 id="数据库事务的作用"><a href="#数据库事务的作用" class="headerlink" title="数据库事务的作用"></a>数据库事务的作用</h1><p>当我们需要批量执行sql语句修改多条数据时，为了确保数据的一致性（比如张三给李四转账100元，张三的金额-100，李四金额+100），必须加入事务的使用用以在完整且正确执行完所有sql操作后，再提交对数据的修改。</p>
+<p>假设当执行完第一条sql后突然断电引发操作异常，在没有执行commit之前，数据均不会修改。</p>
+<br>
+
+<h1 id="数据库锁"><a href="#数据库锁" class="headerlink" title="数据库锁"></a>数据库锁</h1><p>主要有：<strong>表级锁</strong>和<strong>行级锁</strong></p>
+<ol>
+<li><p>读锁</p>
+<p> 可以并发读，但不可以并发写。读锁期间，没释放锁前不能进行写操作。</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL"> lock table [TableName] read;
+ unlock tables;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<ol start="2">
+<li><p>写锁</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL"> lock table [TableName] write;
+ unlock tables;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ol>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2021/11/15/m1%E8%8A%AF%E7%89%87%E5%AE%89%E8%A3%85docker-mysql/">
+        上一篇<br>m1芯片安装docker-mysql
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2021/09/01/go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        下一篇<br>go学习笔记
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?64376856"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

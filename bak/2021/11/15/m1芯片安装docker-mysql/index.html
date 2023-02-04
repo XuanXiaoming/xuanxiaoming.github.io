@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>m1芯片安装docker-mysql - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="记录一下安装docker-mysql的过程">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?35601593">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205051214612.png')">
+                <div class="post-title">
+                    m1芯片安装docker-mysql
+                    <div class="post-meta">
+                        <time datetime="2021-11-15T09:08:57.000Z" itemprop="datePublished">
+                            2021-11-15 17:08
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/数据库/'>数据库</a>, 
+                        
+                        <a href='/tags/mysql/'>MySQL</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="m1芯片安装docker-mysql"><a href="#m1芯片安装docker-mysql" class="headerlink" title="m1芯片安装docker-mysql"></a>m1芯片安装docker-mysql</h2><p>自己平时是不喜欢直接在机器上安装mysql的，因为碎片文件比较多，删除mysql的时候会非常麻烦，得不厌其烦的寻找并删除碎片文件。直到我遇到了docker，我才觉得找到了答案，直接在docker上启动一个mysql服务，用可视化工具做远程连接就好，删除也没有负担，随时随地都可以重新准备就绪。</p>
+<p>但是最近我在新电脑上启动docker-mysql时发现docker官方容器并不支持apple m1芯片，找了很长时间才找到一个由mysql官方维护的容器是支持的，于是就开始尝试使用这个容器。</p>
+<p>在使用过程中，我发现一个问题就是我的DataGrid怎么也连不上mysql服务，一直提示 <code>[HY000][1130] null, message from server: &quot;Host &#39;172.17.0.1&#39; is not allowed to connect to this MySQL server&quot;.</code>。研究了很长时间，发现原因是该容器是mysql-server，可以理解为运行着mysql的服务器，所以本地连接的时候相当于远程访问，也就是说需要进容器内打开mysql的远程登录，并授予用户远程登录权限。</p>
+<p>具体操作如下：</p>
+<ol>
+<li><p>启动mysql-server容器（可以加-v将宿主机卷空间挂载进去，用于备份数据库）</p>
+<pre class="line-numbers language-shell"><code class="language-shell">docker run --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql/mysql-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>使用改表法为用户增加访问权限docker exec进容器内，找到mysql库下的user表，将其hosts从localhost改成%或远程主机的IP（我这里是个人机器上使用就改root用户，具体请酌情考虑）</p>
+<pre class="line-numbers language-sql"><code class="language-sql">mysql <span class="token operator">-</span>uroot <span class="token operator">-</span>proot
+
+mysql<span class="token operator">></span> <span class="token keyword">use</span> mysql<span class="token punctuation">;</span>
+mysql<span class="token operator">></span> <span class="token keyword">select</span> host<span class="token punctuation">,</span><span class="token keyword">user</span> <span class="token keyword">from</span> <span class="token keyword">user</span><span class="token punctuation">;</span>
+mysql<span class="token operator">></span> <span class="token keyword">update</span> <span class="token keyword">user</span> <span class="token keyword">set</span> host<span class="token operator">=</span><span class="token string">"%"</span> <span class="token keyword">where</span> <span class="token keyword">user</span><span class="token operator">=</span><span class="token string">"root"</span><span class="token punctuation">;</span>
+mysql<span class="token operator">></span> <span class="token keyword">select</span> host<span class="token punctuation">,</span><span class="token keyword">user</span> <span class="token keyword">from</span> <span class="token keyword">user</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>上述内容修改完后，就可以退出容器里，最后重启容器即可</p>
+<pre class="line-numbers language-shell"><code class="language-shell">docker restart mysql-server;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ol>
+<p>以上步骤都做完后，即可使用可视化工具远程访问mysql服务。最后需要注意的一点是，远程访问最好设置 <code>useSSL=true</code>，打开安全传输。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2021/12/10/linux%E4%B8%89%E5%89%91%E5%AE%A2/">
+        上一篇<br>linux三剑客
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2021/11/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">
+        下一篇<br>数据库笔记
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?44976163"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

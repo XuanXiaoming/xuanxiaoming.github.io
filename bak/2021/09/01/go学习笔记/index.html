@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>go学习笔记 - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="go语言的学习笔记和问题思考">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?92072674">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202205301103194.jpeg')">
+                <div class="post-title">
+                    go学习笔记
+                    <div class="post-meta">
+                        <time datetime="2021-09-01T01:38:14.000Z" itemprop="datePublished">
+                            2021-09-01 09:38
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/golang/'>golang</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="Golang学习笔记"><a href="#Golang学习笔记" class="headerlink" title="Golang学习笔记"></a>Golang学习笔记</h2><h3 id="map清空的问题"><a href="#map清空的问题" class="headerlink" title="map清空的问题"></a>map清空的问题</h3><p>Go语言中并没有为 map 提供任何清空所有元素的函数、方法，清空 map 的唯一办法就是重新 make 一个新的 map，不用担心垃圾回收的效率，Go语言中的并行垃圾回收效率比写一个清空函数要高效的多。</p>
+<h3 id="并发安全的map"><a href="#并发安全的map" class="headerlink" title="并发安全的map"></a>并发安全的map</h3><p>Go语言在 1.9 版本中提供了一种效率较高的并发安全的 sync.Map，sync.Map 和 map 不同，不是以语言原生形态提供，而是在 sync 包下的特殊结构。</p>
+<p>sync.Map 有以下特性：</p>
+<ul>
+<li>无须初始化，直接声明即可。</li>
+<li>sync.Map 不能使用 map 的方式进行取值和设置等操作，而是使用 sync.Map 的方法进行调用，Store 表示存储，Load 表示获取，Delete 表示删除。</li>
+<li>使用 Range 配合一个回调函数进行遍历操作，通过回调函数返回内部遍历出来的值，Range 参数中回调函数的返回值在需要继续迭代遍历时，返回 true，终止迭代遍历时，返回 false。</li>
+</ul>
+<p>sync.Map 没有提供获取 map 数量的方法，替代方法是在获取 sync.Map 时遍历自行计算数量，sync.Map 为了保证并发安全有一些性能损失，因此在非并发情况下，使用 map 相比使用 sync.Map 会有更好的性能。</p>
+<h3 id="make和new的区别"><a href="#make和new的区别" class="headerlink" title="make和new的区别"></a>make和new的区别</h3><ol>
+<li>make 只能用来分配及初始化类型为 slice、map、chan 的数据。new 可以分配任意类型的数据</li>
+<li>new 分配返回的是指针，即类型 *Type。make 返回引用，即 Type</li>
+<li>new 分配的空间被清零。make 分配空间后，会进行初始化</li>
+</ol>
+<p>make 也是用于内存分配的，但是和 new 不同，它只用于 chan、map 以及 slice 的内存创建，而且它返回的类型就是这三个类型本身，而不是他们的指针类型，因为这三种类型就是引用类型，所以就没有必要返回他们的指针了。</p>
+<h3 id="数组和切片的区别"><a href="#数组和切片的区别" class="headerlink" title="数组和切片的区别"></a>数组和切片的区别</h3><ul>
+<li><p><strong>数组</strong></p>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// value := [数据长度]类型 {}</span>
+arr <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"1"</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// 声明并且赋值</span>
+arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// 声明未赋值</span>
+arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"1"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>数组类型的值（以下简称数组）的长度是固定的数组的长度在声明它的时候就必须给定，并且在之后不会再改变。可以说，数组的长度是其类型的一部分（数组的容量永远等于其长度，都是不可变的）</p>
+</li>
+<li><p><strong>切片</strong></p>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// value := []类型 {}</span>
+
+<span class="token comment" spellcheck="true">// 创建长度容量都为0的切片</span>
+value <span class="token operator">:=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token comment" spellcheck="true">// []string{"1"} 长度容量为1的切片</span>
+value <span class="token operator">:=</span><span class="token function">append</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span><span class="token string">"1"</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 数据转切片</span>
+arr <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span><span class="token string">"1"</span><span class="token punctuation">}</span>
+slice <span class="token operator">:=</span>arr<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+
+<span class="token comment" spellcheck="true">// 创建长度容量为1的切片</span>
+slice <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// 创建长度为1，容量为2的切片</span>
+slice <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">1</span>，<span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>切片类型的值是可变长的。而切片的类型字面量中只有其元素的类型，而没有其长度。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减少。在每一个切片的底层数据结构中，会包含一个数组，可以被叫做底层数据，而切片就是对底层数组的引用，故而<strong>切片类型属于引用类型</strong>。</p>
+</li>
+</ul>
+<blockquote>
+<p>一个切片无法容纳更多的元素时，Go 语言就会想办法扩容。但它并不会改变原来的切片，而是会生成一个容量更大的切片，然后将把原有的元素和新元素一并拷贝到新切片中。在一般的情况下，你可以简单地认为新切片的容量（以下简称新容量）将会是原切片容量（以下简称原容量）的 2 倍。<br>但是，当原切片的长度（以下简称原长度）大于或等于1024时，Go 语言将会以原容量的1.25倍作为新容量的基准（以下新容量基准）。新容量基准会被调整（不断地与1.25相乘），直到结果不小于原长度与要追加的元素数量之和（以下简称新长度）。<br>只要新长度不会超过切片的原容量，那么使用append函数对其追加元素的时候就不会引起扩容。这只会使紧邻切片窗口右边的（底层数组中的）元素被新的元素替换掉。</p>
+</blockquote>
+<h3 id="import-导包前的下划线“-”含义"><a href="#import-导包前的下划线“-”含义" class="headerlink" title="import 导包前的下划线“_”含义"></a>import 导包前的下划线“_”含义</h3><p>import 下划线（如：import _ github/demo）的作用：当导入一个包时，该包下的文件里所有init()函数都会被执行，然而，有些时候我们并不需要把整个包都导入进来，仅仅是是希望它执行init()函数而已。这个时候就可以使用 import _ 引用该包。</p>
+<h3 id="sql-Open-中数据库连接串格式"><a href="#sql-Open-中数据库连接串格式" class="headerlink" title="sql.Open()中数据库连接串格式"></a>sql.Open()中数据库连接串格式</h3><p>sql.Open()中的数据库连接串格式为：<code>&quot;用户名:密码@tcp(IP:端口)/数据库?charset=utf8&quot;</code></p>
+<h3 id="Go-项目中是否应把-go-sum-放到-Git-版本库里？"><a href="#Go-项目中是否应把-go-sum-放到-Git-版本库里？" class="headerlink" title="Go 项目中是否应把 go.sum 放到 Git 版本库里？"></a>Go 项目中是否应把 go.sum 放到 Git 版本库里？</h3><p>官方的建议是要将 <code>go.sum</code> 和 <code>go.mod</code> 两个文件一起提交到代码库中，这样才能保证项目依赖包版本的一致，同时保证 Build 的一致性。</p>
+<h3 id="Go语言无范型，如何创建多对象json？"><a href="#Go语言无范型，如何创建多对象json？" class="headerlink" title="Go语言无范型，如何创建多对象json？"></a>Go语言无范型，如何创建多对象json？</h3><p>go语言中struct创建的类型，可以做对象数组</p>
+<p>例如有一个json长这样：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">"A"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">"B"</span><span class="token operator">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">"a"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">"b"</span><span class="token operator">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解析后直接使用[]User去接收</p>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    ……
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这里有一篇文章总结的很详细：<code>https://juejin.cn/post/6844903891344048141</code></p>
+<h3 id="Go语言date类型，时间操作"><a href="#Go语言date类型，时间操作" class="headerlink" title="Go语言date类型，时间操作"></a>Go语言date类型，时间操作</h3><pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 获取当前时间</span>
+dateTime <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>dateTime<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 年</span>
+year <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Year</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 月</span>
+month <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Month</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 日</span>
+day <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Day</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 小时</span>
+hour <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Hour</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 分钟</span>
+minute <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Minute</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 秒</span>
+second <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Second</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 纳秒</span>
+nanosecond <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Nanosecond</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+<span class="token comment" spellcheck="true">// 时间戳，计算到秒</span>
+timeUnix <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 时间戳，计算到纳秒</span>
+timeUnixNano <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">UnixNano</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 时间戳格式化</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"2006-01-02 15:04:05"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 时间戳转为go格式的时间</span>
+<span class="token keyword">var</span> timeUnix <span class="token builtin">int64</span> <span class="token operator">=</span> <span class="token number">1562555859</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Unix</span><span class="token punctuation">(</span>timeUnix<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 获取今天23:59:59秒的时间戳</span>
+currentTime <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+endTime <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Date</span><span class="token punctuation">(</span>currentTime<span class="token punctuation">.</span><span class="token function">Year</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> currentTime<span class="token punctuation">.</span><span class="token function">Month</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+           currentTime<span class="token punctuation">.</span><span class="token function">Day</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> currentTime<span class="token punctuation">.</span><span class="token function">Location</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>endTime<span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>endTime<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"2006/01/02 15:04:05"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 计算两个时间戳相距多少时间，后面换算成各种单位</span>
+afterTime<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">ParseDuration</span><span class="token punctuation">(</span><span class="token string">"1h"</span><span class="token punctuation">)</span>
+result <span class="token operator">:=</span> currentTime<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>afterTime<span class="token punctuation">)</span>
+beforeTime<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">ParseDuration</span><span class="token punctuation">(</span><span class="token string">"-1h"</span><span class="token punctuation">)</span>
+result2 <span class="token operator">:=</span> currentTime<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>beforeTime<span class="token punctuation">)</span>
+
+m <span class="token operator">:=</span> result<span class="token punctuation">.</span><span class="token function">Sub</span><span class="token punctuation">(</span>result2<span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v 分钟 \n"</span><span class="token punctuation">,</span> m<span class="token punctuation">.</span><span class="token function">Minutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+h <span class="token operator">:=</span> result<span class="token punctuation">.</span><span class="token function">Sub</span><span class="token punctuation">(</span>result2<span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v 小时 \n"</span><span class="token punctuation">,</span> h<span class="token punctuation">.</span><span class="token function">Hours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+d <span class="token operator">:=</span> result<span class="token punctuation">.</span><span class="token function">Sub</span><span class="token punctuation">(</span>result2<span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v 天 \n"</span><span class="token punctuation">,</span> d<span class="token punctuation">.</span><span class="token function">Hours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">24</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 判断一个时间相比另外一个时间过去了多久</span>
+startTime <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"离现在过去了："</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span><span class="token function">Since</span><span class="token punctuation">(</span>startTime<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Go语言-空接口"><a href="#Go语言-空接口" class="headerlink" title="Go语言 空接口"></a>Go语言 空接口</h3><p>go语言中所有的类型都实现了空接口，相当于java中的Object，因此空接口可以存储任意类型的数值。</p>
+<h3 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h3><ul>
+<li>并行（parallelism）：指在同一时刻，有多条指令在多个处理器上同时执行。</li>
+<li>并发（concurrency）：指在同一时刻只能有一条指令执行，但多个进程指令被快速地轮换执行，得到在宏观上有多个进程同时执行的效果，但在微观上并不是同时执行，只是把时间片分成了若干段，使得多个进程快速交替执行。</li>
+</ul>
+<h3 id="什么是TPS，什么是QPS，区别是什么？"><a href="#什么是TPS，什么是QPS，区别是什么？" class="headerlink" title="什么是TPS，什么是QPS，区别是什么？"></a>什么是TPS，什么是QPS，区别是什么？</h3><ul>
+<li>TPS：Transactions Per Second（每秒传输的事物处理个数），即服务器每秒处理的事务数。TPS包括一条消息入和一条消息出，加上一次用户数据库访问（业务TPS = CAPS × 每个呼叫平均TPS）。TPS是软件测试结果的测量单位。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数。一般的，评价系统性能均以每秒钟完成的技术交易的数量来衡量。系统整体处理能力取决于处理能力最低模块的TPS值。</li>
+<li>QPS：每秒查询率QPS是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准，在因特网上，作为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。</li>
+</ul>
+<h3 id="Go语言-CSP模型-channel-管道"><a href="#Go语言-CSP模型-channel-管道" class="headerlink" title="Go语言 CSP模型 channel(管道)"></a>Go语言 CSP模型 channel(管道)</h3><p>CSP 是 Communicating Sequential Process 的简称，中文可以叫做 <strong>通信顺序进程，是一种并发编程模型</strong> ，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。相对于Actor模型，CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。</p>
+<p>Golang 就是借用CSP模型的一些概念为之实现并发进行理论支持，其实从实际上出发，go语言并没有完全实现了CSP模型的所有理论，仅仅是借用了 process和channel这两个概念。process是在go语言上的表现就是 goroutine 是实际并发执行的实体，每个实体之间是通过channel通讯来实现数据共享。</p>
+<p>Go语言的CSP模型是由协程Goroutine与通道Channel实现：</p>
+<ul>
+<li>Go协程goroutine: 是一种轻量线程，它不是操作系统的线程，而是将一个操作系统线程分段使用，通过调度器实现协作式调度。是一种绿色线程，微线程，它与Coroutine协程也有区别，能够在发现堵塞后启动新的微线程。</li>
+<li>通道channel: 类似Unix的Pipe，用于协程之间通讯和同步。协程之间虽然解耦，但是它们和Channel有着耦合。</li>
+</ul>
+<blockquote>
+<p><strong>核心思想：不要通过共享内存来通信，而要通过通信来实现内存共享。</strong></p>
+</blockquote>
+<p>因为 channel 是一个引用类型，所以在它被初始化之前，它的值是 nil，channel 使用 make 函数进行初始化。可以向它传递一个 int 值，代表 channel 缓冲区的大小（容量），构造出来的是一个缓冲型的 channel；不传或传 0 的，构造的就是一个非缓冲型的 channel。</p>
+<h3 id="反射的意义，可以应用在什么地方？"><a href="#反射的意义，可以应用在什么地方？" class="headerlink" title="反射的意义，可以应用在什么地方？"></a>反射的意义，可以应用在什么地方？</h3><p>反射本质上不是一个编程语言必须具备的特性。<br>反射的意义在于将本应该对程序员透明的机制，暴露给程序员，使得我们有能力去操纵它，让它能够更灵活地完成我们的工作。<strong>即动态修补程序代码。</strong><br>反射这种东西，确实破坏了封装的初衷，但他们两者之间并不是绝对的对立。想一想，我们封装、隐藏细节、建立抽象屏障，无外乎都是为了降低程序的复杂度——这是工程上的折衷，因为面对复杂的程序结构，人脑太不够用了。在大量的实践中我们发现，我们抽象出来的通用模式并不是绝对的，很多问题在它构建的框架之下解决起来就是非常麻烦，所以需要反射这种机制，动态的、灵活的修补代码，使之为我们的实际业务需求建立服务。<br>所以有了反射这么一手，把很多难以预测的问题留到运行时，动态地去考虑去解决。这也就使得我们在走投无路时，还可以有一道后门开着让我们大摇大摆地进入。</p>
+<h3 id="Go语言-函数名称前的变量含义"><a href="#Go语言-函数名称前的变量含义" class="headerlink" title="Go语言 函数名称前的变量含义"></a>Go语言 函数名称前的变量含义</h3><p>在接触到go之前，我认为函数和方法只是同一个东西的两个名字而已（在我熟悉的c/c++，python，java中没有明显的区别），但是在golang中者完全是两个不同的东西。官方的解释是，方法是包含了接收者的函数。golang语言中函数和方法是两种不同的概念</p>
+<p>首先函数的格式是固定的，func ＋ 函数名 ＋ 参数 ＋ 返回值（可选） ＋ 函数体。</p>
+<p>方法和函数的区别，方法在func关键字后是接收者而不是函数名，接收者可以是自己定义的一个类型，这个类型可以是struct，interface，甚至我们可以重定义基本数据类型。我们可以给他一些我们想要的方法来满足我们的实际工程中的需求，这里我们要注意一个细节，接收者是指针和非指针的区别，我们可以看到当接收者为指针式，我们可以通过方法改变该接收者的属性，但是非指针类型缺做不到。</p>
+<p>假设将一个结构体看作是一个类，那么方法（有接收者的）可以看成是该类的成员函数</p>
+<h3 id="反射三定律"><a href="#反射三定律" class="headerlink" title="反射三定律"></a>反射三定律</h3><ol>
+<li>反射可以将接口类型变量转换为反射类型变量</li>
+<li>反射可以将反射类型变量转换为接口类型</li>
+<li>想要使用反射来修改变量的值，其值必须是可写的（CanSet）。这个值必须满足两个条件：<ul>
+<li>变量可以被寻址（CanAddr）</li>
+<li>变量可导出（结构体字段名首字母需大写，不能为匿名字段）</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>反射的性能极差，能不用反射尽量不用</p>
+</blockquote>
+<h3 id="Go语言代码测试分类"><a href="#Go语言代码测试分类" class="headerlink" title="Go语言代码测试分类"></a>Go语言代码测试分类</h3><ul>
+<li>单元测试<br>测试函数的功能性问题<br>使用方式：在函数名前加Test前缀，传入(t *testing.T)</li>
+<li>基准测试<br>分析代码存在的CPU性能和内存分配问题<br>使用方法：在函数名前加Benchmark前缀，传入(t *testing.B)</li>
+<li>覆盖率测试<br>统计通过运行程序包的测试有多少代码得到了执行<br>使用方法：go test -cover XX.go</li>
+</ul>
+<h3 id="Http、Socket、WebSocket之间联系与区别"><a href="#Http、Socket、WebSocket之间联系与区别" class="headerlink" title="Http、Socket、WebSocket之间联系与区别"></a>Http、Socket、WebSocket之间联系与区别</h3><p><strong>把WebSocket想象成HTTP(应用层)，HTTP和Socket什么关系，WebSocket和Socket就是什么关系。</strong><br><strong>HTTP协议，有一个缺陷：通信只能由客户端发起，做不到服务器主动向客户端推送信息。</strong><br><strong>WebSocket协议，它的最大特点就是，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话，属于服务器推送技术的一种。</strong></p>
+<ul>
+<li><p>Http协议：简单的对象访问协议，对应于应用层。Http协议是基于TCP链接的</p>
+</li>
+<li><p>tcp协议：对应于传输层</p>
+</li>
+<li><p>ip协议：对应与网络层</p>
+<blockquote>
+<p>TCP/IP是传输层协议，主要解决数据如何在网络中传输；而Http是应用层协议，主要解决如何包装数据。<br>Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议。</p>
+</blockquote>
+</li>
+<li><p>HTTP连接：http连接就是所谓的短连接，及客户端向服务器发送一次请求，服务器端相应后连接即会断掉。</p>
+</li>
+<li><p>Socket连接：socket连接及时所谓的长连接，理论上客户端和服务端一旦建立连接，则不会主动断掉；但是由于各种环境因素可能会是连接断开，比如说：服务器端或客户端主机down了，网络故障，或者两者之间长时间没有数据传输，网络防火墙可能会断开该链接已释放网络资源。所以当一个socket连接中没有数据的传输，那么为了位置连续的连接需要发送心跳消息，具体心跳消息格式是开发者自己定义的。</p>
+</li>
+</ul>
+<h3 id="Go语言实现多态"><a href="#Go语言实现多态" class="headerlink" title="Go语言实现多态"></a>Go语言实现多态</h3><ol>
+<li>创建公共接口</li>
+<li>使用多个方法继承接口，传入参数为不同的结构体</li>
+<li>调用时会根据传入参数的不同的结构体对象，分别调用不同的方法（实现多态）</li>
+</ol>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 公共接口</span>
+<span class="token keyword">type</span> Mammal <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 不同的结构体对象</span>
+<span class="token keyword">type</span> Dog <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">type</span> Cat <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">type</span> Human <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>d Dog<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"woof"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c Cat<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"meow"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>h Human<span class="token punctuation">)</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"speak"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 根据传入参数不同，调用不同的方法，实现多态</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> m Mammal
+    m <span class="token operator">=</span> Dog<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    m<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    m <span class="token operator">=</span> Cat<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    m<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    m <span class="token operator">=</span> Human<span class="token punctuation">{</span><span class="token punctuation">}</span>
+    m<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3>
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2021/11/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">
+        上一篇<br>数据库笔记
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2020/07/10/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/">
+        下一篇<br>ssh免密登录
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?42087783"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
