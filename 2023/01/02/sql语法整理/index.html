@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>SQL语法整理 - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="抽空整理了一份简要的sql语法文档，一边复习一边归纳。">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?84811562">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202304271704423.png')">
+                <div class="post-title">
+                    SQL语法整理
+                    <div class="post-meta">
+                        <time datetime="2023-01-02T08:35:46.000Z" itemprop="datePublished">
+                            2023-01-02 16:35
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/数据库/'>数据库</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><pre class="line-numbers language-SQL"><code class="language-SQL">// 增
+INSERT INTO 表名称 VALUES (值1, 值2,....)
+INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
+
+// 删
+DELETE FROM 表名称 WHERE 列名称 = 值
+
+// 改
+UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+
+// 查
+SELECT 列名称 FROM 表名称
+SELECT * FROM 表名称
+
+// 查找去重（使用DISTINCT）
+SELECT DISTINCT 列名称 FROM 表名称
+
+// 查找增加筛选条件（逻辑子句可以使用AND或OR结合多条子句）
+SELECT 列名称 FROM 表名称 WHERE 逻辑子句
+
+// 查找结果集排序（结尾用ASC或DESC选择正序排还是逆序排）
+SELECT 列名称 FROM 表名称 ORDER BY 列名称 [ASC DESC]
+
+// 查找结果集分组
+SELECT 列名称 FROM 表名称 GROUP BY 列名称
+
+// 查找结果集分组后，按条件筛选
+SELECT 列名称 FROM 表名称 GROUP BY 列名称 HAVING 条件
+
+// 查找符合范围内的数据（判断范围包含LOW和HIGH的边界值）
+SELECT 列名称 FROM 表名称 WHERE 条件数据列名 BETWEEN LOW AND HIGH;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h2><ul>
+<li><p><strong>now()</strong></p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select now();
+  +---------------------+
+  | now()               |
+  +---------------------+
+  | 2023-02-16 18:31:56 |
+  +---------------------+
+  1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>sysdate()</strong></p>
+<p>sysdate()日期时间函数跟now()一样获取系统时间，不同之处在于：now()在执行开始时值就得到了， sysdate()在函数执行时动态得到值。</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select now(),sleep(2),sysdate(),now();
+  +---------------------+----------+---------------------+---------------------+
+  | now()               | sleep(2) | sysdate()           | now()               |
+  +---------------------+----------+---------------------+---------------------+
+  | 2023-02-16 18:37:53 |        0 | 2023-02-16 18:37:55 | 2023-02-16 18:37:53 |
+  +---------------------+----------+---------------------+---------------------+
+  1 row in set (2.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>current_timestamp</strong></p>
+<p><strong>DEFAULT CURRENT_TIMESTAMP</strong> 表示当插入数据的时候，该字段默认值为当前时间</p>
+<p><strong>ON UPDATE CURRENT_TIMESTAMP</strong> 表示每次更新这条数据的时候，该字段都会更新成当前时间</p>
+<p>这两个操作是mysql数据库本身在维护，所以可以根据这个特性来生成【创建时间】和【更新时间】两个字段，且不需要代码来维护</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  CREATE TABLE `test` (
+      `text` varchar(255) DEFAULT '' COMMENT '内容',
+      `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+      `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>date_format(date,format)、time_format(time,format) 日期、时间转字符串函数，str_to_date(str, format) 字符串转日期函数</strong></p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select date_format(now(), '%Y%m%d %H:%i:%s');
+  +---------------------------------------+
+  | date_format(now(), '%Y%m%d %H:%i:%s') |
+  +---------------------------------------+
+  | 20230217 03:56:33                     |
+  +---------------------------------------+
+  1 row in set (0.00 sec)
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<pre><code># str_to_date() 在使用时format中使用的分隔符要与字符串使用的分隔符匹配
+mysql&gt; select str_to_date(&#39;2022-12-12&#39;, &#39;%Y-%m-%d&#39;);
++---------------------------------------+
+| str_to_date(&#39;2022-12-12&#39;, &#39;%Y-%m-%d&#39;) |
++---------------------------------------+
+| 2022-12-12                            |
++---------------------------------------+
+1 row in set (0.00 sec)</code></pre><pre><code>
+- **unix_timestamp() 日期转时间戳，from_unixtime() 时间戳转日期**
+
+  ```SQL
+    # 默认会返回当前日期的时间戳
+    mysql&gt; select unix_timestamp();
+    +------------------+
+    | unix_timestamp() |
+    +------------------+
+    |       1676577902 |
+    +------------------+
+    1 row in set (0.00 sec)
+
+
+    mysql&gt; select from_unixtime(1676577911);
+    +---------------------------+
+    | from_unixtime(1676577911) |
+    +---------------------------+
+    | 2023-02-17 04:05:11       |
+    +---------------------------+
+    1 row in set (0.00 sec)</code></pre><ul>
+<li><p><strong>date_add()、date_sub() 在日期上增加或删除时间</strong></p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select date_add(now(), interval 1 day);
+  +---------------------------------+
+  | date_add(now(), interval 1 day) |
+  +---------------------------------+
+  | 2023-02-18 04:12:41             |
+  +---------------------------------+
+  1 row in set (0.00 sec)
+
+  mysql> select date_add(now(), interval -1 day);
+  +----------------------------------+
+  | date_add(now(), interval -1 day) |
+  +----------------------------------+
+  | 2023-02-16 04:12:51              |
+  +----------------------------------+
+  1 row in set (0.00 sec)
+
+  mysql> select date_sub(now(), interval 1 day);
+  +---------------------------------+
+  | date_sub(now(), interval 1 day) |
+  +---------------------------------+
+  | 2023-02-16 04:13:00             |
+  +---------------------------------+
+  1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>两个日期间的运算</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select datediff('2023-3-1', '2021-4-1');
+  +----------------------------------+
+  | datediff('2023-3-1', '2021-4-1') |
+  +----------------------------------+
+  |                              699 |
+  +----------------------------------+
+  1 row in set (0.00 sec)
+
+  mysql> select timediff('2023-3-1 23:14:57', '2021-4-1 10:13:15');
+  +----------------------------------------------------+
+  | timediff('2023-3-1 23:14:57', '2021-4-1 10:13:15') |
+  +----------------------------------------------------+
+  | 838:59:59                                          |
+  +----------------------------------------------------+
+  1 row in set, 1 warning (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>时间戳转换、增、减函数</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select timestamp(now());
+  +---------------------+
+  | timestamp(now())    |
+  +---------------------+
+  | 2023-02-19 04:32:02 |
+  +---------------------+
+  1 row in set (0.00 sec)
+
+  mysql> select timestamp(now(), '10 04:00:00');
+  +---------------------------------+
+  | timestamp(now(), '10 04:00:00') |
+  +---------------------------------+
+  | 2023-03-01 08:29:26             |
+  +---------------------------------+
+  1 row in set (0.00 sec)
+
+  mysql> select timestampdiff(year, now(), '20201201');
+  +----------------------------------------+
+  | timestampdiff(year, now(), '20201201') |
+  +----------------------------------------+
+  |                                     -2 |
+  +----------------------------------------+
+  1 row in set (0.01 sec)
+
+  mysql> select timestampdiff(day, now(), '20201201');
+  +---------------------------------------+
+  | timestampdiff(day, now(), '20201201') |
+  +---------------------------------------+
+  |                                  -810 |
+  +---------------------------------------+
+  1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>时区转换函数（timezone）</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select convert_tz(now(), '+08:00', '+00:00');
+  +---------------------------------------+
+  | convert_tz(now(), '+08:00', '+00:00') |
+  +---------------------------------------+
+  | 2023-02-18 20:36:40                   |
+  +---------------------------------------+
+  1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h2><ul>
+<li><p>count() 数量统计</p>
+</li>
+<li><p>avg() 求平均数</p>
+</li>
+<li><p>sum() 求和</p>
+</li>
+<li><p>max()、min() 取最大值、最小值</p>
+</li>
+<li><p>abs() 取绝对值</p>
+</li>
+<li><p>pow(x, y) 求x的y次方</p>
+</li>
+<li><p>truncate(x, y) x保留y位小数</p>
+</li>
+<li><p>mod(x, y) x除y取余</p>
+</li>
+</ul>
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><ul>
+<li><p>char_length(s) 返回字符串s的长度</p>
+</li>
+<li><p>concat(s1, s2, …, sn) 将多个字符串合并，concat_ws(x, s1, s2, …, sn) 合并多个字符串并用x做分隔符</p>
+</li>
+<li><p>locate(s1, s) 在字符串s中获取字符串s1的开始位置</p>
+</li>
+<li><p>lower(s) 将字符串中所有字母变成小写，upper(s) 将字符串中所有字母变成大写</p>
+</li>
+<li><p>substr(s, n, len) 在字符串s中，从n位置开始截取长度为len的子字符串</p>
+</li>
+<li><p>replace(s, s1, s2) 在字符串s中，用s2替换所有s1</p>
+</li>
+<li><p>trim(s) 清除字符串s中所有空格</p>
+</li>
+</ul>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><pre class="line-numbers language-SQL"><code class="language-SQL"># if函数, 遵守非0为真0为假
+mysql> select if(0, 'true', 'false');
++--------------------+
+| if(0, true, false) |
++--------------------+
+| 0                  |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select if(1, 'true', 'false');
++------------------------+
+| if(1, 'true', 'false') |
++------------------------+
+| true                   |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select if(1>0, 'true', 'false');
++----------------------+
+| if(1>0, true, false) |
++----------------------+
+| 1                    |
++----------------------+
+1 row in set (0.01 sec)
+
+# isnull 判断参数是否为空
+mysql> select isnull(null);
++--------------+
+| isnull(null) |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select isnull(1);
++-----------+
+| isnull(1) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+
+# ifnull(a, b) a为null返回b，否则返回a
+mysql> select ifnull(null, 1);
++-----------------+
+| ifnull(null, 1) |
++-----------------+
+|               1 |
++-----------------+
+1 row in set (0.00 sec)
+
+
+# database() 返回当前数据库名
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.02 sec)
+
+mysql> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+mysql> select database();
++------------+
+| database() |
++------------+
+| mysql      |
++------------+
+1 row in set (0.00 sec)
+
+
+# current_user() 返回当前用户
+mysql> select current_user();
++----------------+
+| current_user() |
++----------------+
+| root@%         |
++----------------+
+1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="进阶语法"><a href="#进阶语法" class="headerlink" title="进阶语法"></a>进阶语法</h1><h2 id="通配符与模糊查询"><a href="#通配符与模糊查询" class="headerlink" title="通配符与模糊查询"></a>通配符与模糊查询</h2><ol>
+<li><p>“%” 百分号通配符：表示任何字符出现任意次数（可以是0次）</p>
+</li>
+<li><p>“<em>“ 下划线通配符：表示只能匹配单个字符,不能多也不能少,就是一个字符。当然，也可以like “陈___</em>“，数量不限</p>
+</li>
+<li><p>like操作符：LIKE作用是指示 mysql 后面的搜索模式是利用通配符而不是直接相等匹配进行比较；但如果like后面没出现通配符，则在SQL执行优化时将 like 默认为 “=”执行</p>
+</li>
+</ol>
+<pre class="line-numbers language-SQL"><code class="language-SQL"># 模糊查询语法，column_name(s)表示需要查询的列名，table_name表示需要查询的表名，pattern表示查询条件，可以使用通配符进行模糊匹配
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意：<br>    - 匹配前需要检查数据库是否配置了区分大小写<br>    - 匹配字符尾部空格要清除，否则会匹配不上<br>    - 通配符无法匹配到NULL<br>    - MySQL中的模糊查询可能会降低查询的效率，因为需要对所有可能匹配的记录进行扫描。因此，应该尽量避免使用通配符在查询条件的开头处，以提高查询效率</p>
+</blockquote>
+<h2 id="条件集查询（in）"><a href="#条件集查询（in）" class="headerlink" title="条件集查询（in）"></a>条件集查询（in）</h2><p>嵌套 SQL 可以使用子查询或者联结查询的方式在一个查询语句中进行多层嵌套。如果需要在查询结果中再次查找数据，可以将原始查询语句作为子查询，然后在子查询的结果中进行再次查询。</p>
+<p>例如，假设有两个表格：订单表格和商品表格，其中订单表格中包含订单编号和商品编号，商品表格中包含商品编号和商品名称。如果要查询订单表格中所有包含特定商品的订单，可以使用如下的 SQL 语句：</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">SELECT * FROM orders WHERE product_id IN (
+    SELECT product_id FROM products WHERE product_name = '特定商品'
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="查询数据集排前的数据"><a href="#查询数据集排前的数据" class="headerlink" title="查询数据集排前的数据"></a>查询数据集排前的数据</h2><pre class="line-numbers language-SQL"><code class="language-SQL">// mysql
+SELECT TOP 5 * FROM 表
+
+// oracle（不支持top语法）
+SELECT * FROM 表 WHERE ROWNUM <= 5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="限制查询数量（常用于数据分页）"><a href="#限制查询数量（常用于数据分页）" class="headerlink" title="限制查询数量（常用于数据分页）"></a>限制查询数量（常用于数据分页）</h2><pre class="line-numbers language-SQL"><code class="language-SQL">SELECT 列名称 FROM 表名称 LIMIT 数量 [OFFSET 偏移量];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>OFFSET后面为偏移量。OFFSET内容为可选项，当不填OFFSET内容时，默认输出设置数量的表内头部数据；当填入OFFSET偏移量，输出（数量~数量+偏移量）之间的数据。上边际不包含该数量位置的值，从+1开始记，例。</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">select * from table_name limit 10 offset 10;
+
+// 不包含第10条数据，返回第11条到第20条，共计10条数据。也可以简写成如下
+
+select * from table_name limit 10, 10;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="联表查询"><a href="#联表查询" class="headerlink" title="联表查询"></a>联表查询</h2><p>在MySQL中，连接（Join）是指将多个表中的数据进行组合的操作。MySQL支持多种连接方式，包括内连接（INNER JOIN）、左连接（LEFT JOIN）、右连接（RIGHT JOIN）和外连接（FULL OUTER JOIN）。</p>
+<ul>
+<li><p>内连接（INNER JOIN）：内连接是最常用的连接方式，它只返回两个表中共同符合查询条件的记录。内连接使用JOIN关键字或直接使用表名进行连接，例如：</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  SELECT * FROM table1 
+  JOIN table2 
+  ON table1.column = table2.column;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202304271626332.png" alt="内连接"></p>
+</li>
+<li><p>左连接（LEFT JOIN）：左连接返回左边表中所有记录以及与之匹配的右边表中的记录。如果右边表中没有与之匹配的记录，则返回NULL值。左连接使用LEFT JOIN关键字进行指定，例如：</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  SELECT * FROM table1 
+  LEFT JOIN table2 
+  ON table1.column = table2.column;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202304271626330.png" alt="左连接"></p>
+</li>
+<li><p>右连接（RIGHT JOIN）：右连接返回右边表中所有记录以及与之匹配的左边表中的记录。如果左边表中没有与之匹配的记录，则返回NULL值。右连接使用RIGHT JOIN关键字进行指定，例如：</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  SELECT * FROM table1 
+  RIGHT JOIN table2 
+  ON table1.column = table2.column;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202304271626331.png" alt="右连接"></p>
+</li>
+<li><p>外连接（FULL OUTER JOIN）：外连接返回左边表和右边表中的所有记录，如果某个表中没有与之匹配的记录，则返回NULL值。MySQL不支持全外连接，但可以使用左外连接和右外连接的联合查询来模拟实现，例如：</p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">  SELECT * FROM table1 
+  LEFT JOIN table2 ON table1.column = table2.column 
+  UNION 
+  SELECT * FROM table1 
+  RIGHT JOIN table2 ON table1.column = table2.column;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><pre class="line-numbers language-SQL"><code class="language-SQL">// 基本语法（IN/OUT 表示输入输出参数）
+CREATE PROCEDURE `存储过程名称`(IN/OUT `参数名` 类型)
+BEGIN
+  // do something
+END
+
+// 执行存储过程
+CALL 存储过程名称(参数);
+
+// 删除存储过程，IF EXISTS 指定这个关键字，用于防止因删除不存在的存储过程而引发的错误
+DROP PROCEDURE [ IF EXISTS ] <存储过程名称>
+
+// 查看全部存储过程
+SHOW PROCEDURE STATUS;
+
+// 查看存储过程内容
+SHOW CREATE PROCEDURE 存储过程名称;
+
+// 存储过程不支持修改内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="存储过程支持if、case、while、repeat、loop、ITERATE："><a href="#存储过程支持if、case、while、repeat、loop、ITERATE：" class="headerlink" title="存储过程支持if、case、while、repeat、loop、ITERATE："></a>存储过程支持if、case、while、repeat、loop、ITERATE：</h3><pre class="line-numbers language-SQL"><code class="language-SQL">if 条件 then ... else ... end if;
+
+case 变量 when 结果1 then ...; when 结果2 then ...; else ...; end case;
+
+while 循环条件 do ... end while;
+
+repeat ... until 循环条件 end repeat;
+
+LOOP_LABLE:loop ... leave LOOP_LABLE; end loop;  // leave LOOP_LABLE 指跳出循环，此外还有 iterate LOOP_LABLE 用于循环语句的迭代，即立即开始下次循环<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>需要注意的是，存储过程在使用时需要考虑其性能和安全性，并且需要避免过度依赖存储过程，否则可能会导致数据库性能下降和维护困难。</strong></p>
+<h1 id="库表操作"><a href="#库表操作" class="headerlink" title="库表操作"></a>库表操作</h1><h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><pre class="line-numbers language-SQL"><code class="language-SQL">CREATE DATABASE 数据库名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="修改库属性"><a href="#修改库属性" class="headerlink" title="修改库属性"></a>修改库属性</h2><pre class="line-numbers language-SQL"><code class="language-SQL">// 修改数据库名称
+ALTER DATABASE db_name RENAME TO new_db_name;
+
+// 修改数据库字符集
+ALTER DATABASE db_name CHARACTER SET utf8mb4;
+
+// 修改数据库排序规则
+ALTER DATABASE db_name COLLATE utf8mb4_general_ci;
+
+// 修改数据库存储引擎
+ALTER DATABASE db_name ENGINE=InnoDB;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>有些属性的修改可能会导致数据库中的数据丢失或发生不可逆的改变，一定要记得做好备份工作</strong></p>
+<h2 id="删库"><a href="#删库" class="headerlink" title="删库"></a>删库</h2><pre class="line-numbers language-SQL"><code class="language-SQL">DROP DATABASE <数据库名>;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><pre class="line-numbers language-SQL"><code class="language-SQL">CREATE TABLE IF NOT EXISTS '表名' (
+  'xxx_id' INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  'xxx_name' VARCHAR(10) NOT NULL,
+  'xxx_role' VARCHAR(4) NOT NULL DEFAULT('user'),
+  'xxx_age' INT UNSIGNED NOT NULL CHECK ('xxx_age' BETWEEN 0 and 120),
+  'xxx_DATE' DATE,
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+// 创建外键
+CREATE TABLE departments (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department_id INT,
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id)
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="字段的增删改"><a href="#字段的增删改" class="headerlink" title="字段的增删改"></a>字段的增删改</h2><pre class="line-numbers language-SQL"><code class="language-SQL">// 增加字段
+ALTER TABLE table_name ADD column_name column_type;
+
+// 修改字段类型
+ALTER TABLE table_name MODIFY column_name new_column_type;
+
+// 修改字段名称
+ALTER TABLE table_name CHANGE old_column_name new_column_name column_type;
+
+// 删除字段
+ALTER TABLE table_name DROP column_name;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>修改表字段可能会导致数据丢失，修改前需要备份数据</strong></p>
+<h2 id="修改表属性"><a href="#修改表属性" class="headerlink" title="修改表属性"></a>修改表属性</h2><pre class="line-numbers language-SQL"><code class="language-SQL">// 修改表名称
+ALTER TABLE old_table_name RENAME TO new_table_name;
+
+// 修改表的存储引擎
+ALTER TABLE table_name ENGINE = new_engine;
+
+// 添加索引
+ALTER TABLE table_name ADD INDEX index_name (column_name);
+
+// 删除索引
+ALTER TABLE table_name DROP INDEX index_name;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>修改表属性可能会导致数据丢失，修改前需要备份数据</strong></p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><pre class="line-numbers language-SQL"><code class="language-SQL">// 创建普通索引，索引值可出现多次
+CREATE INDEX index_name ON table_name (column_name);
+
+// 创建唯一索引，除了NULL外，NULL可能会出现多次
+CREATE UNIQUE INDEX index_name ON table_name (column_name);
+
+// 创建主键索引
+ALTER TABLE table_name ADD PRIMARY KEY (column_name);
+
+// 创建全文索引
+CREATE FULLTEXT INDEX index_name ON table_name (column_name);
+
+// 删除索引
+DROP INDEX [indexName] ON mytable;
+
+// 删除主键索引，删除主键索引表明将允许值为NULL或值重复，所以建议先将逐渐索引改为唯一索引，以此保证原数据完整性
+ALTER TABLE table_name DROP PRIMARY KEY;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="删表"><a href="#删表" class="headerlink" title="删表"></a>删表</h2><pre class="line-numbers language-SQL"><code class="language-SQL">DROP TABLE [ IF EXISTS ] 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="导入导出"><a href="#导入导出" class="headerlink" title="导入导出"></a>导入导出</h2><pre class="line-numbers language-Plain"><code class="language-Plain">// 导出数据，不加表名表示导出整个库，加'-d'表示仅导出表结构，加'--databases'表示要导出多个数据库
+mysqldump -h IP地址 -P 端口 -u 用户名 -p [-d] [--databases] 数据库名 [表名] > 导出的文件名
+
+// 导入数据，导入前需要先创建同名数据库，在库中导入
+create database 库名;
+use 库名;
+source sql文件;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><p>备份涉及到很多问题，比如物理备份、逻辑备份、增量备份，还可以借助第三方软件实现热备份。</p>
+<p>逻辑备份比较好理解，使用mysqldump直接导出sql，打包备份就行，逻辑备份的缺点是不如物理备份速度快。</p>
+<p>物理备份是指直接拷贝数据库目录中的文件转移到别的机器上，缺点是文件体积大，不够灵活。</p>
+<p>MySQL 的增量备份是在全量备份的基础上，仅备份自上一次备份后新增或修改的数据。这种备份方式可以节省备份时间和存储空间，并且可以更快地恢复数据。</p>
+<p>增量备份之前，需要在 MySQL 服务器上启用二进制日志功能。在备份之前，先使用 FLUSH LOGS 命令生成新的二进制日志文件，然后备份从上次备份之后产生的所有二进制日志文件。可以使用 mysqlbinlog 工具来转换二进制日志为 SQL 语句，然后将这些 SQL 语句应用到备份的数据库中。具体操作如下：</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell"># 启用二进制日志功能
+vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# 在 [mysqld] 部分中添加以下行
+log-bin=/var/log/mysql/mysql-bin.log
+
+# 重启 MySQL 服务器
+sudo systemctl restart mysql
+
+# 生成新的二进制日志文件
+mysqladmin flush-logs
+
+# 备份从上次备份以来产生的所有二进制日志文件
+sudo cp /var/log/mysql/mysql-bin.* /path/backup/directory
+
+# 将二进制日志转换为 SQL 语句并应用到备份的数据库中
+mysqlbinlog /path/backup/directory/mysql-bin.* | mysql -u root -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>在备份之前，应该停止 MySQL 服务以确保数据文件不被占用。</strong></p>
+<p>此外在linux下可以使用crontab做定时逻辑备份或增量备份，以确保数据的可靠性</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2023/01/17/mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86/">
+        上一篇<br>MySQL主从同步原理
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/11/27/linux%E5%AE%89%E8%A3%85nginx/">
+        下一篇<br>Linux安装Nginx
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?49870767"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

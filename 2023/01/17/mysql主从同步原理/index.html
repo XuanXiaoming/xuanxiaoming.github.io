@@ -4,12 +4,13 @@
 <html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>標籤: MySQL - ming&#39;s blog</title>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>MySQL主从同步原理 - ming&#39;s blog</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="baidu-site-verification" content="aRPR2l8QnW" />
 <meta name="author" content="ming">
-<meta name="description" content="A Blog Powered By Hexo">
+<meta name="description" content="什么是MySQL主从同步当master(主)库的数据发生变化的时候，变化会实时的同步到slave(从)库。
+主从同...">
 <meta name="keywords" content="技术、开箱体验、生活，交友">
 
 <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
@@ -23,7 +24,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?97818783">
+<link rel="stylesheet" href="/css/journal.css?87162093">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -33,8 +34,8 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 <body>
 <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
 <div id="app">
@@ -151,46 +152,111 @@
         </a>
 
         
-        
-
-        
-
-        
-        
     </div>
 </div>
 
+
+
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        <div class="post-item-wrapper post-item-wrapper-no-hover">
-            <div class="post-item post-item-no-gaps">
-                <div class="post-item-info-wrapper">
-                    <div class="post-item-title  post-item-title-small">
-                        <a href="/tags/">標籤</a> / MySQL
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202304271704188.jpg')">
+                <div class="post-title">
+                    MySQL主从同步原理
+                    <div class="post-meta">
+                        <time datetime="2023-01-17T08:59:26.000Z" itemprop="datePublished">
+                            2023-01-17 16:59
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/数据库/'>数据库</a>
+                        
+                        
                     </div>
                 </div>
             </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="什么是MySQL主从同步"><a href="#什么是MySQL主从同步" class="headerlink" title="什么是MySQL主从同步"></a>什么是MySQL主从同步</h1><p>当master(主)库的数据发生变化的时候，变化会实时的同步到slave(从)库。</p>
+<h1 id="主从同步有什么好处"><a href="#主从同步有什么好处" class="headerlink" title="主从同步有什么好处"></a>主从同步有什么好处</h1><ul>
+<li><p>水平扩展数据库的负载能力。</p>
+</li>
+<li><p>容错，高可用。Failover(失败切换)/High Availability</p>
+</li>
+<li><p>数据备份。</p>
+</li>
+</ul>
+<h1 id="主从同步的原理"><a href="#主从同步的原理" class="headerlink" title="主从同步的原理"></a>主从同步的原理</h1><p>不管是delete、update、insert，还是创建函数、存储过程，所有的操作都在master上。当master有操作的时候，slave会快速的接收到这些操作，从而做同步。</p>
+<p>在master机器上，主从同步事件会被写到特殊的log文件中（binary-log），然后slave读取主从同步事件，并根据读取的事件变化，在slave库上做相应的更改。</p>
+<p>主从同步事件有3种形式：statement、row、mixed。</p>
+<ol>
+<li><p>statement：对数据库操作的sql语句写入到binlog中。</p>
+</li>
+<li><p>row：将每一条数据的变化写入到binlog中。</p>
+</li>
+<li><p>mixed：statement与row的混合。Mysql决定什么时候写statement格式的，什么时候写row格式的binlog。</p>
+</li>
+</ol>
+<h2 id="在master机器上的操作"><a href="#在master机器上的操作" class="headerlink" title="在master机器上的操作"></a>在master机器上的操作</h2><p>当master上的数据发生改变的时候，该事件(insert、update、delete)变化会按照顺序写入到binlog中。</p>
+<p>当slave连接到master的时候，master机器会为slave开启binlog dump线程。当master 的 binlog发生变化的时候，binlog dump线程会通知slave，并将相应的binlog内容发送给slave。</p>
+<h2 id="在slave机器上的操作"><a href="#在slave机器上的操作" class="headerlink" title="在slave机器上的操作"></a>在slave机器上的操作</h2><p>当主从同步开启的时候，slave上会创建2个线程。</p>
+<ul>
+<li><p>I/O线程</p>
+<p>该线程连接到master机器，master机器上的binlog dump线程会将binlog的内容发送给该I/O线程。</p>
+<p>该I/O线程接收到binlog内容后，再将内容写入到本地的relay log。</p>
+</li>
+<li><p>SQL线程</p>
+<p>该线程读取I/O线程写入的relay log。并且根据relay log的内容对slave数据库做相应的操作。</p>
+</li>
+</ul>
+<h2 id="在master、slave上查看上述线程"><a href="#在master、slave上查看上述线程" class="headerlink" title="在master、slave上查看上述线程"></a><strong>在master、slave上查看上述线程</strong></h2><p>使用SHOW PROCESSLIST命令可以查看。在master机器上查看binlog dump线程。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2023/01/02/sql%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/">
+        下一篇<br>SQL语法整理
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
         </div>
-        
-        <a href="/2021/11/15/m1芯片安装docker-mysql/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            m1芯片安装docker-mysql
-                        </div>
-                        <div class="post-item-meta">
-                            2021-11-15
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        
-
-        
     </div>
-
     <div class="single-column-footer">
     Proudly published with Hexo<br>
     
@@ -207,7 +273,7 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?78499196"></script>
+<script src="/js/journal.js?58288759"></script>
 <!-- 添加网站运行时间 -->
 
         <script>
@@ -240,7 +306,6 @@
                 }
                 window.setInterval("createtime()", 250);
         </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
 
 </body>
 </html>
