@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/journal.css?84811562">
+<link rel="stylesheet" href="/css/journal.css?37134112">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -213,159 +213,157 @@ SELECT 列名称 FROM 表名称 GROUP BY 列名称 HAVING 条件
 
 // 查找符合范围内的数据（判断范围包含LOW和HIGH的边界值）
 SELECT 列名称 FROM 表名称 WHERE 条件数据列名 BETWEEN LOW AND HIGH;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<br>
+
 <h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h2><ul>
 <li><p><strong>now()</strong></p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select now();
-  +---------------------+
-  | now()               |
-  +---------------------+
-  | 2023-02-16 18:31:56 |
-  +---------------------+
-  1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2023-02-16 18:31:56 |
++---------------------+
+1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>sysdate()</strong></p>
 <p>sysdate()日期时间函数跟now()一样获取系统时间，不同之处在于：now()在执行开始时值就得到了， sysdate()在函数执行时动态得到值。</p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select now(),sleep(2),sysdate(),now();
-  +---------------------+----------+---------------------+---------------------+
-  | now()               | sleep(2) | sysdate()           | now()               |
-  +---------------------+----------+---------------------+---------------------+
-  | 2023-02-16 18:37:53 |        0 | 2023-02-16 18:37:55 | 2023-02-16 18:37:53 |
-  +---------------------+----------+---------------------+---------------------+
-  1 row in set (2.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select now(),sleep(2),sysdate(),now();
++---------------------+----------+---------------------+---------------------+
+| now()               | sleep(2) | sysdate()           | now()               |
++---------------------+----------+---------------------+---------------------+
+| 2023-02-16 18:37:53 |        0 | 2023-02-16 18:37:55 | 2023-02-16 18:37:53 |
++---------------------+----------+---------------------+---------------------+
+1 row in set (2.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>current_timestamp</strong></p>
 <p><strong>DEFAULT CURRENT_TIMESTAMP</strong> 表示当插入数据的时候，该字段默认值为当前时间</p>
 <p><strong>ON UPDATE CURRENT_TIMESTAMP</strong> 表示每次更新这条数据的时候，该字段都会更新成当前时间</p>
 <p>这两个操作是mysql数据库本身在维护，所以可以根据这个特性来生成【创建时间】和【更新时间】两个字段，且不需要代码来维护</p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  CREATE TABLE `test` (
-      `text` varchar(255) DEFAULT '' COMMENT '内容',
-      `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-      `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-SQL"><code class="language-SQL">CREATE TABLE `test` (
+    `text` varchar(255) DEFAULT '' COMMENT '内容',
+    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>date_format(date,format)、time_format(time,format) 日期、时间转字符串函数，str_to_date(str, format) 字符串转日期函数</strong></p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select date_format(now(), '%Y%m%d %H:%i:%s');
-  +---------------------------------------+
-  | date_format(now(), '%Y%m%d %H:%i:%s') |
-  +---------------------------------------+
-  | 20230217 03:56:33                     |
-  +---------------------------------------+
-  1 row in set (0.00 sec)
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<pre><code># str_to_date() 在使用时format中使用的分隔符要与字符串使用的分隔符匹配
-mysql&gt; select str_to_date(&#39;2022-12-12&#39;, &#39;%Y-%m-%d&#39;);
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select date_format(now(), '%Y%m%d %H:%i:%s');
 +---------------------------------------+
-| str_to_date(&#39;2022-12-12&#39;, &#39;%Y-%m-%d&#39;) |
+| date_format(now(), '%Y%m%d %H:%i:%s') |
++---------------------------------------+
+| 20230217 03:56:33                     |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+#str_to_date() 在使用时format中使用的分隔符要与字符串使用的分隔符匹配
+mysql> select str_to_date('2022-12-12', '%Y-%m-%d');
++---------------------------------------+
+| str_to_date('2022-12-12', '%Y-%m-%d') |
 +---------------------------------------+
 | 2022-12-12                            |
 +---------------------------------------+
-1 row in set (0.00 sec)</code></pre><pre><code>
-- **unix_timestamp() 日期转时间戳，from_unixtime() 时间戳转日期**
+1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>unix_timestamp() 日期转时间戳，from_unixtime() 时间戳转日期</strong></p>
+<pre class="line-numbers language-SQL"><code class="language-SQL">#默认会返回当前日期的时间戳
+mysql> select unix_timestamp();
++------------------+
+| unix_timestamp() |
++------------------+
+|       1676577902 |
++------------------+
+1 row in set (0.00 sec)
 
-  ```SQL
-    # 默认会返回当前日期的时间戳
-    mysql&gt; select unix_timestamp();
-    +------------------+
-    | unix_timestamp() |
-    +------------------+
-    |       1676577902 |
-    +------------------+
-    1 row in set (0.00 sec)
-
-
-    mysql&gt; select from_unixtime(1676577911);
-    +---------------------------+
-    | from_unixtime(1676577911) |
-    +---------------------------+
-    | 2023-02-17 04:05:11       |
-    +---------------------------+
-    1 row in set (0.00 sec)</code></pre><ul>
+mysql> select from_unixtime(1676577911);
++---------------------------+
+| from_unixtime(1676577911) |
++---------------------------+
+| 2023-02-17 04:05:11       |
++---------------------------+
+1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li><p><strong>date_add()、date_sub() 在日期上增加或删除时间</strong></p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select date_add(now(), interval 1 day);
-  +---------------------------------+
-  | date_add(now(), interval 1 day) |
-  +---------------------------------+
-  | 2023-02-18 04:12:41             |
-  +---------------------------------+
-  1 row in set (0.00 sec)
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select date_add(now(), interval 1 day);
++---------------------------------+
+| date_add(now(), interval 1 day) |
++---------------------------------+
+| 2023-02-18 04:12:41             |
++---------------------------------+
+1 row in set (0.00 sec)
 
-  mysql> select date_add(now(), interval -1 day);
-  +----------------------------------+
-  | date_add(now(), interval -1 day) |
-  +----------------------------------+
-  | 2023-02-16 04:12:51              |
-  +----------------------------------+
-  1 row in set (0.00 sec)
+mysql> select date_add(now(), interval -1 day);
++----------------------------------+
+| date_add(now(), interval -1 day) |
++----------------------------------+
+| 2023-02-16 04:12:51              |
++----------------------------------+
+1 row in set (0.00 sec)
 
-  mysql> select date_sub(now(), interval 1 day);
-  +---------------------------------+
-  | date_sub(now(), interval 1 day) |
-  +---------------------------------+
-  | 2023-02-16 04:13:00             |
-  +---------------------------------+
-  1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+mysql> select date_sub(now(), interval 1 day);
++---------------------------------+
+| date_sub(now(), interval 1 day) |
++---------------------------------+
+| 2023-02-16 04:13:00             |
++---------------------------------+
+1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>两个日期间的运算</p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select datediff('2023-3-1', '2021-4-1');
-  +----------------------------------+
-  | datediff('2023-3-1', '2021-4-1') |
-  +----------------------------------+
-  |                              699 |
-  +----------------------------------+
-  1 row in set (0.00 sec)
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select datediff('2023-3-1', '2021-4-1');
++----------------------------------+
+| datediff('2023-3-1', '2021-4-1') |
++----------------------------------+
+|                              699 |
++----------------------------------+
+1 row in set (0.00 sec)
 
-  mysql> select timediff('2023-3-1 23:14:57', '2021-4-1 10:13:15');
-  +----------------------------------------------------+
-  | timediff('2023-3-1 23:14:57', '2021-4-1 10:13:15') |
-  +----------------------------------------------------+
-  | 838:59:59                                          |
-  +----------------------------------------------------+
-  1 row in set, 1 warning (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+mysql> select timediff('2023-3-1 23:14:57', '2021-4-1 10:13:15');
++----------------------------------------------------+
+| timediff('2023-3-1 23:14:57', '2021-4-1 10:13:15') |
++----------------------------------------------------+
+| 838:59:59                                          |
++----------------------------------------------------+
+1 row in set, 1 warning (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>时间戳转换、增、减函数</p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select timestamp(now());
-  +---------------------+
-  | timestamp(now())    |
-  +---------------------+
-  | 2023-02-19 04:32:02 |
-  +---------------------+
-  1 row in set (0.00 sec)
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select timestamp(now());
++---------------------+
+| timestamp(now())    |
++---------------------+
+| 2023-02-19 04:32:02 |
++---------------------+
+1 row in set (0.00 sec)
 
-  mysql> select timestamp(now(), '10 04:00:00');
-  +---------------------------------+
-  | timestamp(now(), '10 04:00:00') |
-  +---------------------------------+
-  | 2023-03-01 08:29:26             |
-  +---------------------------------+
-  1 row in set (0.00 sec)
+mysql> select timestamp(now(), '10 04:00:00');
++---------------------------------+
+| timestamp(now(), '10 04:00:00') |
++---------------------------------+
+| 2023-03-01 08:29:26             |
++---------------------------------+
+1 row in set (0.00 sec)
 
-  mysql> select timestampdiff(year, now(), '20201201');
-  +----------------------------------------+
-  | timestampdiff(year, now(), '20201201') |
-  +----------------------------------------+
-  |                                     -2 |
-  +----------------------------------------+
-  1 row in set (0.01 sec)
+mysql> select timestampdiff(year, now(), '20201201');
++----------------------------------------+
+| timestampdiff(year, now(), '20201201') |
++----------------------------------------+
+|                                     -2 |
++----------------------------------------+
+1 row in set (0.01 sec)
 
-  mysql> select timestampdiff(day, now(), '20201201');
-  +---------------------------------------+
-  | timestampdiff(day, now(), '20201201') |
-  +---------------------------------------+
-  |                                  -810 |
-  +---------------------------------------+
-  1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+mysql> select timestampdiff(day, now(), '20201201');
++---------------------------------------+
+| timestampdiff(day, now(), '20201201') |
++---------------------------------------+
+|                                  -810 |
++---------------------------------------+
+1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>时区转换函数（timezone）</p>
-<pre class="line-numbers language-SQL"><code class="language-SQL">  mysql> select convert_tz(now(), '+08:00', '+00:00');
-  +---------------------------------------+
-  | convert_tz(now(), '+08:00', '+00:00') |
-  +---------------------------------------+
-  | 2023-02-18 20:36:40                   |
-  +---------------------------------------+
-  1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-SQL"><code class="language-SQL">mysql> select convert_tz(now(), '+08:00', '+00:00');
++---------------------------------------+
+| convert_tz(now(), '+08:00', '+00:00') |
++---------------------------------------+
+| 2023-02-18 20:36:40                   |
++---------------------------------------+
+1 row in set (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a>统计函数</h2><ul>
@@ -490,6 +488,8 @@ mysql> select current_user();
 | root@%         |
 +----------------+
 1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<br>
+
 <h1 id="进阶语法"><a href="#进阶语法" class="headerlink" title="进阶语法"></a>进阶语法</h1><h2 id="通配符与模糊查询"><a href="#通配符与模糊查询" class="headerlink" title="通配符与模糊查询"></a>通配符与模糊查询</h2><ol>
 <li><p>“%” 百分号通配符：表示任何字符出现任意次数（可以是0次）</p>
 </li>
@@ -744,7 +744,7 @@ mysqlbinlog /path/backup/directory/mysql-bin.* | mysql -u root -p<span aria-hidd
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/journal.js?49870767"></script>
+<script src="/js/journal.js?43498732"></script>
 <!-- 添加网站运行时间 -->
 
         <script>

@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>Linux安装Nginx - ming&#39;s blog</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="baidu-site-verification" content="aRPR2l8QnW" />
+<meta name="author" content="ming">
+<meta name="description" content="Linux安装Nginx一、安装nginx使用 apt 来安装 Nginx
+sudo apt -y update
+...">
+<meta name="keywords" content="技术、开箱体验、生活，交友">
+
+<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="aRPR2l8QnW" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/journal.css?9873864">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<body>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://xuanxiaoming.github.io">
+                首頁
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/tags/index.html">
+                標籤
+            </a>
+            
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/archives/index.html">
+                歸檔
+            </a>
+            
+
+            <a class="a-block drawer-menu-item no-tint false" href="/message/index.html">
+                閑言
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/friends/index.html">
+                友人
+            </a>
+            <a class="a-block drawer-menu-item no-tint false" href="/about/index.html">
+                關於
+            </a>
+
+            
+            <a class="a-block drawer-menu-item no-tint false" href="/atom.xml">
+                RSS
+            </a>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            ming&#39;s blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">ming&#39;s blog</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            ming's Blog
+        </div>
+        <div class="nav-subtitle">
+            風月都好看，人間也浪漫
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block nav-link-item no-tint false" href="/tags/index.html">
+            標籤
+        </a>
+        
+
+        <a class="a-block nav-link-item no-tint false" href="/archives/index.html">
+            歸檔
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/message/index.html">
+            閑言
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/friends/index.html">
+            友人
+        </a>
+        <a class="a-block nav-link-item no-tint false" href="/about/index.html">
+            關於
+        </a>
+        
+        <a class="a-block no-tint nav-link-item" href="/atom.xml">
+            RSS
+        </a>
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://xxmblog-1256516391.cos.ap-nanjing.myqcloud.com/202304271709296.jpg')">
+                <div class="post-title">
+                    Linux安装Nginx
+                    <div class="post-meta">
+                        <time datetime="2022-11-27T08:51:39.000Z" itemprop="datePublished">
+                            2022-11-27 16:51
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/linux/'>linux</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="Linux安装Nginx"><a href="#Linux安装Nginx" class="headerlink" title="Linux安装Nginx"></a>Linux安装Nginx</h1><h3 id="一、安装nginx"><a href="#一、安装nginx" class="headerlink" title="一、安装nginx"></a>一、安装nginx</h3><p>使用 apt 来安装 Nginx</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo apt -y update
+sudo apt -y install nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<br>  
+
+<h3 id="二、配置防火墙"><a href="#二、配置防火墙" class="headerlink" title="二、配置防火墙"></a>二、配置防火墙</h3><p>在测试 Nginx 之前，我们需要调整防火墙，让他允许 Nginx 服务通过。Nginx ufw 在安装时会把他自身注册成为服务。</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo ufw app list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输出结果：</p>
+<pre class="line-numbers language-Plain"><code class="language-Plain">Available applications:
+  Nginx Full
+  Nginx HTTP
+  Nginx HTTPS
+  OpenSSH<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Nginx 提供了三个配置文件：</p>
+<ul>
+<li><p><strong>Nginx Full</strong><br>开端口80 正常，未加密的网络流量<br>端口443 TLS / SSL加密的流量</p>
+</li>
+<li><p><strong>Nginx HTTP</strong><br>仅打开端口80 正常，未加密</p>
+</li>
+<li><p><strong>Nginx HTTPS</strong><br>仅打开端口443 TLS / SSL加密</p>
+</li>
+</ul>
+<br>
+先测试HTTP，配置防火墙允许服务通过
+
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo ufw allow 'Nginx HTTP'<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<br>  
+
+<h3 id="三、检查web服务器"><a href="#三、检查web服务器" class="headerlink" title="三、检查web服务器"></a>三、检查web服务器</h3><p>用以下命令来查看更改结果</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo ufw status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们可以在输出结果中看到</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">Status: active
+
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere                  
+Nginx HTTP                 ALLOW       Anywhere                  
+OpenSSH (v6)               ALLOW       Anywhere (v6)             
+Nginx HTTP (v6)            ALLOW       Anywhere (v6)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>若未看到上述结果，先检查nginx服务是否开启</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">service nginx status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>看到 <code>Active: active (running)</code> 说明已启动</p>
+<p>使用以下命令检查内网ip</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用以下命令检查公网ip</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">curl -4 icanhazip.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当nginx服务运行后可以在浏览器访问<a href="http://本地IP" target="_blank" rel="noopener">http://本地IP</a></p>
+<br>  
+
+<h3 id="四、管理nginx"><a href="#四、管理nginx" class="headerlink" title="四、管理nginx"></a>四、管理nginx</h3><p>停止、启动、重启、配置服务器跟随系统启动，配置不跟随服务器启动，热加载配置</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo service nginx stop
+sudo service nginx start
+sudo service nginx restart
+sudo service nginx disable
+sudo service nginx enable
+sudo service nginx reload  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<br>
+
+<h3 id="五、设置服务块"><a href="#五、设置服务块" class="headerlink" title="五、设置服务块"></a>五、设置服务块</h3><p>如果是部署到公网上以供公共访问，首先需要准备一个域名</p>
+<p>假设网站是 <code>http://example.com</code></p>
+<p>nginx默认前端资源存储位置在 <code>/var/www</code></p>
+<p>先在该路径下创建存放网页资源的文件夹，路径为 <code>/var/www/example.com/html</code>，然后为该文件夹分配权限</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo chown -R $USER:$USER /var/www/example.com/html
+sudo chmod -R 755 /var/www/example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>先随便添加一个网页做测试</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">vim /var/www/example.com/html/index.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>内容随便写一个 <code>&lt;h1&gt;HELLO WORLD!&lt;/h1&gt;</code></p>
+<p>接下来要在nginx的服务中创建一个新的服务器块</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo vim /etc/nginx/sites-available/example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>内容如下：</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">server {
+        listen 80;
+        listen [::]:80;
+        root /var/www/example.com/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name example.com www.example.com;
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>为上述文件创建链接，让nginx启动时读取目录</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>为避免可能由于添加其他服务器名称而引起的哈希存储区内存问题，有必要调整 <code>/etc/nginx/nginx.conf</code> 文件中的单个值</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">http {
+    ...
+    # 找到这行，将注释去掉
+    server_names_hash_bucket_size 64;
+    ...
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重启nginx</p>
+<pre class="line-numbers language-Shell"><code class="language-Shell">sudo service nginx restart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>检查一下nginx的运行状态之后，就可以尝试在浏览器访问 <code>http://example.com</code></p>
+<br>
+
+<h3 id="六、-一些重要路径"><a href="#六、-一些重要路径" class="headerlink" title="六、 一些重要路径"></a>六、 一些重要路径</h3><p><code>/etc/nginx Nginx</code> 配置目录。所有 Nginx 的配置文件都在这里</p>
+<p><code>/etc/nginx/nginx.conf</code> Nginx的配置文件。大多数全局配置可以通过这个文件来修改</p>
+<p><code>/etc/nginx/sites-available/sites-enabled</code> 用来存储服务器下每个站点服务器块的目录。 默认情况下 Nginx 不会直接使用目录下的配置文件，需要我们更改配置来告诉 Nginx 来去读</p>
+<p><code>/etc/nginx/sites-enabled/sites-available</code> 这里是存储已经启用站点服务器块的目录</p>
+<p><code>/etc/nginx/snippets</code> 这个目录包含一些 Nginx 的配置文件。可打开详细查看这些配置文件到文档进行学习</p>
+<p><code>/var/log/nginx/access.log</code> 这里是 Nginx 到日志文件，对 Web 服务器的每个请求都会记录在这个日志中</p>
+<p><code>/var/log/nginx/error.log</code> 记录 Nginx 运行过程中发生的错误日志</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2023/01/02/sql%E8%AF%AD%E6%B3%95%E6%95%B4%E7%90%86/">
+        上一篇<br>SQL语法整理
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/11/07/linux%E7%B3%BB%E7%BB%9F%E6%A3%80%E6%9F%A5%E4%B8%8E%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/">
+        下一篇<br>Linux系统检查与故障诊断
+    </a>
+    
+</nav>
+
+            <!-- _include/comment_templates 加载评论插件元素 -->
+            
+
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjI0OC8zMjcxMQ=="></div>
+    <!-- 隐藏广告 -->
+    <style> #taboola-livere { display: none;} </style>
+    <script> document.getElementById("taboola-livere").style.display="none"; </script>
+
+
+            <!-- _include/comment_includes 加载评论插件脚本 -->
+            
+
+    <script type="text/javascript">
+        (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+            if (typeof LivereTower === 'function') { return; }
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2023 <a href="https://xuanxiaoming.github.io">ming&#39;s blog</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.1.0/vue.global.prod.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/smooth-scroll/14.2.1/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/journal.js?16843895"></script>
+<!-- 添加网站运行时间 -->
+
+        <script>
+                var now = new Date();
+                function createtime() {
+                        var create_time = new Date(2020, 01, 13);
+                        // console.info(create_time);
+                        now.setTime(now.getTime() + 250);
+                        days = (now - create_time) / 1000 / 60 / 60 / 24;
+                        dnum = Math.floor(days);
+                        hours = (now - create_time) / 1000 / 60 / 60 - (24 * dnum);
+                        hnum = Math.floor(hours);
+                        if (String(hnum).length == 1) {
+                                hnum = "0" + hnum;
+                        }
+                        minutes = (now - create_time) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+                        mnum = Math.floor(minutes);
+                        if (String(mnum).length == 1) {
+                                mnum = "0" + mnum;
+                        }
+                        seconds = (now - create_time) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                        snum = Math.round(seconds);
+                        if (String(snum).length == 1) {
+                                snum = "0" + snum;
+                        }
+                        if (document.getElementById("timeDate") && document.getElementById("times")) {
+                                document.getElementById("timeDate").innerHTML = dnum + " 天 ";
+                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                }
+                window.setInterval("createtime()", 250);
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
